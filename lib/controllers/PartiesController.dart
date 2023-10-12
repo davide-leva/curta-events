@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:admin/controllers/Config.dart';
-import 'package:admin/controllers/TransactionController.dart';
 import 'package:admin/models/Party.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:get/get.dart';
@@ -22,26 +21,7 @@ class PartiesController extends GetxController {
   @override
   void onReady() async {
     await _update();
-
-    TransactionController _transactionController =
-        Get.put(TransactionController());
-
-    /*Updater.listen(Collection.parties, () {
-      if (_transactionController.balance != current.balance)
-        modify(
-          current,
-          Party(
-            balance: _transactionController.balance,
-            tag: current.tag,
-            title: current.title,
-            date: current.date,
-            place: current.place,
-            id: current.id,
-          ),
-        );
-    });*/
     Updater.listen(Collection.parties, _update);
-
     super.onReady();
   }
 
@@ -70,6 +50,11 @@ class PartiesController extends GetxController {
   Future<void> modify(Party old, Party newParty) async {
     await DataService.update(Collection.parties, old.id, newParty);
     await Updater.update(Collection.parties);
+
+    if (old.priceEntrance != newParty.priceEntrance ||
+        old.pricePrevendita != newParty.pricePrevendita) {
+      await Updater.update(Collection.transactions);
+    }
     return;
   }
 }

@@ -32,6 +32,10 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
           text: DateFormat('dd/MM/yyyy').format(_controller.current.date));
       final TextEditingController _titleController =
           TextEditingController(text: _controller.current.title);
+      final TextEditingController _prevenditaController = TextEditingController(
+          text: _controller.current.pricePrevendita.toString());
+      final TextEditingController _entranceController = TextEditingController(
+          text: _controller.current.priceEntrance.toString());
       DateTime _selectedDatetime = _controller.current.date;
 
       return Container(
@@ -44,6 +48,8 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
             _placeController,
             _dateController,
             _selectedDatetime,
+            _prevenditaController,
+            _entranceController,
           ),
           desktop: _desktopView(
             context,
@@ -52,6 +58,8 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
             _placeController,
             _dateController,
             _selectedDatetime,
+            _prevenditaController,
+            _entranceController,
           ),
         ),
       );
@@ -59,12 +67,15 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
   }
 
   _desktopView(
-      BuildContext context,
-      Party current,
-      TextEditingController _titleController,
-      TextEditingController _placeController,
-      TextEditingController _dateController,
-      DateTime _selectedDatetime) {
+    BuildContext context,
+    Party current,
+    TextEditingController _titleController,
+    TextEditingController _placeController,
+    TextEditingController _dateController,
+    DateTime _selectedDatetime,
+    TextEditingController _prevenditaController,
+    TextEditingController _entranceController,
+  ) {
     return border(
       SizedBox(
         child: Row(
@@ -127,13 +138,24 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                         }),
                       ),
                     ),
+                    TextInput(
+                      textController: _prevenditaController,
+                      label: "Prezzo prevendita",
+                    ),
+                    TextInput(
+                      textController: _entranceController,
+                      label: "Prezzo entrata",
+                    ),
                   ],
                   () => _modifyParty(
-                      _controller,
-                      current,
-                      _titleController.text,
-                      _placeController.text,
-                      _selectedDatetime),
+                    _controller,
+                    current,
+                    _titleController.text,
+                    _placeController.text,
+                    _selectedDatetime,
+                    int.parse(_prevenditaController.text),
+                    int.parse(_entranceController.text),
+                  ),
                   successTitle: "Modifica",
                   successIcon: Icons.edit,
                 );
@@ -160,12 +182,15 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
   }
 
   _mobileView(
-      BuildContext context,
-      Party current,
-      TextEditingController _titleController,
-      TextEditingController _placeController,
-      TextEditingController _dateController,
-      DateTime _selectedDatetime) {
+    BuildContext context,
+    Party current,
+    TextEditingController _titleController,
+    TextEditingController _placeController,
+    TextEditingController _dateController,
+    DateTime _selectedDatetime,
+    TextEditingController _prevenditaController,
+    TextEditingController _entranceController,
+  ) {
     return border(
       SizedBox(
         child: Row(
@@ -228,13 +253,24 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                         }),
                       ),
                     ),
+                    TextInput(
+                      textController: _prevenditaController,
+                      label: "Prezzo prevendita",
+                    ),
+                    TextInput(
+                      textController: _entranceController,
+                      label: "Prezzo entrata",
+                    ),
                   ],
                   () => _modifyParty(
-                      _controller,
-                      current,
-                      _titleController.text,
-                      _placeController.text,
-                      _selectedDatetime),
+                    _controller,
+                    current,
+                    _titleController.text,
+                    _placeController.text,
+                    _selectedDatetime,
+                    int.parse(_prevenditaController.text),
+                    int.parse(_entranceController.text),
+                  ),
                 );
               },
             ),
@@ -259,8 +295,15 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
   }
 }
 
-_modifyParty(PartiesController controller, Party party, String title,
-    String place, DateTime date) {
+_modifyParty(
+  PartiesController controller,
+  Party party,
+  String title,
+  String place,
+  DateTime date,
+  int pricePrevendita,
+  int priceEntrance,
+) {
   Party newParty = Party(
     id: party.id,
     tag: party.tag,
@@ -268,6 +311,8 @@ _modifyParty(PartiesController controller, Party party, String title,
     balance: party.balance,
     date: date,
     place: place,
+    priceEntrance: priceEntrance,
+    pricePrevendita: pricePrevendita,
   );
 
   controller.modify(party, newParty);

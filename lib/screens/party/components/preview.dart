@@ -1,6 +1,9 @@
 import 'dart:math';
 
+import 'package:admin/controllers/Config.dart';
+import 'package:admin/controllers/PartiesController.dart';
 import 'package:admin/controllers/TransactionController.dart';
+import 'package:admin/models/Party.dart';
 import 'package:admin/screens/party/components/balance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +19,7 @@ class Preview extends StatelessWidget {
   final GroupsController groupsController = Get.put(GroupsController());
   final TransactionController transactionController =
       Get.put(TransactionController());
+  final PartiesController partiesController = Get.put(PartiesController());
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +70,8 @@ class Preview extends StatelessWidget {
                       Text("Fatturato"),
                       Text(
                         (_totalIncome(transactionController) +
-                                    _totalPeople(groupsController) * 15)
+                                    _totalPeople(groupsController) *
+                                        _totalPrice(partiesController))
                                 .toStringAsFixed(2) +
                             " €",
                         textAlign: TextAlign.center,
@@ -91,7 +96,8 @@ class Preview extends StatelessWidget {
                       Text("Guadagno"),
                       Text(
                         (_totalIncome(transactionController) +
-                                    _totalPeople(groupsController) * 15 +
+                                    _totalPeople(groupsController) *
+                                        _totalPrice(partiesController) +
                                     _totalOutcome(transactionController))
                                 .toStringAsFixed(2) +
                             " €",
@@ -119,6 +125,13 @@ class Preview extends StatelessWidget {
   }
 }
 
+_totalPrice(PartiesController partiesController) {
+  Party party = partiesController.parties
+      .singleWhere((element) => element.tag == Config.get('selectedParty'));
+
+  return party.priceEntrance + party.pricePrevendita;
+}
+
 _totalPeople(GroupsController groupController) {
   int total = groupController.groups.fold(0, (sum, groups) {
     return sum + groups.numberOfPeople;
@@ -129,7 +142,8 @@ _totalPeople(GroupsController groupController) {
 
 _totalIncome(TransactionController transactionController) {
   double total = transactionController.transactions.fold(0, (sum, transaction) {
-    if (transaction.title == "Prevendite") return sum;
+    if (transaction.title == "Prevendite" || transaction.title == "Ingressi")
+      return sum;
 
     return sum + max(0, transaction.amount);
   });
