@@ -1,3 +1,5 @@
+import 'package:admin/controllers/Config.dart';
+import 'package:admin/models/Party.dart';
 import 'package:admin/models/Product.dart';
 import 'package:admin/models/Transaction.dart';
 import 'package:get/get.dart';
@@ -37,6 +39,10 @@ class TransactionController extends GetxController {
         .map((e) => Product.fromJson(e))
         .toList();
 
+    List<Party> parties = (await Updater.getData(Collection.parties))
+        .map((e) => Party.fromJson(e))
+        .toList();
+
     _transactions.assignAll((await Updater.getData(Collection.transactions))
         .map((data) => Transaction.fromJson(data))
         .toList());
@@ -52,7 +58,28 @@ class TransactionController extends GetxController {
                   })
                   .where((person) => person.hasPaid)
                   .length *
-              15,
+              parties
+                  .singleWhere(
+                      (element) => element.tag == Config.get('selectedParty'))
+                  .pricePrevendita *
+              1.0,
+          description: ""),
+      Transaction(
+          id: "do_not_delete",
+          title: "Ingressi",
+          amount: groups
+                  .map((group) => group.people)
+                  .fold<List<Person>>(<Person>[], (list, people) {
+                    list.addAll(people);
+                    return list;
+                  })
+                  .where((person) => person.hasEntered)
+                  .length *
+              parties
+                  .singleWhere(
+                      (element) => element.tag == Config.get('selectedParty'))
+                  .priceEntrance *
+              1.0,
           description: ""),
       Transaction(
           id: "do_not_delete",

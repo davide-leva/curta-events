@@ -37,6 +37,12 @@ class Updater {
     return;
   }
 
+  static Future<void> refresh() async {
+    for (Collection scope in Collection.values) {
+      await update(scope, cloud: true);
+    }
+  }
+
   static void listen(Collection scope, void Function() onUpdate) {
     _notifier[scope]?.addListener(onUpdate);
   }

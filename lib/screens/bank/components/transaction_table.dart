@@ -541,12 +541,13 @@ _dataRow(
               TableButton(
                 color: Colors.teal,
                 icon: Icons.edit_note,
-                onPressed: () {
+                onPressed: () async {
                   PartiesController controller = Get.put(PartiesController());
                   Party party = controller.parties
                       .singleWhere((element) => element.id == transaction.id);
 
                   Config.set('selectedParty', party.tag);
+                  await Updater.refresh();
                 },
               )
             ]

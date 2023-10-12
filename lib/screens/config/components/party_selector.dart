@@ -78,6 +78,7 @@ class _PartySelectorState extends State<PartySelector> {
                 title: "Gestisci",
                 onPressed: () async {
                   Config.set('selectedParty', _selectedTag);
+                  await Updater.refresh();
                 },
                 icon: Icons.edit,
                 color: Colors.green,

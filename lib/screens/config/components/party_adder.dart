@@ -22,6 +22,8 @@ class _PartyAdderState extends State<PartyAdder> {
   final TextEditingController _tagController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _placeController = TextEditingController();
+  final TextEditingController _prevenditaController = TextEditingController();
+  final TextEditingController _entranceController = TextEditingController();
 
   final PartiesController _partyController = Get.put(PartiesController());
 
@@ -59,7 +61,24 @@ class _PartyAdderState extends State<PartyAdder> {
           SizedBox(
             height: defaultPadding,
           ),
-          TextInput(textController: _tagController, label: "Tag database"),
+          TextInput(
+            textController: _prevenditaController,
+            label: "Prezzo prevendita",
+          ),
+          SizedBox(
+            height: defaultPadding,
+          ),
+          TextInput(
+            textController: _prevenditaController,
+            label: "Prezzo entrata",
+          ),
+          SizedBox(
+            height: defaultPadding,
+          ),
+          TextInput(
+            textController: _tagController,
+            label: "Tag database",
+          ),
           SizedBox(
             height: defaultPadding,
           ),
@@ -99,6 +118,8 @@ class _PartyAdderState extends State<PartyAdder> {
                     _placeController.text,
                     _selectedDate,
                     _partyController,
+                    int.parse(_prevenditaController.text),
+                    int.parse(_entranceController.text),
                   );
 
                   Updater.update(Collection.parties);
@@ -114,8 +135,15 @@ class _PartyAdderState extends State<PartyAdder> {
   }
 }
 
-_addParty(String name, String tag, String place, DateTime date,
-    PartiesController controller) async {
+_addParty(
+  String name,
+  String tag,
+  String place,
+  DateTime date,
+  PartiesController controller,
+  int pricePrevendita,
+  int priceEntrance,
+) async {
   Party party = Party(
     id: CloudService.uuid(),
     tag: tag,
@@ -123,6 +151,8 @@ _addParty(String name, String tag, String place, DateTime date,
     balance: 0,
     date: date,
     place: place,
+    priceEntrance: priceEntrance,
+    pricePrevendita: pricePrevendita,
   );
 
   await controller.add(party);

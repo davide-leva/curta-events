@@ -78,8 +78,10 @@ class PriceCard extends StatelessWidget {
           TableButton(
             color: Colors.red,
             icon: Icons.close,
-            isDisabled:
-                title == "Spesa" || title == "Prevendite" || title == "Sconti",
+            isDisabled: title == "Spesa" ||
+                title == "Prevendite" ||
+                title == "Sconti" ||
+                title == "Ingressi",
             onPressed: onDelete,
           )
         ],

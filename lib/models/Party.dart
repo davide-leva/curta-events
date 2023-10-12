@@ -8,6 +8,8 @@ class Party implements Model {
     required this.balance,
     required this.date,
     required this.place,
+    required this.pricePrevendita,
+    required this.priceEntrance,
   });
 
   final String id;
@@ -16,6 +18,8 @@ class Party implements Model {
   final double balance;
   final DateTime date;
   final String place;
+  final int priceEntrance;
+  final int pricePrevendita;
 
   @override
   Map<String, dynamic> toJson() {
@@ -26,6 +30,8 @@ class Party implements Model {
       "balance": balance,
       "date": date.toIso8601String(),
       "place": place,
+      "pricePrevendita": pricePrevendita,
+      "priceEntrance": priceEntrance,
     };
   }
 
@@ -38,6 +44,8 @@ class Party implements Model {
       balance: (data['balance'] as num).toDouble(),
       date: DateTime.parse(data['date']),
       place: data['place'],
+      pricePrevendita: data['pricePrevendita'],
+      priceEntrance: data['priceEntrance'],
     );
   }
 
