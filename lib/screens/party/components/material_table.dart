@@ -165,74 +165,78 @@ class _MaterialTableState extends State<MaterialTable> {
             ],
           ),
           Obx(
-            () => SizedBox(
-              width: double.infinity,
-              child: DataTable(
-                columns: [
-                  DataColumn(
-                    label: Text("Prodotto e quantità"),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      "Prezzo",
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    numeric: true,
-                  ),
-                  DataColumn(
-                    label: Text(
-                      "Totale",
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    numeric: true,
-                  ),
-                  DataColumn(
-                    label: Text("Azioni"),
-                  ),
-                ],
-                rows: List.generate(
-                  shopController.entries.length,
-                  (index) => _dataRow(
-                    shopController.entries[index],
-                    shopController,
-                    productController,
-                    transactionController,
-                    () {
-                      _selectedProduct = shopController.entries[index].product;
-                      _quantityController.text =
-                          "${shopController.entries[index].quantity}";
+            () => shopController.entries.length == 0 ||
+                    productController.products.length == 0
+                ? Container()
+                : SizedBox(
+                    width: double.infinity,
+                    child: DataTable(
+                      columns: [
+                        DataColumn(
+                          label: Text("Prodotto e quantità"),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Prezzo",
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          numeric: true,
+                        ),
+                        DataColumn(
+                          label: Text(
+                            "Totale",
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          numeric: true,
+                        ),
+                        DataColumn(
+                          label: Text("Azioni"),
+                        ),
+                      ],
+                      rows: List.generate(
+                        shopController.entries.length,
+                        (index) => _dataRow(
+                          shopController.entries[index],
+                          shopController,
+                          productController,
+                          transactionController,
+                          () {
+                            _selectedProduct =
+                                shopController.entries[index].product;
+                            _quantityController.text =
+                                "${shopController.entries[index].quantity}";
 
-                      showPopUp(
-                        context,
-                        "Modifica spesa",
-                        [
-                          TextInput(
-                            textController: _quantityController,
-                            label: "Quantità",
-                          )
-                        ],
-                        () {
-                          _modifyEntry(
-                            shopController.entries[index],
-                            _selectedProduct,
-                            _quantityController.text,
-                            shopController,
-                          );
-                        },
-                        successTitle: "Modifica",
-                        successIcon: Icons.edit,
-                      );
-                    },
-                    () {
-                      _purchaseEntry(
-                        shopController.entries[index],
-                        shopController,
-                      );
-                    },
+                            showPopUp(
+                              context,
+                              "Modifica spesa",
+                              [
+                                TextInput(
+                                  textController: _quantityController,
+                                  label: "Quantità",
+                                )
+                              ],
+                              () {
+                                _modifyEntry(
+                                  shopController.entries[index],
+                                  _selectedProduct,
+                                  _quantityController.text,
+                                  shopController,
+                                );
+                              },
+                              successTitle: "Modifica",
+                              successIcon: Icons.edit,
+                            );
+                          },
+                          () {
+                            _purchaseEntry(
+                              shopController.entries[index],
+                              shopController,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
           )
         ],
       ),

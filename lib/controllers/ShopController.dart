@@ -21,7 +21,8 @@ class ShopController extends GetxController {
         .map((data) => Entry.fromJson(data))
         .toList());
 
-    Updater.update(Collection.transactions, cloud: false);
+    await Updater.update(Collection.transactions, cloud: false);
+    update();
     return;
   }
 

@@ -36,11 +36,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Curta Events',
-      scrollBehavior: NoOverscroll().copyWith(dragDevices: {
-        PointerDeviceKind.mouse,
-        PointerDeviceKind.touch,
-        PointerDeviceKind.trackpad
-      }),
+      scrollBehavior: NoOverscroll().copyWith(
+        dragDevices: {
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.touch,
+          PointerDeviceKind.trackpad
+        },
+        scrollbars: false,
+      ),
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: kBgColor,
         textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)

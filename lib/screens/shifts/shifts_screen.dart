@@ -199,9 +199,11 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
             height: defaultPadding,
           ),
           SingleChildScrollView(
+            controller: ScrollController(),
             scrollDirection: Axis.horizontal,
             child: Obx(
               () => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...List.generate(
                     _controller.shifts.length,
@@ -456,110 +458,115 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
                 ...List.generate(
                   _controller.shifts.length,
                   (index) => Container(
-                    child: ShiftCard(
-                      shift: _controller.shifts[index],
-                      onDelete: () {
-                        setState(() async {
-                          _controller.delete(_controller.shifts[index]);
-                        });
-                      },
-                      onModify: () {
-                        List<TextEditingController> tecl =
-                            List.empty(growable: true);
+                    child: Obx(
+                      () => ShiftCard(
+                        shift: _controller.shifts[index],
+                        onDelete: () {
+                          setState(() async {
+                            _controller.delete(_controller.shifts[index]);
+                          });
+                        },
+                        onModify: () {
+                          List<TextEditingController> tecl =
+                              List.empty(growable: true);
 
-                        for (int i = 0;
-                            i < _controller.shifts[index].jobs.length;
-                            i++) {
-                          tecl.add(TextEditingController());
-                          tecl[i].text = _controller
-                              .shifts[index].jobs[i].workers
-                              .join(', ');
-                        }
+                          for (int i = 0;
+                              i < _controller.shifts[index].jobs.length;
+                              i++) {
+                            tecl.add(TextEditingController());
+                            tecl[i].text = _controller
+                                .shifts[index].jobs[i].workers
+                                .join(', ');
+                          }
 
-                        _timeStart = _controller.shifts[index].timeStart;
-                        _timeStartController.text = _timeStart.format(context);
-                        _timeFinish = _controller.shifts[index].timeFinish;
-                        _timeFinishController.text =
-                            _timeFinish.format(context);
+                          _timeStart = _controller.shifts[index].timeStart;
+                          _timeStartController.text =
+                              _timeStart.format(context);
+                          _timeFinish = _controller.shifts[index].timeFinish;
+                          _timeFinishController.text =
+                              _timeFinish.format(context);
 
-                        List<Widget> actions = <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              showTimePicker(
-                                context: context,
-                                initialTime: _timeStart,
-                                initialEntryMode: TimePickerEntryMode.inputOnly,
-                                helpText: "Inserisci ora di inizio",
-                                hourLabelText: "Ore",
-                                minuteLabelText: "Minuti",
-                                cancelText: "Annulla",
-                                confirmText: "Inserisci",
-                              ).then(
-                                (value) => setState(() {
-                                  if (value == null) return;
+                          List<Widget> actions = <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: _timeStart,
+                                  initialEntryMode:
+                                      TimePickerEntryMode.inputOnly,
+                                  helpText: "Inserisci ora di inizio",
+                                  hourLabelText: "Ore",
+                                  minuteLabelText: "Minuti",
+                                  cancelText: "Annulla",
+                                  confirmText: "Inserisci",
+                                ).then(
+                                  (value) => setState(() {
+                                    if (value == null) return;
 
-                                  _timeStart = value;
-                                  _timeStartController.text =
-                                      _timeStart.format(context);
-                                }),
-                              );
-                            },
-                            child: TextInput(
-                              textController: _timeStartController,
-                              label: "Ora inizio",
-                              editable: false,
+                                    _timeStart = value;
+                                    _timeStartController.text =
+                                        _timeStart.format(context);
+                                  }),
+                                );
+                              },
+                              child: TextInput(
+                                textController: _timeStartController,
+                                label: "Ora inizio",
+                                editable: false,
+                              ),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              showTimePicker(
-                                context: context,
-                                initialTime: _timeFinish,
-                                initialEntryMode: TimePickerEntryMode.inputOnly,
-                                helpText: "Inserisci ora di fine",
-                                hourLabelText: "Ore",
-                                minuteLabelText: "Minuti",
-                                cancelText: "Annulla",
-                                confirmText: "Inserisci",
-                              ).then(
-                                (value) => setState(() {
-                                  if (value == null) return;
+                            GestureDetector(
+                              onTap: () {
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: _timeFinish,
+                                  initialEntryMode:
+                                      TimePickerEntryMode.inputOnly,
+                                  helpText: "Inserisci ora di fine",
+                                  hourLabelText: "Ore",
+                                  minuteLabelText: "Minuti",
+                                  cancelText: "Annulla",
+                                  confirmText: "Inserisci",
+                                ).then(
+                                  (value) => setState(() {
+                                    if (value == null) return;
 
-                                  _timeFinish = value;
-                                  _timeFinishController.text =
-                                      _timeFinish.format(context);
-                                }),
-                              );
-                            },
-                            child: TextInput(
-                              textController: _timeFinishController,
-                              label: "Ora inizio",
-                              editable: false,
+                                    _timeFinish = value;
+                                    _timeFinishController.text =
+                                        _timeFinish.format(context);
+                                  }),
+                                );
+                              },
+                              child: TextInput(
+                                textController: _timeFinishController,
+                                label: "Ora inizio",
+                                editable: false,
+                              ),
+                            )
+                          ];
+
+                          actions.addAll(_controller.shifts[index].jobs
+                              .mapIndexed((index, job) => TextInput(
+                                  textController: tecl[index],
+                                  label: job.title)));
+
+                          showPopUp(
+                            context,
+                            "Modifica turno",
+                            actions,
+                            () => _modifyShift(
+                              _controller,
+                              _controller.shifts[index],
+                              _timeStart,
+                              _timeFinish,
+                              _controller.shifts[index].jobs
+                                  .map((e) => e.title)
+                                  .toList(),
+                              tecl.map((e) => e.text).toList(),
                             ),
-                          )
-                        ];
-
-                        actions.addAll(_controller.shifts[index].jobs
-                            .mapIndexed((index, job) => TextInput(
-                                textController: tecl[index],
-                                label: job.title)));
-
-                        showPopUp(
-                          context,
-                          "Modifica turno",
-                          actions,
-                          () => _modifyShift(
-                            _controller,
-                            _controller.shifts[index],
-                            _timeStart,
-                            _timeFinish,
-                            _controller.shifts[index].jobs
-                                .map((e) => e.title)
-                                .toList(),
-                            tecl.map((e) => e.text).toList(),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 )
