@@ -25,8 +25,9 @@ class PartyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         Config.set('selectedParty', tag);
+        await Updater.refresh();
       },
       child: Container(
         margin: EdgeInsets.only(top: defaultPadding),

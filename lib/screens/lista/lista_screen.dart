@@ -149,53 +149,50 @@ class _ListaScreenState extends State<ListaScreen> {
                 });
                 return w;
               })
-            : Obx(
-                () => _groupController.groups.isEmpty
-                    ? Container(
-                        child: border(
-                          Text(
-                            "Lista vuota",
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                      )
-                    : Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: [
-                                SearchGroup(controller: _groupController),
-                                SizedBox(
-                                  height: defaultPadding,
-                                ),
-                                ...List.generate(
-                                  max(0,
-                                      2 * _groupController.groups.length - 1),
-                                  (index) {
-                                    int groupIndex = index ~/ 2;
+            : _groupController.groups.isEmpty
+                ? Container(
+                    child: border(
+                      Text(
+                        "Lista vuota",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            SearchGroup(controller: _groupController),
+                            SizedBox(
+                              height: defaultPadding,
+                            ),
+                            ...List.generate(
+                              max(0, 2 * _groupController.groups.length - 1),
+                              (index) {
+                                int groupIndex = index ~/ 2;
 
-                                    if (index % 2 == 0) {
-                                      return GroupTable(
+                                if (index % 2 == 0) {
+                                  return Obx(() => GroupTable(
                                         group:
                                             _groupController.groups[groupIndex],
                                         groupIndex: groupIndex,
                                         controller: _groupController,
-                                      );
-                                    } else {
-                                      return SizedBox(
-                                        height: defaultPadding,
-                                      );
-                                    }
-                                  },
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+                                      ));
+                                } else {
+                                  return SizedBox(
+                                    height: defaultPadding,
+                                  );
+                                }
+                              },
+                            )
+                          ],
+                        ),
                       ),
-              ),
+                    ],
+                  ),
       ],
     );
   }
@@ -307,53 +304,50 @@ class _ListaScreenState extends State<ListaScreen> {
                 });
                 return w;
               })
-            : Obx(
-                () => _groupController.groups.isEmpty
-                    ? Container(
-                        child: border(
-                          Text(
-                            "Lista vuota",
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                      )
-                    : Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Column(
-                              children: [
-                                SearchGroup(controller: _groupController),
-                                SizedBox(
-                                  height: defaultPadding,
-                                ),
-                                ...List.generate(
-                                  max(0,
-                                      2 * _groupController.groups.length - 1),
-                                  (index) {
-                                    int groupIndex = index ~/ 2;
+            : _groupController.groups.isEmpty
+                ? Container(
+                    child: border(
+                      Text(
+                        "Lista vuota",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            SearchGroup(controller: _groupController),
+                            SizedBox(
+                              height: defaultPadding,
+                            ),
+                            ...List.generate(
+                              max(0, 2 * _groupController.groups.length - 1),
+                              (index) {
+                                int groupIndex = index ~/ 2;
 
-                                    if (index % 2 == 0) {
-                                      return GroupTable(
+                                if (index % 2 == 0) {
+                                  return Obx(() => GroupTable(
                                         group:
                                             _groupController.groups[groupIndex],
                                         groupIndex: groupIndex,
                                         controller: _groupController,
-                                      );
-                                    } else {
-                                      return SizedBox(
-                                        height: defaultPadding,
-                                      );
-                                    }
-                                  },
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+                                      ));
+                                } else {
+                                  return SizedBox(
+                                    height: defaultPadding,
+                                  );
+                                }
+                              },
+                            )
+                          ],
+                        ),
                       ),
-              ),
+                    ],
+                  ),
       ],
     );
   }
