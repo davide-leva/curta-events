@@ -1,6 +1,5 @@
 import 'package:admin/screens/admin/components/icon_selector.dart';
 import 'package:admin/screens/components/pop_up.dart';
-import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

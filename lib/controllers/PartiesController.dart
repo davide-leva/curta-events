@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:admin/controllers/Config.dart';
+import 'package:admin/controllers/TransactionController.dart';
 import 'package:admin/models/Party.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,12 @@ class PartiesController extends GetxController {
   Future<void> _update() async {
     _parties.assignAll((await Updater.getData(Collection.parties))
         .map((data) => Party.fromJson(data))
+        .map((party) => party.tag == Config.get('selectedParty')
+            ? party
+                .withBalance(max(Get.put(TransactionController()).balance, 0))
+            : party)
         .toList());
+
     _parties.sort((a, b) => -a.date.compareTo(b.date));
 
     Updater.update(Collection.bank, cloud: false);
@@ -55,6 +61,24 @@ class PartiesController extends GetxController {
         old.pricePrevendita != newParty.pricePrevendita) {
       await Updater.update(Collection.transactions);
     }
+    return;
+  }
+
+  Future<void> archive(Party party) async {
+    await modify(
+      party,
+      Party(
+          id: party.id,
+          tag: party.tag,
+          title: party.title,
+          balance: Get.put(TransactionController()).balance,
+          date: party.date,
+          place: party.place,
+          pricePrevendita: party.pricePrevendita,
+          priceEntrance: party.priceEntrance,
+          archived: true),
+    );
+
     return;
   }
 }

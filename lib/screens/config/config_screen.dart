@@ -1,17 +1,13 @@
-import 'dart:convert';
 
-import 'package:admin/models/Event.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/components/button.dart';
 import 'package:admin/screens/config/components/color_picker.dart';
 import 'package:admin/screens/config/components/party_selector.dart';
 import 'package:admin/screens/config/components/setting_panel.dart';
 import 'package:admin/services/local_storage.dart';
-import 'package:admin/services/socket_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import '../../controllers/Config.dart';
 import '../components/header.dart';
 import 'components/party_adder.dart';
 

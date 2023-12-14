@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:admin/models/Event.dart';
 import 'package:admin/services/sync_service.dart';
-import 'package:admin/services/updater.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';

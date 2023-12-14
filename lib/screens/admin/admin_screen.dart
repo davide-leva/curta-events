@@ -8,7 +8,6 @@ import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
 import 'package:admin/screens/config/components/setting_panel.dart';
 import 'package:admin/services/socket_service.dart';
-import 'package:admin/services/sync_service.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 

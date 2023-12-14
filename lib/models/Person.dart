@@ -37,3 +37,12 @@ class Person implements Model {
     return other is Person && name == other.name;
   }
 }
+
+class PersonEntry {
+  final Person person;
+  final String groupName;
+  final int groupIndex;
+  final int personIndex;
+
+  PersonEntry(this.person, this.groupName, this.groupIndex, this.personIndex);
+}

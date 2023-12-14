@@ -50,6 +50,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
             _selectedDatetime,
             _prevenditaController,
             _entranceController,
+            _controller,
           ),
           desktop: _desktopView(
             context,
@@ -60,6 +61,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
             _selectedDatetime,
             _prevenditaController,
             _entranceController,
+            _controller,
           ),
         ),
       );
@@ -75,6 +77,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
     DateTime _selectedDatetime,
     TextEditingController _prevenditaController,
     TextEditingController _entranceController,
+    PartiesController _controller,
   ) {
     return border(
       SizedBox(
@@ -165,6 +168,13 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
               width: defaultPadding,
             ),
             TableButton(
+                color: current.archived ? Colors.green : Colors.amber,
+                icon: Icons.archive,
+                onPressed: () => _controller.archive(current)),
+            SizedBox(
+              width: defaultPadding,
+            ),
+            TableButton(
                 color: Colors.lightBlue,
                 icon: Icons.print,
                 onPressed: () async {
@@ -190,6 +200,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
     DateTime _selectedDatetime,
     TextEditingController _prevenditaController,
     TextEditingController _entranceController,
+    PartiesController _controller,
   ) {
     return border(
       SizedBox(
@@ -278,6 +289,13 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
               width: defaultPadding,
             ),
             TableButton(
+                color: current.archived ? Colors.green : Colors.amber,
+                icon: Icons.archive,
+                onPressed: () => _controller.archive(current)),
+            SizedBox(
+              width: defaultPadding,
+            ),
+            TableButton(
                 color: Colors.lightBlue,
                 icon: Icons.print,
                 onPressed: () async {
@@ -313,6 +331,7 @@ _modifyParty(
     place: place,
     priceEntrance: priceEntrance,
     pricePrevendita: pricePrevendita,
+    archived: party.archived,
   );
 
   controller.modify(party, newParty);

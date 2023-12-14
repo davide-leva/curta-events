@@ -153,6 +153,7 @@ _addParty(
     place: place,
     priceEntrance: priceEntrance,
     pricePrevendita: pricePrevendita,
+    archived: false,
   );
 
   await controller.add(party);

@@ -1,7 +1,5 @@
 import 'package:admin/models/Shift.dart';
-import 'package:admin/screens/dashboard/components/shifts_card.dart';
 import 'package:admin/services/data_service.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../services/sync_service.dart';

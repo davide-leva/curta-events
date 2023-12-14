@@ -1,10 +1,14 @@
 import 'package:admin/models/Group.dart';
 import 'package:admin/models/Person.dart';
 import 'package:get/get.dart';
+import 'package:collection/collection.dart';
 
 import '../services/data_service.dart';
 import '../services/sync_service.dart';
 import '../services/updater.dart';
+
+List<T> flatten<T>(Iterable<Iterable<T>> list) =>
+    [for (var sublist in list) ...sublist];
 
 class GroupsController extends GetxController {
   List<ListaGroup> _groups = <ListaGroup>[].obs;
@@ -24,6 +28,20 @@ class GroupsController extends GetxController {
               (_sum, person) => _sum + (person.hasEntered ? 1 : 0),
             ),
       );
+
+  List<PersonEntry> filter(List<ListaGroup> groups, String search) {
+    final List<PersonEntry> people = flatten(groups.mapIndexed((gid, group) =>
+        group.people.mapIndexed(
+            (pid, person) => PersonEntry(person, group.title, gid, pid))));
+
+    if (search.length >= 3) {
+      return (people.where((entry) =>
+              entry.person.name.toLowerCase().contains(search.toLowerCase())))
+          .toList();
+    } else {
+      return List.empty();
+    }
+  }
 
   @override
   void onReady() {
