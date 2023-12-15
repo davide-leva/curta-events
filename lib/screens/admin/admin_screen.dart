@@ -1,13 +1,15 @@
 import 'package:admin/constants.dart';
 import 'package:admin/models/Device.dart';
 import 'package:admin/models/Event.dart';
-import 'package:admin/screens/admin/components/devices_card.dart';
 import 'package:admin/screens/admin/components/icon_selector.dart';
+import 'package:admin/screens/admin/components/devices_card.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
 import 'package:admin/screens/config/components/setting_panel.dart';
 import 'package:admin/services/socket_service.dart';
+import 'package:admin/services/sync_service.dart';
+import 'package:admin/services/updater.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -118,16 +120,19 @@ class _AdminScreenState extends State<AdminScreen> {
                                     onChange: (icon) => _icon = icon,
                                   ),
                                 ],
-                                () => SocketService.auth(
-                                  code,
-                                  new Device(
-                                    id: Config.get('deviceID'),
-                                    operator: _operatorController.text,
-                                    place: _placeController.text,
-                                    type: _type,
-                                    icon: _icon,
-                                  ),
-                                ),
+                                () {
+                                  SocketService.auth(
+                                    code,
+                                    new Device(
+                                      id: Config.get('deviceID'),
+                                      operator: _operatorController.text,
+                                      place: _placeController.text,
+                                      type: _type,
+                                      icon: _icon,
+                                    ),
+                                  );
+                                  Updater.update(Collection.register);
+                                },
                               );
                             });
                           },

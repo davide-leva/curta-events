@@ -23,6 +23,7 @@ enum Collection {
   shifts,
   config,
   devices,
+  register,
 }
 
 enum CloudState {
@@ -112,6 +113,9 @@ class SyncService {
         return "main:bank";
 
       case Collection.devices:
+        return "$coll";
+
+      case Collection.register:
         return "$coll";
 
       case Collection.shifts:

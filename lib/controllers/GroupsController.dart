@@ -29,20 +29,6 @@ class GroupsController extends GetxController {
             ),
       );
 
-  List<PersonEntry> filter(List<ListaGroup> groups, String search) {
-    final List<PersonEntry> people = flatten(groups.mapIndexed((gid, group) =>
-        group.people.mapIndexed(
-            (pid, person) => PersonEntry(person, group.title, gid, pid))));
-
-    if (search.length >= 3) {
-      return (people.where((entry) =>
-              entry.person.name.toLowerCase().contains(search.toLowerCase())))
-          .toList();
-    } else {
-      return List.empty();
-    }
-  }
-
   @override
   void onReady() {
     _update();

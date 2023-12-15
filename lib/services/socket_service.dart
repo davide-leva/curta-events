@@ -44,6 +44,7 @@ class SocketService {
     });
 
     wss.stream.listen((event) {
+      print(event);
       _inputChannel.add(event);
     }, onDone: () {
       SyncService.cloudState.value = CloudState.offline;

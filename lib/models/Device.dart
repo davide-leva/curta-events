@@ -62,6 +62,8 @@ class Device implements Model {
         return Icons.desktop_windows;
       case 59086:
         return Icons.watch;
+      case 58941:
+        return Icons.tablet;
       default:
         return Icons.error;
     }

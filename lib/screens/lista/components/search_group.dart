@@ -180,14 +180,17 @@ class _SearchGroupState extends State<SearchGroup> {
                         widget.controller.removePerson(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
+                        setState(_updateResult);
                       }, () {
                         widget.controller.togglePersonPaid(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
+                        setState(_updateResult);
                       }, () {
                         widget.controller.togglePersonEntrance(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
+                        setState(_updateResult);
                       }),
                     ),
                   )
@@ -290,14 +293,17 @@ class _SearchGroupState extends State<SearchGroup> {
                           widget.controller.removePerson(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
+                          setState(_updateResult);
                         }, () {
                           widget.controller.togglePersonPaid(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
+                          setState(_updateResult);
                         }, () {
                           widget.controller.togglePersonEntrance(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
+                          setState(_updateResult);
                         }),
                       ),
                     ),
@@ -370,17 +376,17 @@ DataRow _dataRow(PersonEntry entry, Function() onDelete, Function() onConfirm,
               width: defaultPadding,
             ),
             TableButton(
-              onPressed: onDelete,
-              icon: Icons.close,
-              color: Colors.red,
+              onPressed: onEntrance,
+              icon: Icons.door_back_door,
+              color: Colors.purple,
             ),
             SizedBox(
               width: defaultPadding,
             ),
             TableButton(
-              onPressed: onEntrance,
-              icon: Icons.door_back_door,
-              color: Colors.purple,
+              onPressed: onDelete,
+              icon: Icons.close,
+              color: Colors.red,
             ),
           ],
         ),

@@ -65,7 +65,7 @@ class CloudService {
     return jsonDecode(response.body)['version'];
   }
 
-  static Future<int> delete(Collection collection, String id,
+  static Future<void> delete(Collection collection, String id,
       {int? version}) async {
     Map<String, String> headers = <String, String>{
       'device': Config.get('deviceID'),
@@ -73,16 +73,12 @@ class CloudService {
       'Content-Type': 'application/json',
     };
 
-    if (version != null) {
-      headers['version'] = version.toString();
-    }
-
-    http.Response response = await http.delete(
+    await http.delete(
         Uri.parse(
             '${Config.get('dataEndpoint')}${SyncService.id(collection)}/$id'),
         headers: headers);
 
-    return jsonDecode(response.body)['version'];
+    return;
   }
 
   static Future<int> getVersion(Collection collection) async {
