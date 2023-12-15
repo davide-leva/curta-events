@@ -96,7 +96,6 @@ class SyncService {
     });
 
     SocketService.setListener(EventType.AUTH, (event) {
-      print("TESTTTTTTTTTTTTTT");
       Device device = Device.fromJson(event.data['device']);
 
       Config.set('operator', device.operator);

@@ -65,6 +65,7 @@ class _WebAuthScreenState extends State<WebAuthScreen> {
                   ),
                   TextInput(
                     textController: _pwdController,
+                    obscure: true,
                     label: "Password",
                   ),
                   SizedBox(
