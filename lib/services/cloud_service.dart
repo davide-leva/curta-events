@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:admin/controllers/Config.dart';
 import 'package:admin/services/sync_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -121,7 +122,11 @@ class CloudService {
       id.add(chars[0]);
     }
 
-    return "dev-" + id.join("");
+    if (kIsWeb) {
+      return "web-" + id.join("");
+    } else {
+      return "dev-" + id.join("");
+    }
   }
 
   static Future<int> getInstagramFollowers() async {

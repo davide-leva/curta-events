@@ -31,7 +31,7 @@ enum CloudState {
   offline,
 }
 
-enum SocketState { pending, auth, connect, connected }
+enum SocketState { pending, auth, web_auth, connect, connected }
 
 class SyncService {
   static final ValueNotifier<SocketState> socketState =
@@ -93,6 +93,19 @@ class SyncService {
 
     SocketService.setListener(EventType.SETTING, (event) {
       Config.set(event.data['key'], event.data['value']);
+    });
+
+    SocketService.setListener(EventType.AUTH, (event) {
+      print("TESTTTTTTTTTTTTTT");
+      Device device = Device.fromJson(event.data['device']);
+
+      Config.set('operator', device.operator);
+      Config.set('place', device.place);
+      Config.set('userLevel', device.type);
+      Config.set('icon', device.icon.codePoint.toString());
+      Config.set('key', event.data['key']);
+
+      SyncService.socketState.value = SocketState.connect;
     });
   }
 

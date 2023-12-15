@@ -64,6 +64,8 @@ class Device implements Model {
         return Icons.watch;
       case 58941:
         return Icons.tablet;
+      case 984484:
+        return Icons.webhook;
       default:
         return Icons.error;
     }

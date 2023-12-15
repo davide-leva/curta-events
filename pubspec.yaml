@@ -47,6 +47,7 @@ dependencies:
   flutter_mjpeg: ^2.0.0
   qr_flutter: ^4.1.0
   mobile_scanner: ^3.4.1
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:
