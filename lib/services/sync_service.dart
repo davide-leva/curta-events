@@ -45,16 +45,6 @@ class SyncService {
     Config.init();
     SocketService.init();
 
-    Timer.periodic(10.seconds, (_) {
-      CloudService.testConnection().then((isConnected) {
-        if (isConnected) {
-          cloudState.value = CloudState.online;
-        } else {
-          cloudState.value = CloudState.offline;
-        }
-      });
-    });
-
     CloudService.getInstagramFollowers().then((followers) {
       Config.set('followers', "$followers");
     });
@@ -143,7 +133,7 @@ class SyncService {
         return "${Config.get('selectedParty')}:$coll";
 
       case Collection.config:
-        return "config";
+        return "main:config";
     }
   }
 

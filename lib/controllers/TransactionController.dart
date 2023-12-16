@@ -2,12 +2,12 @@ import 'package:admin/controllers/Config.dart';
 import 'package:admin/models/Party.dart';
 import 'package:admin/models/Product.dart';
 import 'package:admin/models/Transaction.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:get/get.dart';
 
 import '../models/Entry.dart';
 import '../models/Group.dart';
 import '../models/Person.dart';
-import '../services/data_service.dart';
 import '../services/sync_service.dart';
 import '../services/updater.dart';
 
@@ -113,19 +113,19 @@ class TransactionController extends GetxController {
   }
 
   Future<void> add(Transaction transaction) async {
-    await DataService.insert(Collection.transactions, transaction);
+    await CloudService.insert(Collection.transactions, transaction);
     await Updater.update(Collection.shifts);
     return;
   }
 
   Future<void> delete(Transaction transaction) async {
-    await DataService.delete(Collection.transactions, transaction.id);
+    await CloudService.delete(Collection.transactions, transaction.id);
     await Updater.update(Collection.shifts);
     return;
   }
 
   Future<void> modify(Transaction old, Transaction newTransaction) async {
-    await DataService.update(Collection.transactions, old.id, newTransaction);
+    await CloudService.update(Collection.transactions, old.id, newTransaction);
     await Updater.update(Collection.shifts);
     return;
   }

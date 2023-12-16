@@ -1,5 +1,5 @@
 import 'package:admin/models/Device.dart';
-import 'package:admin/services/data_service.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:get/get.dart';
 
 import '../services/sync_service.dart';
@@ -30,7 +30,7 @@ class DevicesController extends GetxController {
   }
 
   Future<void> modify(Device old, Device newDevice) async {
-    await DataService.update(Collection.devices, old.id, newDevice);
+    await CloudService.update(Collection.devices, old.id, newDevice);
     await Updater.update(Collection.devices);
     return;
   }

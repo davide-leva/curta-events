@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:admin/models/Event.dart';
 import 'package:admin/services/sync_service.dart';

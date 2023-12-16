@@ -1,8 +1,8 @@
+import 'package:admin/services/cloud_service.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:get/get.dart';
 
 import '../models/Entry.dart';
-import '../services/data_service.dart';
 import '../services/updater.dart';
 
 class ShopController extends GetxController {
@@ -27,19 +27,19 @@ class ShopController extends GetxController {
   }
 
   Future<void> add(Entry entry) async {
-    await DataService.insert(Collection.shop, entry);
+    await CloudService.insert(Collection.shop, entry);
     await Updater.update(Collection.shop);
     return;
   }
 
   Future<void> delete(Entry entry) async {
-    await DataService.delete(Collection.shop, entry.id);
+    await CloudService.delete(Collection.shop, entry.id);
     await Updater.update(Collection.shop);
     return;
   }
 
   Future<void> modify(Entry old, Entry newEntry) async {
-    await DataService.update(Collection.shop, old.id, newEntry);
+    await CloudService.update(Collection.shop, old.id, newEntry);
     await Updater.update(Collection.shop);
     return;
   }

@@ -1,4 +1,4 @@
-import 'package:admin/services/data_service.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +32,7 @@ class Updater {
 
   static Future<void> update(Collection scope, {cloud = true}) async {
     if (cloud) {
-      _data[scope]?.assignAll((await DataService.get(scope)));
+      _data[scope]?.assignAll((await CloudService.get(scope)));
     }
 
     _notifier[scope]?.value++;
@@ -51,7 +51,7 @@ class Updater {
 
   static Future<List<Map<String, dynamic>>> getData(Collection scope) async {
     if ((_data[scope] ?? []).isEmpty) {
-      _data[scope]?.assignAll((await DataService.get(scope)));
+      _data[scope]?.assignAll((await CloudService.get(scope)));
     }
 
     return _data[scope] ?? [];

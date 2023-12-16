@@ -154,18 +154,7 @@ class _AdminScreenState extends State<AdminScreen> {
               ],
               panelName: "Telecamere",
               onSave: (p) {
-                SocketService.send(
-                  SocketEvent(
-                    from: Config.get('deviceID'),
-                    to: 'all',
-                    type: EventType.SETTING,
-                    data: {
-                      'key': 'cameras',
-                      'value': p[0],
-                    },
-                  ),
-                );
-                Config.set('cameras', p[0]);
+                Config.share('cameras', p[0]);
               },
             ),
           ],

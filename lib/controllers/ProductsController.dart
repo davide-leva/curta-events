@@ -1,8 +1,8 @@
+import 'package:admin/services/cloud_service.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:get/get.dart';
 
 import '../models/Product.dart';
-import '../services/data_service.dart';
 import '../services/updater.dart';
 
 class ProductController extends GetxController {
@@ -26,13 +26,13 @@ class ProductController extends GetxController {
   }
 
   Future<void> add(Product product) async {
-    await DataService.insert(Collection.products, product);
+    await CloudService.insert(Collection.products, product);
     await Updater.update(Collection.products);
     return;
   }
 
   Future<void> delete(Product product) async {
-    await DataService.delete(Collection.products, product.id);
+    await CloudService.delete(Collection.products, product.id);
     await Updater.update(Collection.products);
     return;
   }
@@ -46,7 +46,7 @@ class ProductController extends GetxController {
   }
 
   Future<void> modify(Product old, Product newProduct) async {
-    await DataService.update(Collection.products, old.id, newProduct);
+    await CloudService.update(Collection.products, old.id, newProduct);
     await Updater.update(Collection.products);
     return;
   }

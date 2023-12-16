@@ -10,31 +10,30 @@ class IconSelector extends StatefulWidget {
   final void Function(IconData icon) onChange;
   final IconData? initialSelection;
 
-  IconData? _icon;
-
   @override
   State<IconSelector> createState() => _IconSelectorState();
 }
 
 class _IconSelectorState extends State<IconSelector> {
+  IconData? _icon;
+
   @override
   Widget build(BuildContext context) {
-    if (widget._icon == null)
-      widget._icon = widget.initialSelection ?? Icons.phone_android;
+    if (_icon == null) _icon = widget.initialSelection ?? Icons.phone_android;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         GestureDetector(
           onTap: () => setState(() {
-            widget._icon = Icons.phone_android;
+            _icon = Icons.phone_android;
             widget.onChange(Icons.phone_android);
           }),
           child: Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              color: widget._icon == Icons.phone_android
+              color: _icon == Icons.phone_android
                   ? Colors.lightBlue
                   : Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(8),
@@ -44,14 +43,14 @@ class _IconSelectorState extends State<IconSelector> {
         ),
         GestureDetector(
           onTap: () => setState(() {
-            widget._icon = Icons.laptop;
+            _icon = Icons.laptop;
             widget.onChange(Icons.laptop);
           }),
           child: Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              color: widget._icon == Icons.laptop
+              color: _icon == Icons.laptop
                   ? Colors.lightBlue
                   : Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(8),
@@ -61,14 +60,14 @@ class _IconSelectorState extends State<IconSelector> {
         ),
         GestureDetector(
           onTap: () => setState(() {
-            widget._icon = Icons.desktop_windows;
+            _icon = Icons.desktop_windows;
             widget.onChange(Icons.desktop_windows);
           }),
           child: Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              color: widget._icon == Icons.desktop_windows
+              color: _icon == Icons.desktop_windows
                   ? Colors.lightBlue
                   : Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(8),
@@ -78,14 +77,14 @@ class _IconSelectorState extends State<IconSelector> {
         ),
         GestureDetector(
           onTap: () => setState(() {
-            widget._icon = Icons.tablet;
+            _icon = Icons.tablet;
             widget.onChange(Icons.tablet);
           }),
           child: Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              color: widget._icon == Icons.tablet
+              color: _icon == Icons.tablet
                   ? Colors.lightBlue
                   : Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(8),

@@ -1,9 +1,9 @@
 import 'package:admin/controllers/ProductsController.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:get/get.dart';
 
 import '../models/Entry.dart';
 import '../models/Product.dart';
-import '../services/data_service.dart';
 import '../services/sync_service.dart';
 import '../services/updater.dart';
 
@@ -52,19 +52,19 @@ class InventoryController extends GetxController {
   }
 
   Future<void> add(Entry entry) async {
-    await DataService.insert(Collection.inventory, entry);
+    await CloudService.insert(Collection.inventory, entry);
     await Updater.update(Collection.inventory);
     return;
   }
 
   Future<void> delete(Entry entry) async {
-    await DataService.delete(Collection.inventory, entry.id);
+    await CloudService.delete(Collection.inventory, entry.id);
     await Updater.update(Collection.inventory);
     return;
   }
 
   Future<void> modify(Entry old, Entry newEntry) async {
-    await DataService.update(Collection.inventory, old.id, newEntry);
+    await CloudService.update(Collection.inventory, old.id, newEntry);
     await Updater.update(Collection.inventory);
     return;
   }

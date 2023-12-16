@@ -1,4 +1,5 @@
 import 'package:admin/models/Model.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 
 class Person implements Model {
   Person({
@@ -29,7 +30,7 @@ class Person implements Model {
         name: data['name'],
         hasEntered: data['hasEntered'],
         hasPaid: data['hasPaid'],
-        discount: data['discount'] ?? 0.00);
+        discount: data['discount'].toDouble() ?? 0.00);
   }
 
   @override

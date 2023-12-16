@@ -1,9 +1,8 @@
 import 'package:admin/models/Group.dart';
 import 'package:admin/models/Person.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:get/get.dart';
-import 'package:collection/collection.dart';
 
-import '../services/data_service.dart';
 import '../services/sync_service.dart';
 import '../services/updater.dart';
 
@@ -53,13 +52,13 @@ class GroupsController extends GetxController {
   }
 
   Future<void> add(ListaGroup group) async {
-    await DataService.insert(Collection.groups, group);
+    await CloudService.insert(Collection.groups, group);
     await Updater.update(Collection.groups);
     return;
   }
 
   Future<void> delete(ListaGroup group) async {
-    await DataService.delete(Collection.groups, group.id);
+    await CloudService.delete(Collection.groups, group.id);
     await Updater.update(Collection.groups);
     return;
   }
@@ -74,7 +73,7 @@ class GroupsController extends GetxController {
       hasPaid: false,
     ));
 
-    await DataService.update(Collection.groups, group.id, group);
+    await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
     return;
   }
@@ -85,7 +84,7 @@ class GroupsController extends GetxController {
     group.numberOfPeople -= 1;
     group.people.removeAt(personIndex);
 
-    await DataService.update(Collection.groups, group.id, group);
+    await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
     return;
   }
@@ -95,7 +94,7 @@ class GroupsController extends GetxController {
 
     group.people[personIndex].hasPaid = !group.people[personIndex].hasPaid;
 
-    await DataService.update(Collection.groups, group.id, group);
+    await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
     return;
   }
@@ -106,7 +105,7 @@ class GroupsController extends GetxController {
     group.people[personIndex].hasEntered =
         !group.people[personIndex].hasEntered;
 
-    await DataService.update(Collection.groups, group.id, group);
+    await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
     return;
   }
@@ -117,7 +116,7 @@ class GroupsController extends GetxController {
 
     group.people[personIndex].discount = discount;
 
-    await DataService.update(Collection.groups, group.id, group);
+    await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
     return;
   }

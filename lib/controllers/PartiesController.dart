@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:admin/controllers/Config.dart';
 import 'package:admin/controllers/TransactionController.dart';
 import 'package:admin/models/Party.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:get/get.dart';
 
-import '../services/data_service.dart';
 import '../services/updater.dart';
 
 class PartiesController extends GetxController {
@@ -42,19 +42,19 @@ class PartiesController extends GetxController {
   }
 
   Future<void> add(Party party) async {
-    await DataService.insert(Collection.parties, party);
+    await CloudService.insert(Collection.parties, party);
     await Updater.update(Collection.parties);
     return;
   }
 
   Future<void> delete(Party party) async {
-    await DataService.delete(Collection.parties, party.id);
+    await CloudService.delete(Collection.parties, party.id);
     await Updater.update(Collection.parties);
     return;
   }
 
   Future<void> modify(Party old, Party newParty) async {
-    await DataService.update(Collection.parties, old.id, newParty);
+    await CloudService.update(Collection.parties, old.id, newParty);
     await Updater.update(Collection.parties);
 
     if (old.priceEntrance != newParty.priceEntrance ||

@@ -1,5 +1,5 @@
 import 'package:admin/models/Shift.dart';
-import 'package:admin/services/data_service.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:get/get.dart';
 
 import '../services/sync_service.dart';
@@ -34,19 +34,19 @@ class ShiftController extends GetxController {
   }
 
   Future<void> add(Shift shift) async {
-    await DataService.insert(Collection.shifts, shift);
+    await CloudService.insert(Collection.shifts, shift);
     await Updater.update(Collection.shifts);
     return;
   }
 
   Future<void> modify(Shift oldShift, Shift newShift) async {
-    await DataService.update(Collection.shifts, oldShift.id, newShift);
+    await CloudService.update(Collection.shifts, oldShift.id, newShift);
     await Updater.update(Collection.shifts);
     return;
   }
 
   Future<void> delete(Shift shift) async {
-    await DataService.delete(Collection.shifts, shift.id);
+    await CloudService.delete(Collection.shifts, shift.id);
     await Updater.update(Collection.shifts);
     return;
   }

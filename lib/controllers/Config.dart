@@ -1,8 +1,9 @@
 import 'package:admin/controllers/BankController.dart';
+import 'package:admin/models/Model.dart';
 import 'package:admin/services/cloud_service.dart';
-import 'package:admin/services/data_service.dart';
 import 'package:admin/services/local_storage.dart';
 import 'package:admin/services/sync_service.dart';
+import 'package:admin/services/updater.dart';
 
 import '../models/Party.dart';
 
@@ -10,6 +11,7 @@ class Config {
   static List<ConfigEntry> config = <ConfigEntry>[];
 
   static void init() async {
+    Updater.listen(Collection.config, _update);
     List<Map<String, dynamic>> data = LocalStorage.get(Collection.config);
 
     if (data.isEmpty) {
@@ -21,12 +23,17 @@ class Config {
 
     set(
         'selectedParty',
-        (await DataService.get(Collection.parties)
+        (await CloudService.get(Collection.parties)
                 .then((data) => data.map((party) => Party.fromJson(party))))
             .toList()
             .sorted((a, b) => a.date.compareTo(b.date))
             .last
             .tag);
+  }
+
+  static void _update() async {
+    (await Updater.getData(Collection.config))
+        .forEach((entry) => set(entry['key'], entry['value']));
   }
 
   static String get(String key) {
@@ -56,12 +63,24 @@ class Config {
     _save();
   }
 
+  static void share(String key, String value) {
+    CloudService.update(
+      Collection.config,
+      key,
+      ConfigEntry(
+        key: key,
+        name: '',
+        value: value,
+      ),
+    );
+  }
+
   static void _save() {
     LocalStorage.set(Collection.config, config.map((e) => e.toJson()).toList());
   }
 }
 
-class ConfigEntry {
+class ConfigEntry implements Model {
   ConfigEntry({
     required this.key,
     required this.name,

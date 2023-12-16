@@ -1,5 +1,5 @@
 import 'package:admin/models/Device.dart';
-import 'package:admin/services/data_service.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:get/get.dart';
 
 import '../services/sync_service.dart';
@@ -32,7 +32,7 @@ class RegisterController extends GetxController {
   }
 
   Future<void> modify(Device old, Device newDevice) async {
-    await DataService.update(Collection.devices, old.id, newDevice);
+    await CloudService.update(Collection.devices, old.id, newDevice);
     await Updater.update(Collection.register);
   }
 
@@ -41,7 +41,7 @@ class RegisterController extends GetxController {
   }
 
   Future<void> delete(Device old) async {
-    await DataService.delete(Collection.register, old.id);
+    await CloudService.delete(Collection.register, old.id);
     await Updater.update(Collection.register);
     return;
   }
