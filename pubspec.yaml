@@ -1,4 +1,4 @@
-name: admin
+name: curta_events
 description: Dashboard Curta Events.
 
 # The following line prevents the package from being accidentally published to
@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: '1.1.0'
 
 environment:
   sdk: '>=2.15.0 <3.0.0'
@@ -47,6 +47,7 @@ dependencies:
   flutter_mjpeg: ^2.0.0
   qr_flutter: ^4.1.0
   mobile_scanner: ^3.4.1
+  crypto: ^3.0.3
 
 dev_dependencies:
   flutter_test:

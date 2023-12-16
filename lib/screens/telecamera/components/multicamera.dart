@@ -2,11 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mjpeg/flutter_mjpeg.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../constants.dart';
 import '../../../controllers/Config.dart';
-import '../../components/button.dart';
 
 class Multicamera extends StatelessWidget {
   Multicamera({

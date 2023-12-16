@@ -3,7 +3,8 @@ import 'dart:convert';
 
 import 'package:admin/models/Event.dart';
 import 'package:admin/services/sync_service.dart';
-import 'package:admin/services/updater.dart';
+import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -15,7 +16,9 @@ enum EventType {
   HANDSHAKE,
   REGISTRATION,
   AUTH,
+  LOGIN,
   AUTH_DONE,
+  AUTH_FAIL,
   UPDATE,
   SETTING,
   CALL,
@@ -36,12 +39,15 @@ class SocketService {
     wss = WebSocketChannel.connect(Uri.parse(Config.get('socketEndpoint')));
     wss.ready.then((value) {
       SyncService.cloudState.value = CloudState.online;
-
-      send(SocketEvent(
-          from: Config.get('deviceID'),
-          to: 'server',
-          type: EventType.HANDSHAKE,
-          data: {}));
+      if (kIsWeb) {
+        SyncService.socketState.value = SocketState.web_auth;
+      } else {
+        send(SocketEvent(
+            from: Config.get('deviceID'),
+            to: 'server',
+            type: EventType.HANDSHAKE,
+            data: {}));
+      }
     });
 
     wss.stream.listen((event) {
@@ -78,6 +84,14 @@ class SocketService {
         },
       ),
     );
+  }
+
+  static void login(String user, String pass) {
+    send(SocketEvent(
+        from: Config.get('deviceID'),
+        to: 'server',
+        type: EventType.LOGIN,
+        data: {"user": user, "hash": _generateHash(pass)}));
   }
 
   static void call(String who) {
@@ -170,5 +184,11 @@ class SocketService {
         onAdmin?.call(Device.fromJson(data), data['key']);
       } finally {}
     }
+  }
+
+  static String _generateHash(String data) {
+    var content = new Utf8Encoder().convert(data);
+    var digest = md5.convert(content);
+    return digest.toString();
   }
 }

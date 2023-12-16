@@ -23,6 +23,7 @@ enum Collection {
   shifts,
   config,
   devices,
+  register,
 }
 
 enum CloudState {
@@ -30,7 +31,7 @@ enum CloudState {
   offline,
 }
 
-enum SocketState { pending, auth, connect, connected }
+enum SocketState { pending, auth, web_auth, connect, connected }
 
 class SyncService {
   static final ValueNotifier<SocketState> socketState =
@@ -43,16 +44,6 @@ class SyncService {
     await LocalStorage.init();
     Config.init();
     SocketService.init();
-
-    Timer.periodic(10.seconds, (_) {
-      CloudService.testConnection().then((isConnected) {
-        if (isConnected) {
-          cloudState.value = CloudState.online;
-        } else {
-          cloudState.value = CloudState.offline;
-        }
-      });
-    });
 
     CloudService.getInstagramFollowers().then((followers) {
       Config.set('followers', "$followers");
@@ -93,6 +84,18 @@ class SyncService {
     SocketService.setListener(EventType.SETTING, (event) {
       Config.set(event.data['key'], event.data['value']);
     });
+
+    SocketService.setListener(EventType.AUTH, (event) {
+      Device device = Device.fromJson(event.data['device']);
+
+      Config.set('operator', device.operator);
+      Config.set('place', device.place);
+      Config.set('userLevel', device.type);
+      Config.set('icon', device.icon.codePoint.toString());
+      Config.set('key', event.data['key']);
+
+      SyncService.socketState.value = SocketState.connect;
+    });
   }
 
   static String id(Collection collection) {
@@ -114,6 +117,9 @@ class SyncService {
       case Collection.devices:
         return "$coll";
 
+      case Collection.register:
+        return "$coll";
+
       case Collection.shifts:
         return "${Config.get('selectedParty')}:$coll";
 
@@ -127,7 +133,7 @@ class SyncService {
         return "${Config.get('selectedParty')}:$coll";
 
       case Collection.config:
-        return "config";
+        return "main:config";
     }
   }
 

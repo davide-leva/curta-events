@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:admin/controllers/Config.dart';
+import 'package:admin/models/Model.dart';
 import 'package:admin/services/sync_service.dart';
-import 'package:get/get.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class CloudService {
@@ -22,7 +23,7 @@ class CloudService {
         .toList();
   }
 
-  static Future<int> insert(Collection collection, Map<String, dynamic> data,
+  static Future<int> insert(Collection collection, Model model,
       {int? version}) async {
     Map<String, String> headers = <String, String>{
       'device': Config.get('deviceID'),
@@ -37,14 +38,13 @@ class CloudService {
     http.Response response = await http.post(
       Uri.parse('${Config.get('dataEndpoint')}${SyncService.id(collection)}'),
       headers: headers,
-      body: jsonEncode(data),
+      body: jsonEncode(model.toJson()),
     );
 
     return jsonDecode(response.body)['version'];
   }
 
-  static Future<int> update(
-      Collection collection, String id, Map<String, dynamic> data,
+  static Future<int> update(Collection collection, String id, Model model,
       {int? version}) async {
     Map<String, String> headers = <String, String>{
       'device': Config.get('deviceID'),
@@ -60,12 +60,12 @@ class CloudService {
       Uri.parse(
           '${Config.get('dataEndpoint')}${SyncService.id(collection)}/$id'),
       headers: headers,
-      body: jsonEncode(data),
+      body: jsonEncode(model.toJson()),
     );
     return jsonDecode(response.body)['version'];
   }
 
-  static Future<int> delete(Collection collection, String id,
+  static Future<void> delete(Collection collection, String id,
       {int? version}) async {
     Map<String, String> headers = <String, String>{
       'device': Config.get('deviceID'),
@@ -73,31 +73,12 @@ class CloudService {
       'Content-Type': 'application/json',
     };
 
-    if (version != null) {
-      headers['version'] = version.toString();
-    }
-
-    http.Response response = await http.delete(
+    await http.delete(
         Uri.parse(
             '${Config.get('dataEndpoint')}${SyncService.id(collection)}/$id'),
         headers: headers);
 
-    return jsonDecode(response.body)['version'];
-  }
-
-  static Future<int> getVersion(Collection collection) async {
-    Map<String, String> headers = <String, String>{
-      'device': Config.get('deviceID'),
-      'key': Config.get('key'),
-      'Content-Type': 'application/json',
-    };
-
-    http.Response response = await http.get(
-        Uri.parse(
-            '${Config.get('dataEndpoint')}versions/${SyncService.id(collection)}'),
-        headers: headers);
-
-    return jsonDecode(response.body)['version'];
+    return;
   }
 
   static String uuid({bool device = false}) {
@@ -125,7 +106,11 @@ class CloudService {
       id.add(chars[0]);
     }
 
-    return "dev-" + id.join("");
+    if (kIsWeb) {
+      return "web-" + id.join("");
+    } else {
+      return "dev-" + id.join("");
+    }
   }
 
   static Future<int> getInstagramFollowers() async {
@@ -144,10 +129,4 @@ class CloudService {
       return int.parse(Config.get('followers'));
     }
   }
-
-  static Future<bool> testConnection() async => http
-      .get(Uri.parse('${Config.get('dataEndpoint')}test'))
-      .timeout(5.seconds)
-      .then((value) => value.statusCode == 200)
-      .onError((_, __) => false);
 }

@@ -5,6 +5,7 @@ import 'package:admin/controllers/MenuController.dart' as controller;
 import 'package:admin/screens/lista/lista_screen.dart';
 import 'package:admin/screens/main/auth_screen.dart';
 import 'package:admin/screens/main/main_screen.dart';
+import 'package:admin/screens/main/web_auth_screen.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,6 +68,8 @@ class MyApp extends StatelessWidget {
                 );
               case SocketState.auth:
                 return AuthScreen();
+              case SocketState.web_auth:
+                return WebAuthScreen();
               case SocketState.connect:
                 10.milliseconds.delay(() =>
                     SyncService.socketState.value = SocketState.connected);

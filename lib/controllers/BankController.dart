@@ -1,9 +1,9 @@
 import 'package:admin/controllers/PartiesController.dart';
 import 'package:admin/models/BankTransaction.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:get/get.dart';
 
-import '../services/data_service.dart';
 import '../services/updater.dart';
 
 extension SortList<T> on List<T> {
@@ -68,20 +68,20 @@ class BankController extends GetxController {
   }
 
   Future<void> add(BankTransaction transaction) async {
-    await DataService.insert(Collection.bank, transaction);
+    await CloudService.insert(Collection.bank, transaction);
     await Updater.update(Collection.bank);
     return;
   }
 
   Future<void> delete(BankTransaction transaction) async {
-    await DataService.delete(Collection.bank, transaction.id);
+    await CloudService.delete(Collection.bank, transaction.id);
     await Updater.update(Collection.bank);
     return;
   }
 
   Future<void> modify(
       BankTransaction old, BankTransaction newTransaction) async {
-    await DataService.update(Collection.bank, old.id, newTransaction);
+    await CloudService.update(Collection.bank, old.id, newTransaction);
     await Updater.update(Collection.bank);
     return;
   }

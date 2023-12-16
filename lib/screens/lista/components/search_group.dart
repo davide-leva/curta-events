@@ -50,49 +50,67 @@ class _SearchGroupState extends State<SearchGroup> {
 
   final TextEditingController _searchPersonController = TextEditingController();
 
+  void _updateResult() {
+    final List<PersonEntry> people = flatten(
+      widget.controller.groups.mapIndexed(
+        (gid, group) => group.people.mapIndexed(
+          (pid, person) => PersonEntry(person, group.title, gid, pid),
+        ),
+      ),
+    );
+
+    widget.result.assignAll(people.where((entry) {
+      List<String> words =
+          _searchPersonController.text.toLowerCase().split(' ');
+
+      bool flag = true;
+      words.forEach((word) {
+        flag = flag && entry.person.name.toLowerCase().contains(word) ||
+            word.contains(
+              entry.person.name.toLowerCase(),
+            );
+      });
+
+      return flag;
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<PersonEntry> people = flatten(widget.controller.groups
-        .mapIndexed((gid, group) => group.people.mapIndexed(
-            (pid, person) => PersonEntry(person, group.title, gid, pid))));
-
-    if (_searchPersonController.text.length >= 3 && widget.result.isEmpty) {
-      widget.result.addAll(people.where((entry) => entry.person.name
-          .toLowerCase()
-          .contains(_searchPersonController.text.toLowerCase())));
-    }
-
     return KeyboardListener(
       focusNode: FocusNode(),
-      onKeyEvent: (event) {
+      onKeyEvent: (event) async {
         if (!(event is s.KeyDownEvent)) return;
         if (widget.result.length != 1) return;
 
         PersonEntry personFound = widget.result.first;
 
-        if (event.logicalKey.same(s.LogicalKeyboardKey.f1)) {
-          widget.controller.togglePersonPaid(
+        if (event.logicalKey.same(PAY_KEY)) {
+          await widget.controller.togglePersonPaid(
               personFound.groupIndex, personFound.personIndex);
+          setState(_updateResult);
         }
 
-        if (event.logicalKey.same(s.LogicalKeyboardKey.f2)) {
-          widget.controller.togglePersonEntrance(
+        if (event.logicalKey.same(ENTRANCE_KEY)) {
+          await widget.controller.togglePersonEntrance(
               personFound.groupIndex, personFound.personIndex);
+          setState(_updateResult);
         }
 
-        if (event.logicalKey.same(s.LogicalKeyboardKey.f5)) {
-          widget.controller
+        if (event.logicalKey.same(DELETE_KEY)) {
+          await widget.controller
               .removePerson(personFound.groupIndex, personFound.personIndex);
+          setState(_updateResult);
         }
       },
       child: Responsive(
-        desktop: _desktopView(context, people),
-        mobile: _mobileView(context, people),
+        desktop: _desktopView(context),
+        mobile: _mobileView(context),
       ),
     );
   }
 
-  Container _desktopView(BuildContext context, List<PersonEntry> people) {
+  Container _desktopView(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -120,28 +138,20 @@ class _SearchGroupState extends State<SearchGroup> {
                 width: 200,
                 height: 28,
                 child: Center(
-                    child: TextInput(
-                        textController: _searchPersonController,
-                        label: "",
-                        textLength: 3,
-                        onTextLength: () {
-                          setState(() {
-                            widget.result.clear();
-                            widget.result.addAll(people.where((entry) =>
-                                entry.person.name.toLowerCase().contains(
-                                    _searchPersonController.text
-                                        .toLowerCase()) ||
-                                _searchPersonController.text
-                                    .toLowerCase()
-                                    .contains(
-                                        entry.person.name.toLowerCase())));
-                          });
-                        },
-                        orElse: () {
-                          setState(() {
-                            widget.result.clear();
-                          });
-                        })),
+                  child: TextInput(
+                    textController: _searchPersonController,
+                    label: "",
+                    textLength: 2,
+                    onTextLength: () {
+                      setState(_updateResult);
+                    },
+                    orElse: () {
+                      setState(() {
+                        widget.result.clear();
+                      });
+                    },
+                  ),
+                ),
               ),
             ],
           ),
@@ -170,14 +180,17 @@ class _SearchGroupState extends State<SearchGroup> {
                         widget.controller.removePerson(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
+                        setState(_updateResult);
                       }, () {
                         widget.controller.togglePersonPaid(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
+                        setState(_updateResult);
                       }, () {
                         widget.controller.togglePersonEntrance(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
+                        setState(_updateResult);
                       }),
                     ),
                   )
@@ -201,7 +214,7 @@ class _SearchGroupState extends State<SearchGroup> {
     );
   }
 
-  Container _mobileView(BuildContext context, List<PersonEntry> people) {
+  Container _mobileView(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -234,28 +247,20 @@ class _SearchGroupState extends State<SearchGroup> {
                     width: 200,
                     height: 32,
                     child: Center(
-                        child: TextInput(
-                            textController: _searchPersonController,
-                            label: "",
-                            textLength: 3,
-                            onTextLength: () {
-                              setState(() {
-                                widget.result.clear();
-                                widget.result.addAll(people.where((entry) =>
-                                    entry.person.name.toLowerCase().contains(
-                                        _searchPersonController.text
-                                            .toLowerCase()) ||
-                                    _searchPersonController.text
-                                        .toLowerCase()
-                                        .contains(
-                                            entry.person.name.toLowerCase())));
-                              });
-                            },
-                            orElse: () {
-                              setState(() {
-                                widget.result.clear();
-                              });
-                            })),
+                      child: TextInput(
+                        textController: _searchPersonController,
+                        label: "",
+                        textLength: 2,
+                        onTextLength: () {
+                          setState(_updateResult);
+                        },
+                        orElse: () {
+                          setState(() {
+                            widget.result.clear();
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ],
               )
@@ -288,14 +293,17 @@ class _SearchGroupState extends State<SearchGroup> {
                           widget.controller.removePerson(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
+                          setState(_updateResult);
                         }, () {
                           widget.controller.togglePersonPaid(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
+                          setState(_updateResult);
                         }, () {
                           widget.controller.togglePersonEntrance(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
+                          setState(_updateResult);
                         }),
                       ),
                     ),
@@ -368,17 +376,17 @@ DataRow _dataRow(PersonEntry entry, Function() onDelete, Function() onConfirm,
               width: defaultPadding,
             ),
             TableButton(
-              onPressed: onDelete,
-              icon: Icons.close,
-              color: Colors.red,
+              onPressed: onEntrance,
+              icon: Icons.door_back_door,
+              color: Colors.purple,
             ),
             SizedBox(
               width: defaultPadding,
             ),
             TableButton(
-              onPressed: onEntrance,
-              icon: Icons.door_back_door,
-              color: Colors.purple,
+              onPressed: onDelete,
+              icon: Icons.close,
+              color: Colors.red,
             ),
           ],
         ),

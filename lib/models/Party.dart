@@ -10,6 +10,7 @@ class Party implements Model {
     required this.place,
     required this.pricePrevendita,
     required this.priceEntrance,
+    required this.archived,
   });
 
   final String id;
@@ -20,6 +21,7 @@ class Party implements Model {
   final String place;
   final int priceEntrance;
   final int pricePrevendita;
+  final bool archived;
 
   @override
   Map<String, dynamic> toJson() {
@@ -32,6 +34,7 @@ class Party implements Model {
       "place": place,
       "pricePrevendita": pricePrevendita,
       "priceEntrance": priceEntrance,
+      "archived": archived,
     };
   }
 
@@ -46,11 +49,25 @@ class Party implements Model {
       place: data['place'],
       pricePrevendita: data['pricePrevendita'],
       priceEntrance: data['priceEntrance'],
+      archived: data['archived'],
     );
   }
 
   @override
   bool operator ==(Object other) {
     return other is Party && id == other.id;
+  }
+
+  Party withBalance(double newBalance) {
+    return Party(
+        id: this.id,
+        tag: this.tag,
+        title: this.title,
+        balance: newBalance,
+        date: this.date,
+        place: this.place,
+        pricePrevendita: this.pricePrevendita,
+        priceEntrance: this.priceEntrance,
+        archived: this.archived);
   }
 }
