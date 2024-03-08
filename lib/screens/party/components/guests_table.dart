@@ -16,7 +16,7 @@ class GuestsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -32,7 +32,7 @@ class GuestsList extends StatelessWidget {
             width: double.infinity,
             child: Obx(
               () => DataTable2(
-                columnSpacing: defaultPadding,
+                columnSpacing: kDefaultPadding,
                 minWidth: 600,
                 columns: [
                   DataColumn(

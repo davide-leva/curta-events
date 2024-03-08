@@ -1,3 +1,4 @@
+import 'package:admin/constants.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ class SideMenuStateAdmin extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: kBgColor,
       child: Column(
         children: [
           DrawerHeader(
@@ -226,7 +228,7 @@ class DrawerListTile extends StatelessWidget {
     return ListTile(
       onTap: press,
       enabled: enabled,
-      horizontalTitleGap: 0.0,
+      horizontalTitleGap: kDefaultPadding,
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

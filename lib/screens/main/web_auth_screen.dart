@@ -40,11 +40,11 @@ class _WebAuthScreenState extends State<WebAuthScreen> {
               height: 24,
             ),
             Container(
-              padding: EdgeInsets.all(defaultPadding),
+              padding: EdgeInsets.all(kDefaultPadding),
               width: 300,
               decoration: BoxDecoration(
                 color: Theme.of(context).canvasColor,
-                borderRadius: BorderRadius.circular(defaultPadding),
+                borderRadius: BorderRadius.circular(kDefaultPadding),
               ),
               child: Column(
                 children: [
@@ -53,7 +53,7 @@ class _WebAuthScreenState extends State<WebAuthScreen> {
                     label: "Utente",
                   ),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   TextInput(
                     textController: _pwdController,
@@ -61,7 +61,7 @@ class _WebAuthScreenState extends State<WebAuthScreen> {
                     label: "Password",
                   ),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   _authFailed
                       ? Text(
@@ -74,7 +74,7 @@ class _WebAuthScreenState extends State<WebAuthScreen> {
                       : Container(),
                   _authFailed
                       ? SizedBox(
-                          height: defaultPadding,
+                          height: kDefaultPadding,
                         )
                       : Container(),
                   GestureDetector(
@@ -83,10 +83,10 @@ class _WebAuthScreenState extends State<WebAuthScreen> {
                     child: Container(
                       alignment: Alignment.center,
                       width: double.infinity,
-                      padding: EdgeInsets.all(defaultPadding),
+                      padding: EdgeInsets.all(kDefaultPadding),
                       decoration: BoxDecoration(
                         color: Colors.green,
-                        borderRadius: BorderRadius.circular(defaultPadding),
+                        borderRadius: BorderRadius.circular(kDefaultPadding),
                       ),
                       child: Text("Login"),
                     ),

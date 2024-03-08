@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../constants.dart';
 import '../../../controllers/Config.dart';
-import '../../components/button.dart';
+import '../../components/action_button.dart';
 
 class PartySelector extends StatefulWidget {
   @override
@@ -21,10 +21,10 @@ class _PartySelectorState extends State<PartySelector> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            defaultPadding,
+            kDefaultPadding,
           ),
           color: Theme.of(context).canvasColor),
       child: Column(
@@ -35,12 +35,12 @@ class _PartySelectorState extends State<PartySelector> {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(
-              horizontal: defaultPadding,
+              horizontal: kDefaultPadding,
             ),
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
@@ -68,7 +68,7 @@ class _PartySelectorState extends State<PartySelector> {
             ),
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

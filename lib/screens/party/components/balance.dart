@@ -29,7 +29,7 @@ class Balance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -74,7 +74,7 @@ class Balance extends StatelessWidget {
                   })
             ],
           ),
-          SizedBox(height: defaultPadding),
+          SizedBox(height: kDefaultPadding),
           Row(children: [
             Expanded(
               child: Obx(
@@ -144,12 +144,12 @@ _addNewTransaction(
 
 border(Widget child) {
   return Container(
-      margin: EdgeInsets.only(top: defaultPadding),
-      padding: EdgeInsets.all(defaultPadding),
+      margin: EdgeInsets.only(top: kDefaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         border: Border.all(width: 2, color: kPrimaryColor.withOpacity(0.15)),
         borderRadius: const BorderRadius.all(
-          Radius.circular(defaultPadding),
+          Radius.circular(kDefaultPadding),
         ),
       ),
       child: child);

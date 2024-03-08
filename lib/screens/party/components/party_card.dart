@@ -30,18 +30,18 @@ class PartyCard extends StatelessWidget {
         await Updater.refresh();
       },
       child: Container(
-        margin: EdgeInsets.only(top: defaultPadding),
-        padding: EdgeInsets.all(defaultPadding),
+        margin: EdgeInsets.only(top: kDefaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         decoration: BoxDecoration(
           border: Border.all(width: 2, color: kPrimaryColor.withOpacity(0.15)),
           borderRadius: const BorderRadius.all(
-            Radius.circular(defaultPadding),
+            Radius.circular(kDefaultPadding),
           ),
         ),
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(defaultPadding * 0.75),
+              padding: EdgeInsets.all(kDefaultPadding * 0.75),
               height: 40,
               width: 40,
               decoration: BoxDecoration(
@@ -55,7 +55,8 @@ class PartyCard extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

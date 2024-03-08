@@ -37,7 +37,7 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -60,7 +60,7 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
                         Expanded(
                           child: Container(
                             width: 300,
-                            padding: EdgeInsets.only(left: defaultPadding),
+                            padding: EdgeInsets.only(left: kDefaultPadding),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(8),
@@ -97,7 +97,7 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: defaultPadding),
+                            padding: EdgeInsets.only(left: kDefaultPadding),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(8),
@@ -145,7 +145,7 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
                 color: Colors.lightBlue,
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               TableButton(
                 onPressed: () async {
@@ -270,7 +270,7 @@ DataRow _dataRow(
               ),
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -296,7 +296,7 @@ DataRow _dataRow(
               },
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               color: Colors.green,
@@ -306,7 +306,7 @@ DataRow _dataRow(
               },
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               color: Colors.red,

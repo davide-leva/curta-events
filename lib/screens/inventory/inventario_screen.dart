@@ -9,11 +9,11 @@ class InventarioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
             Header(screenTitle: "Inventario"),
-            SizedBox(height: defaultPadding),
+            SizedBox(height: kDefaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

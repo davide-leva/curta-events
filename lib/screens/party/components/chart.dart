@@ -51,7 +51,7 @@ class Chart extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: defaultPadding),
+                SizedBox(height: kDefaultPadding),
                 Obx(
                   () => Text(
                     partyController.totalIncome.toStringAsFixed(0) + " €",

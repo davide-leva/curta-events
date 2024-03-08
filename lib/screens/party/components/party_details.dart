@@ -21,7 +21,7 @@ class PartyDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -36,7 +36,7 @@ class PartyDetails extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: defaultPadding),
+          SizedBox(height: kDefaultPadding),
           Chart(),
           Obx(
             () => Column(

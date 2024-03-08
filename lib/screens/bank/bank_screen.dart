@@ -12,7 +12,7 @@ class BankScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Responsive(
           mobile: _mobileView(),
           desktop: _desktopView(),
@@ -26,7 +26,7 @@ class BankScreen extends StatelessWidget {
       children: [
         Header(screenTitle: "Cassa"),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class BankScreen extends StatelessWidget {
               child: TransactionTable(),
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             Expanded(
               flex: 7,
@@ -44,7 +44,7 @@ class BankScreen extends StatelessWidget {
                 children: [
                   ActualBalance(),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   BankSummary(),
                 ],
@@ -62,11 +62,11 @@ class BankScreen extends StatelessWidget {
         Header(screenTitle: "Cassa"),
         ActualBalance(),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         TransactionTable(),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         BankSummary(),
       ],

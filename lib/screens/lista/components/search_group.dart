@@ -112,7 +112,7 @@ class _SearchGroupState extends State<SearchGroup> {
 
   Container _desktopView(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -132,7 +132,7 @@ class _SearchGroupState extends State<SearchGroup> {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               SizedBox(
                 width: 200,
@@ -198,13 +198,13 @@ class _SearchGroupState extends State<SearchGroup> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: defaultPadding * 3,
+                        height: kDefaultPadding * 3,
                       ),
                       Text(
                         "La ricerca non ha prodotto risultati",
                       ),
                       SizedBox(
-                        height: defaultPadding * 3,
+                        height: kDefaultPadding * 3,
                       )
                     ],
                   ),
@@ -216,7 +216,7 @@ class _SearchGroupState extends State<SearchGroup> {
 
   Container _mobileView(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -232,7 +232,7 @@ class _SearchGroupState extends State<SearchGroup> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               SizedBox(
-                height: defaultPadding,
+                height: kDefaultPadding,
               ),
               Row(
                 children: [
@@ -241,7 +241,7 @@ class _SearchGroupState extends State<SearchGroup> {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   ),
                   SizedBox(
                     width: 200,
@@ -272,7 +272,7 @@ class _SearchGroupState extends State<SearchGroup> {
                 ? SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
-                      columnSpacing: defaultPadding,
+                      columnSpacing: kDefaultPadding,
                       columns: [
                         DataColumn(
                           label: Text("Gruppo"),
@@ -312,13 +312,13 @@ class _SearchGroupState extends State<SearchGroup> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: defaultPadding * 3,
+                        height: kDefaultPadding * 3,
                       ),
                       Text(
                         "La ricerca non ha prodotto risultati",
                       ),
                       SizedBox(
-                        height: defaultPadding * 3,
+                        height: kDefaultPadding * 3,
                       )
                     ],
                   ),
@@ -348,7 +348,7 @@ DataRow _dataRow(PersonEntry entry, Function() onDelete, Function() onConfirm,
                 : Container(),
             person.hasEntered
                 ? SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   )
                 : Container(),
             person.hasPaid
@@ -373,7 +373,7 @@ DataRow _dataRow(PersonEntry entry, Function() onDelete, Function() onConfirm,
               color: Colors.green,
             )),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               onPressed: onEntrance,
@@ -381,7 +381,7 @@ DataRow _dataRow(PersonEntry entry, Function() onDelete, Function() onConfirm,
               color: Colors.purple,
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               onPressed: onDelete,

@@ -45,10 +45,11 @@ class MyApp extends StatelessWidget {
         },
         scrollbars: false,
       ),
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData.dark(useMaterial3: false).copyWith(
         scaffoldBackgroundColor: kBgColor,
+        primaryColor: Colors.white,
         textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
+            .apply(bodyColor: Colors.white, decorationColor: Colors.white),
         canvasColor: kSecondaryColor,
       ),
       debugShowCheckedModeBanner: false,

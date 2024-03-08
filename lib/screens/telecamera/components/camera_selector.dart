@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:admin/constants.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../controllers/Config.dart';
@@ -23,10 +23,10 @@ class _CameraSelectorState extends State<CameraSelector> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
-        borderRadius: BorderRadius.circular(defaultPadding),
+        borderRadius: BorderRadius.circular(kDefaultPadding),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +36,7 @@ class _CameraSelectorState extends State<CameraSelector> {
             if (index == 0) {
               return Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: defaultPadding,
+                  horizontal: kDefaultPadding,
                 ),
                 child: ActionButton(
                   title: "Multi cam",
@@ -53,7 +53,7 @@ class _CameraSelectorState extends State<CameraSelector> {
             } else {
               return Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: defaultPadding,
+                  horizontal: kDefaultPadding,
                 ),
                 child: ActionButton(
                   title: jsonDecode(Config.get('cameras'))[index - 1]['name'],

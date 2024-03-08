@@ -1,6 +1,6 @@
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/Config.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/text_input.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +32,7 @@ class SettingPanel extends StatelessWidget {
         tecl.add(TextEditingController(text: configs[index].value));
 
         return Container(
-          margin: EdgeInsets.only(bottom: defaultPadding),
+          margin: EdgeInsets.only(bottom: kDefaultPadding),
           child: TextInput(
             textController: tecl[index],
             label: configs[index].name,
@@ -44,11 +44,11 @@ class SettingPanel extends StatelessWidget {
 
     controllers?.forEach((controller) {
       configControllers.add(controller);
-      configControllers.add(SizedBox(height: defaultPadding));
+      configControllers.add(SizedBox(height: kDefaultPadding));
     });
 
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: BorderRadius.circular(10),
@@ -61,7 +61,7 @@ class SettingPanel extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -14,7 +14,7 @@ import '../../../controllers/TransactionController.dart';
 import '../../../models/Person.dart';
 import '../../../models/Transaction.dart';
 import '../../components/badge.dart';
-import '../../components/button.dart';
+import '../../components/action_button.dart';
 
 class GroupTable extends StatefulWidget {
   GroupTable({
@@ -49,7 +49,7 @@ class _GroupTableState extends State<GroupTable> {
 
   Container _desktopView(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -86,7 +86,7 @@ class _GroupTableState extends State<GroupTable> {
                 color: Colors.lightBlue,
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               ActionButton(
                 title: "Elimina",
@@ -115,7 +115,7 @@ class _GroupTableState extends State<GroupTable> {
               ],
               rows: List.generate(
                 widget.group.numberOfPeople,
-                (index) => _dataRow(widget.group.people[index], () {
+                (index) => _dataRow(context, widget.group.people[index], () {
                   setState(() {
                     widget.controller.removePerson(widget.groupIndex, index);
                   });
@@ -146,6 +146,9 @@ class _GroupTableState extends State<GroupTable> {
                             ? "0.00"
                             : _discountController.text));
                   });
+                }, (code) {
+                  widget.controller
+                      .modifyPersonCode(widget.groupIndex, index, code);
                 }),
               ),
             ),
@@ -157,7 +160,7 @@ class _GroupTableState extends State<GroupTable> {
 
   Container _mobileView(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -193,7 +196,7 @@ class _GroupTableState extends State<GroupTable> {
                 color: Colors.lightBlue,
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               TableButton(
                 onPressed: () {
@@ -207,7 +210,7 @@ class _GroupTableState extends State<GroupTable> {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: DataTable(
-              columnSpacing: defaultPadding,
+              columnSpacing: kDefaultPadding,
               columns: [
                 DataColumn(
                   label: Text("Nome"),
@@ -221,7 +224,7 @@ class _GroupTableState extends State<GroupTable> {
               ],
               rows: List.generate(
                 widget.group.numberOfPeople,
-                (index) => _dataRow(widget.group.people[index], () {
+                (index) => _dataRow(context, widget.group.people[index], () {
                   setState(() {
                     widget.controller.removePerson(widget.groupIndex, index);
                   });
@@ -252,6 +255,9 @@ class _GroupTableState extends State<GroupTable> {
                             ? "0.00"
                             : _discountController.text));
                   });
+                }, (code) {
+                  widget.controller
+                      .modifyPersonCode(widget.groupIndex, index, code);
                 }),
               ),
             ),
@@ -262,11 +268,41 @@ class _GroupTableState extends State<GroupTable> {
   }
 }
 
-DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
-    Function() onEntrance, Function() onDiscount) {
+DataRow _dataRow(
+    BuildContext context,
+    Person person,
+    Function() onDelete,
+    Function() onConfirm,
+    Function() onEntrance,
+    Function() onDiscount,
+    Function(int code) onCode) {
   return DataRow(
     cells: [
-      DataCell(Text("${person.name}")),
+      DataCell(
+        GestureDetector(
+          onTap: () {
+            TextEditingController _codeController = TextEditingController();
+            if (person.code == 0) {
+              showPopUp(
+                context,
+                "Associa prevendita",
+                [
+                  TextInput(textController: _codeController, label: "Codice"),
+                ],
+                () => onCode(int.parse(_codeController.text)),
+              );
+            }
+          },
+          child: InfoBadge(
+            text: person.name,
+            color: person.hasPaid
+                ? Colors.green
+                : person.code == 0
+                    ? Colors.grey
+                    : Colors.lightBlue,
+          ),
+        ),
+      ),
       DataCell(
         Row(
           children: [
@@ -278,7 +314,7 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
                 : Container(),
             person.hasEntered
                 ? SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   )
                 : Container(),
             person.discount != 0.00
@@ -289,7 +325,7 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
                 : Container(),
             person.discount != 0.00
                 ? SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   )
                 : Container(),
             person.hasPaid
@@ -314,7 +350,7 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
               color: Colors.green,
             )),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               onPressed: onEntrance,
@@ -322,7 +358,7 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
               color: Colors.purple,
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               color: Colors.amber.shade800,
@@ -330,7 +366,7 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
               onPressed: onDiscount,
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               onPressed: onDelete,

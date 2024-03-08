@@ -1,5 +1,5 @@
 import 'package:admin/responsive.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ showPopUp(
     previousValue.add(element);
     previousValue.add(
       SizedBox(
-        height: defaultPadding,
+        height: kDefaultPadding,
       ),
     );
     return previousValue;
@@ -48,7 +48,7 @@ showPopUp(
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
-                  height: defaultPadding * 2,
+                  height: kDefaultPadding * 2,
                 ),
                 ...actions,
                 Spacer(),
@@ -57,14 +57,15 @@ showPopUp(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TableButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            onSuccess();
-                          },
-                          icon: successIcon,
-                          color: successColor),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          onSuccess();
+                        },
+                        icon: successIcon,
+                        color: successColor,
+                      ),
                       SizedBox(
-                        width: defaultPadding,
+                        width: kDefaultPadding,
                       ),
                       TableButton(
                         onPressed: () => Navigator.of(context).pop(),
@@ -84,7 +85,7 @@ showPopUp(
                           icon: successIcon,
                           color: successColor),
                       SizedBox(
-                        width: defaultPadding,
+                        width: kDefaultPadding,
                       ),
                       ActionButton(
                         title: cancelTitle,

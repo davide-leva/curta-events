@@ -11,11 +11,11 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
             Header(screenTitle: "Prodotti"),
-            SizedBox(height: defaultPadding),
+            SizedBox(height: kDefaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -27,19 +27,19 @@ class ProductsScreen extends StatelessWidget {
                         shopName: "Carlino",
                       ),
                       SizedBox(
-                        height: defaultPadding,
+                        height: kDefaultPadding,
                       ),
                       ShopTable(
                         shopName: "Esselunga",
                       ),
                       SizedBox(
-                        height: defaultPadding,
+                        height: kDefaultPadding,
                       ),
                       ShopTable(
                         shopName: "Haumai",
                       ),
                       SizedBox(
-                        height: defaultPadding,
+                        height: kDefaultPadding,
                       ),
                       ShopTable(
                         shopName: "Altro",

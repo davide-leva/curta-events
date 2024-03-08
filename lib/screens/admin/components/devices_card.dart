@@ -27,10 +27,10 @@ class _DevicesCardState extends State<DevicesCard> {
     String _type;
 
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
-        borderRadius: BorderRadius.circular(defaultPadding),
+        borderRadius: BorderRadius.circular(kDefaultPadding),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,14 +48,14 @@ class _DevicesCardState extends State<DevicesCard> {
                 Spacer(),
                 Icon(Icons.menu),
                 SizedBox(
-                  width: defaultPadding,
+                  width: kDefaultPadding,
                 ),
               ],
             ),
           ),
           show
               ? SizedBox(
-                  height: defaultPadding,
+                  height: kDefaultPadding,
                 )
               : Container(),
           show
@@ -85,7 +85,7 @@ class _DevicesCardState extends State<DevicesCard> {
                                 label: "Postazione"),
                             Container(
                               width: 300,
-                              padding: EdgeInsets.only(left: defaultPadding),
+                              padding: EdgeInsets.only(left: kDefaultPadding),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(8),
@@ -155,14 +155,14 @@ Widget _deviceRow(Device device, BuildContext context,
                 : Colors.lightBlue,
         borderRadius: BorderRadius.circular(8),
       ),
-      margin: EdgeInsets.only(bottom: defaultPadding),
+      margin: EdgeInsets.only(bottom: kDefaultPadding),
       child: IntrinsicHeight(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Icon(device.icon),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             SizedBox(
               width: 150,
@@ -197,7 +197,7 @@ Widget _deviceRow(Device device, BuildContext context,
                   ),
                 ),
                 SizedBox(
-                  width: defaultPadding,
+                  width: kDefaultPadding,
                 ),
                 GestureDetector(
                   onTap: onModify,

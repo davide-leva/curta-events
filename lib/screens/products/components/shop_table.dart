@@ -1,7 +1,7 @@
 import 'package:admin/controllers/ProductsController.dart';
 import 'package:admin/models/Product.dart';
 import 'package:admin/responsive.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
@@ -43,7 +43,7 @@ class _ShopTableState extends State<ShopTable> {
 
   Obx _desktopView(BuildContext context, ProductController controller) {
     return Obx(() => Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(kDefaultPadding),
           decoration: BoxDecoration(
             color: Theme.of(context).canvasColor,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -82,7 +82,7 @@ class _ShopTableState extends State<ShopTable> {
                         ),
                         Container(
                           width: 300,
-                          padding: EdgeInsets.only(left: defaultPadding),
+                          padding: EdgeInsets.only(left: kDefaultPadding),
                           decoration: BoxDecoration(
                             color: Theme.of(context).cardColor,
                             borderRadius: BorderRadius.circular(8),
@@ -122,7 +122,7 @@ class _ShopTableState extends State<ShopTable> {
               SizedBox(
                 width: double.infinity,
                 child: DataTable2(
-                  columnSpacing: defaultPadding,
+                  columnSpacing: kDefaultPadding,
                   minWidth: 600,
                   columns: [
                     DataColumn(
@@ -158,7 +158,7 @@ class _ShopTableState extends State<ShopTable> {
 
   Obx _mobileView(BuildContext context, ProductController controller) {
     return Obx(() => Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(kDefaultPadding),
           decoration: BoxDecoration(
             color: Theme.of(context).canvasColor,
             borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -197,7 +197,7 @@ class _ShopTableState extends State<ShopTable> {
                         ),
                         Container(
                           width: 300,
-                          padding: EdgeInsets.only(left: defaultPadding),
+                          padding: EdgeInsets.only(left: kDefaultPadding),
                           decoration: BoxDecoration(
                             color: Theme.of(context).cardColor,
                             borderRadius: BorderRadius.circular(8),
@@ -239,7 +239,7 @@ class _ShopTableState extends State<ShopTable> {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
-                    columnSpacing: defaultPadding,
+                    columnSpacing: kDefaultPadding,
                     columns: [
                       DataColumn(
                         label: Text("Prodotto"),
@@ -314,7 +314,7 @@ DataRow _dataRow(
                   ),
                   Container(
                     width: 300,
-                    padding: EdgeInsets.only(left: defaultPadding),
+                    padding: EdgeInsets.only(left: kDefaultPadding),
                     decoration: BoxDecoration(
                       color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(8),
@@ -352,7 +352,7 @@ DataRow _dataRow(
             color: Colors.lightBlue,
           ),
           SizedBox(
-            width: defaultPadding,
+            width: kDefaultPadding,
           ),
           TableButton(
             onPressed: () {

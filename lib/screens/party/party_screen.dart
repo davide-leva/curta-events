@@ -20,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Responsive(
             desktop: _desktopView(context), mobile: _mobileView(context)),
       ),
@@ -44,25 +44,25 @@ class DashboardScreen extends StatelessWidget {
                       ? Allert()
                       : CurrentPartyCard(),
                   Info(),
-                  SizedBox(height: defaultPadding),
+                  SizedBox(height: kDefaultPadding),
                   MaterialTable(),
-                  SizedBox(height: defaultPadding),
+                  SizedBox(height: kDefaultPadding),
                   GuestsList(),
                 ],
               ),
             ),
-            SizedBox(width: defaultPadding),
+            SizedBox(width: kDefaultPadding),
             Expanded(
               flex: 2,
               child: Column(
                 children: [
                   Preview(),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   Balance(),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   PartyDetails(),
                 ],
@@ -84,17 +84,17 @@ class DashboardScreen extends StatelessWidget {
             ? Allert()
             : CurrentPartyCard(),
         Info(),
-        SizedBox(height: defaultPadding),
+        SizedBox(height: kDefaultPadding),
         MaterialTableMobile(),
-        SizedBox(height: defaultPadding),
+        SizedBox(height: kDefaultPadding),
         GuestsList(),
         Preview(),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         Balance(),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         PartyDetails(),
       ],

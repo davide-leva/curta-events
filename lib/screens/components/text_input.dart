@@ -34,7 +34,7 @@ class _TextInputState extends State<TextInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+      padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: Theme.of(context).cardColor,

@@ -26,8 +26,8 @@ class TableButton extends StatelessWidget {
         color: isDisabled ? Colors.grey : color,
         borderRadius: BorderRadius.circular(4),
       ),
-      height: defaultPadding * 1.8 * height,
-      width: defaultPadding * 1.8 * width,
+      height: kDefaultPadding * 1.8 * height,
+      width: kDefaultPadding * 1.8 * width,
       child: IconButton(
         padding: EdgeInsets.zero,
         constraints: BoxConstraints(),
@@ -35,6 +35,7 @@ class TableButton extends StatelessWidget {
         icon: Icon(
           icon,
           size: 20,
+          color: Colors.white,
         ),
       ),
     );

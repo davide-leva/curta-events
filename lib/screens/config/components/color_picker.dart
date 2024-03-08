@@ -21,7 +21,7 @@ class _ColorPickerState extends State<ColorPicker> {
           flex: 1,
           child: Container(
             padding: EdgeInsets.only(
-                left: defaultPadding, right: 8, top: 8, bottom: 8),
+                left: kDefaultPadding, right: 8, top: 8, bottom: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).cardColor,
@@ -71,7 +71,7 @@ class _ColorPickerState extends State<ColorPicker> {
           ),
         ),
         SizedBox(
-          width: defaultPadding,
+          width: kDefaultPadding,
         ),
         GestureDetector(
           onTap: () {

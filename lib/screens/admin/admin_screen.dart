@@ -1,6 +1,5 @@
 import 'package:admin/constants.dart';
 import 'package:admin/models/Device.dart';
-import 'package:admin/models/Event.dart';
 import 'package:admin/screens/admin/components/icon_selector.dart';
 import 'package:admin/screens/admin/components/devices_card.dart';
 import 'package:admin/screens/components/pop_up.dart';
@@ -32,7 +31,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
             Header(
@@ -48,14 +47,14 @@ class _AdminScreenState extends State<AdminScreen> {
                           overlay: Column(
                             children: [
                               SizedBox(
-                                height: defaultPadding * 2,
+                                height: kDefaultPadding * 2,
                               ),
                               Container(
-                                padding: EdgeInsets.all(defaultPadding),
+                                padding: EdgeInsets.all(kDefaultPadding),
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).canvasColor,
                                   borderRadius:
-                                      BorderRadius.circular(defaultPadding),
+                                      BorderRadius.circular(kDefaultPadding),
                                 ),
                                 child: Text(
                                   "Scansiona codice autenticativo",
@@ -83,7 +82,7 @@ class _AdminScreenState extends State<AdminScreen> {
                                   Container(
                                     width: 300,
                                     padding:
-                                        EdgeInsets.only(left: defaultPadding),
+                                        EdgeInsets.only(left: kDefaultPadding),
                                     decoration: BoxDecoration(
                                       color: Theme.of(context).cardColor,
                                       borderRadius: BorderRadius.circular(8),
@@ -142,11 +141,11 @@ class _AdminScreenState extends State<AdminScreen> {
               ],
             ),
             SizedBox(
-              height: defaultPadding,
+              height: kDefaultPadding,
             ),
             DevicesCard(),
             SizedBox(
-              height: defaultPadding,
+              height: kDefaultPadding,
             ),
             SettingPanel(
               settingList: [

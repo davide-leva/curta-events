@@ -11,10 +11,10 @@ class ActualBalance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
-        borderRadius: BorderRadius.circular(defaultPadding),
+        borderRadius: BorderRadius.circular(kDefaultPadding),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

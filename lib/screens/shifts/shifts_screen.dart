@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/ShiftsController.dart';
 import 'package:admin/responsive.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/services/cloud_service.dart';
@@ -78,7 +78,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
 
   Container _desktopView(BuildContext context, ShiftController _controller) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       child: Column(
         children: [
           Header(
@@ -196,7 +196,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
             ],
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           SingleChildScrollView(
             controller: ScrollController(),
@@ -209,7 +209,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
                     _controller.shifts.length,
                     (index) => Container(
                       margin: EdgeInsets.only(
-                        right: defaultPadding,
+                        right: kDefaultPadding,
                       ),
                       child: ShiftCard(
                         shift: _controller.shifts[index],
@@ -333,7 +333,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
   SingleChildScrollView _mobileView(
       BuildContext context, ShiftController _controller) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       child: Column(
         children: [
           Header(
@@ -450,7 +450,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
             ],
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           SingleChildScrollView(
             child: Column(

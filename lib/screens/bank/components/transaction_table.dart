@@ -42,10 +42,10 @@ class _TransactionTableState extends State<TransactionTable> {
 
   Obx _desktopView(BuildContext context) {
     return Obx(() => Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(kDefaultPadding),
           decoration: BoxDecoration(
             color: Theme.of(context).canvasColor,
-            borderRadius: BorderRadius.circular(defaultPadding),
+            borderRadius: BorderRadius.circular(kDefaultPadding),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +61,7 @@ class _TransactionTableState extends State<TransactionTable> {
                   ),
                   Spacer(),
                   SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   ),
                   TableButton(
                     isDisabled: _yearIndex == _controller.years.length - 1,
@@ -70,14 +70,14 @@ class _TransactionTableState extends State<TransactionTable> {
                     onPressed: () => setState(() => _yearIndex++),
                   ),
                   SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   ),
                   InfoBadge(
                     color: Colors.lightBlue,
                     text: "${_controller.years[_yearIndex]}",
                   ),
                   SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   ),
                   TableButton(
                     isDisabled: _yearIndex == 0,
@@ -105,11 +105,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                   firstDate: DateTime(DateTime.now().year - 5),
                                   lastDate: DateTime(DateTime.now().year + 5),
                                 ).then(
-                                  (value) => setState(() => {
-                                        _selectedDate = value!,
+                                  (value) => setState(() {
+                                        _selectedDate = value!;
                                         _dateController.text =
                                             DateFormat('dd/MM/yy', 'it')
-                                                .format(_selectedDate)
+                                                .format(_selectedDate);
                                       }),
                                 );
                               },
@@ -148,7 +148,7 @@ class _TransactionTableState extends State<TransactionTable> {
                 ],
               ),
               SizedBox(
-                height: defaultPadding,
+                height: kDefaultPadding,
               ),
               Container(
                 constraints: BoxConstraints(
@@ -157,7 +157,7 @@ class _TransactionTableState extends State<TransactionTable> {
                 child: DataTable(
                   dataRowMinHeight: 80,
                   dataRowMaxHeight: 80,
-                  columnSpacing: defaultPadding,
+                  columnSpacing: kDefaultPadding,
                   columns: [
                     DataColumn(label: Text("Data")),
                     DataColumn(label: Text("Descrizione")),
@@ -197,11 +197,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                   firstDate: DateTime(DateTime.now().year - 5),
                                   lastDate: DateTime(DateTime.now().year + 5),
                                 ).then(
-                                  (value) => setState(() => {
-                                        _selectedDate = value!,
+                                  (value) => setState(() {
+                                        _selectedDate = value!;
                                         _dateController.text =
                                             DateFormat('dd/MM/yy', 'it')
-                                                .format(_selectedDate)
+                                                .format(_selectedDate);
                                       }),
                                 );
                               },
@@ -249,10 +249,10 @@ class _TransactionTableState extends State<TransactionTable> {
 
   Obx _mobileView(BuildContext context) {
     return Obx(() => Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(kDefaultPadding),
           decoration: BoxDecoration(
             color: Theme.of(context).canvasColor,
-            borderRadius: BorderRadius.circular(defaultPadding),
+            borderRadius: BorderRadius.circular(kDefaultPadding),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,11 +283,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                   firstDate: DateTime(DateTime.now().year - 5),
                                   lastDate: DateTime(DateTime.now().year + 5),
                                 ).then(
-                                  (value) => setState(() => {
-                                        _selectedDate = value!,
+                                  (value) => setState(() {
+                                        _selectedDate = value!;
                                         _dateController.text =
                                             DateFormat('dd/MM/yy', 'it')
-                                                .format(_selectedDate)
+                                                .format(_selectedDate);
                                       }),
                                 );
                               },
@@ -326,7 +326,7 @@ class _TransactionTableState extends State<TransactionTable> {
                 ],
               ),
               SizedBox(
-                height: defaultPadding,
+                height: kDefaultPadding,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -338,14 +338,14 @@ class _TransactionTableState extends State<TransactionTable> {
                     onPressed: () => setState(() => _yearIndex++),
                   ),
                   SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   ),
                   InfoBadge(
                     color: Colors.lightBlue,
                     text: "${_controller.years[_yearIndex]}",
                   ),
                   SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   ),
                   TableButton(
                     isDisabled: _yearIndex == 0,
@@ -356,7 +356,7 @@ class _TransactionTableState extends State<TransactionTable> {
                 ],
               ),
               SizedBox(
-                height: defaultPadding,
+                height: kDefaultPadding,
               ),
               Container(
                 constraints: BoxConstraints(
@@ -367,7 +367,7 @@ class _TransactionTableState extends State<TransactionTable> {
                   child: DataTable(
                     dataRowMinHeight: 80,
                     dataRowMaxHeight: 80,
-                    columnSpacing: defaultPadding,
+                    columnSpacing: kDefaultPadding,
                     columns: [
                       DataColumn(label: Text("Data")),
                       DataColumn(label: Text("Descrizione")),
@@ -409,11 +409,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                         DateTime(DateTime.now().year - 5),
                                     lastDate: DateTime(DateTime.now().year + 5),
                                   ).then(
-                                    (value) => setState(() => {
-                                          _selectedDate = value!,
+                                    (value) => setState(() {
+                                          _selectedDate = value!;
                                           _dateController.text =
                                               DateFormat('dd/MM/yy', 'it')
-                                                  .format(_selectedDate)
+                                                  .format(_selectedDate);
                                         }),
                                   );
                                 },
@@ -488,7 +488,7 @@ _dataRow(
           ),
         ),
         SizedBox(
-          width: defaultPadding,
+          width: kDefaultPadding,
         ),
         Text(DateFormat('dd/MM/yyyy', 'it').format(transaction.date)),
       ],
@@ -558,7 +558,7 @@ _dataRow(
                 onPressed: () => onModify(transaction),
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               TableButton(
                 color: Colors.red,

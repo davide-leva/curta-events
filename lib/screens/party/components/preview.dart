@@ -24,8 +24,8 @@ class Preview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: defaultPadding),
-      padding: EdgeInsets.all(defaultPadding),
+      margin: EdgeInsets.only(top: kDefaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -44,7 +44,7 @@ class Preview extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: defaultPadding),
+          SizedBox(height: kDefaultPadding),
           Row(children: [
             Expanded(
               child: Obx(

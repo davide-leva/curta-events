@@ -20,7 +20,7 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 280,
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -46,7 +46,7 @@ class InfoCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               Text(
                 title,

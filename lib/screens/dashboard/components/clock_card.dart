@@ -44,11 +44,11 @@ class _ClockCardState extends State<ClockCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(
-        defaultPadding,
+        kDefaultPadding,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
-          defaultPadding,
+          kDefaultPadding,
         ),
         color: Theme.of(context).canvasColor,
       ),

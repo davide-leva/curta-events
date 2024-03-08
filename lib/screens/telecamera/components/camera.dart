@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../constants.dart';
 import '../../../controllers/Config.dart';
-import '../../components/button.dart';
+import '../../components/action_button.dart';
 
 final ValueNotifier<double> _zoom = ValueNotifier(0.0);
 final ValueNotifier<bool> _torch = ValueNotifier(false);
@@ -30,10 +30,10 @@ class Camera extends StatelessWidget {
         AspectRatio(
           aspectRatio: 16 / 9,
           child: Container(
-            padding: EdgeInsets.all(defaultPadding),
+            padding: EdgeInsets.all(kDefaultPadding),
             decoration: BoxDecoration(
               color: Theme.of(context).canvasColor,
-              borderRadius: BorderRadius.circular(defaultPadding),
+              borderRadius: BorderRadius.circular(kDefaultPadding),
             ),
             child: Center(
               child: Mjpeg(
@@ -52,13 +52,13 @@ class Camera extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(kDefaultPadding),
           decoration: BoxDecoration(
             color: Theme.of(context).canvasColor,
-            borderRadius: BorderRadius.circular(defaultPadding),
+            borderRadius: BorderRadius.circular(kDefaultPadding),
           ),
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -70,7 +70,7 @@ class Camera extends StatelessWidget {
                 color: Colors.amber.shade800,
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               ActionButton(
                 title: "Foto",
@@ -79,7 +79,7 @@ class Camera extends StatelessWidget {
                 color: Colors.lightBlue,
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               ValueListenableBuilder<double>(
                 valueListenable: _zoom,

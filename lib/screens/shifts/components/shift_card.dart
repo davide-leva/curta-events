@@ -23,9 +23,9 @@ class ShiftCard extends StatelessWidget {
     return Container(
       width: 420,
       margin: EdgeInsets.only(
-        bottom: defaultPadding,
+        bottom: kDefaultPadding,
       ),
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: BorderRadius.circular(20),
@@ -46,7 +46,7 @@ class ShiftCard extends StatelessWidget {
               color: Colors.lightBlue,
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               width: 1.25,
@@ -73,7 +73,7 @@ class ShiftCard extends StatelessWidget {
                                 ),
                       ),
                       SizedBox(
-                        height: defaultPadding,
+                        height: kDefaultPadding,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -22,13 +22,13 @@ class _TelecameraScreenState extends State<TelecameraScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: jsonDecode(Config.get('cameras')).length == 0
               ? [
                   Header(screenTitle: "Telecamera"),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   border(
                     Text("Telecamere non abilitate",
@@ -38,7 +38,7 @@ class _TelecameraScreenState extends State<TelecameraScreen> {
               : [
                   Header(screenTitle: "Telecamera"),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   CameraSelector(
                     onChange: (camera) => setState(() {
@@ -46,7 +46,7 @@ class _TelecameraScreenState extends State<TelecameraScreen> {
                     }),
                   ),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   _camera == 0
                       ? Multicamera(

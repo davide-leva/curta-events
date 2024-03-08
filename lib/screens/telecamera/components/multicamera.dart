@@ -21,10 +21,10 @@ class Multicamera extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(kDefaultPadding),
           decoration: BoxDecoration(
             color: Theme.of(context).canvasColor,
-            borderRadius: BorderRadius.circular(defaultPadding),
+            borderRadius: BorderRadius.circular(kDefaultPadding),
           ),
           child: Wrap(
             alignment: WrapAlignment.center,

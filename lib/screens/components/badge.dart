@@ -17,14 +17,14 @@ class InfoBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: size,
-      height: defaultPadding * 1.8,
+      height: kDefaultPadding * 1.8,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(4),
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: defaultPadding,
-        vertical: defaultPadding * 0.25,
+        horizontal: kDefaultPadding,
+        vertical: kDefaultPadding * 0.25,
       ),
       child: Center(
         child: Text(text),

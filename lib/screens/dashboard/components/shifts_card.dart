@@ -53,7 +53,7 @@ class _ShiftsCardState extends State<ShiftsCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: BorderRadius.circular(20),
@@ -85,7 +85,7 @@ class _ShiftsCardState extends State<ShiftsCard> {
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                               SizedBox(
-                                height: defaultPadding,
+                                height: kDefaultPadding,
                               ),
                               Wrap(
                                 children: job.workers

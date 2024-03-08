@@ -23,12 +23,12 @@ class PriceCard extends StatelessWidget {
     IconData icon = amount > 0 ? Icons.arrow_upward : Icons.arrow_downward;
 
     return Container(
-      margin: EdgeInsets.only(top: defaultPadding),
-      padding: EdgeInsets.all(defaultPadding),
+      margin: EdgeInsets.only(top: kDefaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         border: Border.all(width: 2, color: kPrimaryColor.withOpacity(0.15)),
         borderRadius: const BorderRadius.all(
-          Radius.circular(defaultPadding),
+          Radius.circular(kDefaultPadding),
         ),
       ),
       child: Row(
@@ -49,7 +49,7 @@ class PriceCard extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -73,7 +73,7 @@ class PriceCard extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           SizedBox(
-            width: defaultPadding,
+            width: kDefaultPadding,
           ),
           TableButton(
             color: Colors.red,

@@ -39,7 +39,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
       DateTime _selectedDatetime = _controller.current.date;
 
       return Container(
-        margin: EdgeInsets.only(bottom: defaultPadding),
+        margin: EdgeInsets.only(bottom: kDefaultPadding),
         child: Responsive(
           mobile: _mobileView(
             context,
@@ -91,7 +91,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                   ),
             ),
             SizedBox(
-              width: defaultPadding * 4,
+              width: kDefaultPadding * 4,
             ),
             Column(
               children: [
@@ -165,14 +165,14 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
               },
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
                 color: current.archived ? Colors.green : Colors.amber,
                 icon: Icons.archive,
                 onPressed: () => _controller.archive(current)),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
                 color: Colors.lightBlue,
@@ -216,7 +216,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                       ),
                 ),
                 SizedBox(
-                  width: defaultPadding,
+                  width: kDefaultPadding,
                 ),
                 Text(
                   current.place,
@@ -286,14 +286,14 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
               },
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
                 color: current.archived ? Colors.green : Colors.amber,
                 icon: Icons.archive,
                 onPressed: () => _controller.archive(current)),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
                 color: Colors.lightBlue,

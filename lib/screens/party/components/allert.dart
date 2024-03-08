@@ -20,10 +20,10 @@ class _AllertState extends State<Allert> {
                 child: Container(
                   height: 60,
                   margin: EdgeInsets.only(
-                    bottom: defaultPadding,
+                    bottom: kDefaultPadding,
                   ),
                   padding: EdgeInsets.symmetric(
-                    horizontal: defaultPadding,
+                    horizontal: kDefaultPadding,
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -37,7 +37,7 @@ class _AllertState extends State<Allert> {
                         color: Colors.yellow,
                       ),
                       SizedBox(
-                        width: defaultPadding,
+                        width: kDefaultPadding,
                       ),
                       Text(
                         "Questa è una versione di test!",

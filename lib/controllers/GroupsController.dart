@@ -2,12 +2,23 @@ import 'package:admin/models/Group.dart';
 import 'package:admin/models/Person.dart';
 import 'package:admin/services/cloud_service.dart';
 import 'package:get/get.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../services/sync_service.dart';
 import '../services/updater.dart';
 
 List<T> flatten<T>(Iterable<Iterable<T>> list) =>
     [for (var sublist in list) ...sublist];
+
+class SearchEntry {
+  SearchEntry({
+    required this.groupIndex,
+    required this.personIndex,
+  });
+
+  int groupIndex;
+  int personIndex;
+}
 
 class GroupsController extends GetxController {
   List<ListaGroup> _groups = <ListaGroup>[].obs;
@@ -63,7 +74,7 @@ class GroupsController extends GetxController {
     return;
   }
 
-  Future<void> addPerson(int index, String name) async {
+  Future<void> addPerson(int index, String name, {int code = 0}) async {
     ListaGroup group = _groups[index];
 
     group.numberOfPeople += 1;
@@ -71,6 +82,7 @@ class GroupsController extends GetxController {
       name: name,
       hasEntered: false,
       hasPaid: false,
+      code: code,
     ));
 
     await CloudService.update(Collection.groups, group.id, group);
@@ -115,6 +127,30 @@ class GroupsController extends GetxController {
     ListaGroup group = _groups[groupIndex];
 
     group.people[personIndex].discount = discount;
+
+    await CloudService.update(Collection.groups, group.id, group);
+    await Updater.update(Collection.groups);
+    return;
+  }
+
+  SearchEntry? searchBarcode(BarcodeCapture capture) {
+    for (int i = 0; i < groups.length; i++) {
+      for (int j = 0; j < groups[i].numberOfPeople; j++) {
+        if (groups[i].people[j].code ==
+            (int.parse(capture.barcodes[0].rawValue ?? "0"))) {
+          return SearchEntry(groupIndex: i, personIndex: j);
+        }
+      }
+    }
+
+    return null;
+  }
+
+  Future<void> modifyPersonCode(
+      int groupIndex, int personIndex, int code) async {
+    ListaGroup group = _groups[groupIndex];
+
+    group.people[personIndex].code = code;
 
     await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);

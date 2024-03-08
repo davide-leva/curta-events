@@ -21,14 +21,22 @@ class ActionButton extends StatelessWidget {
     return ElevatedButton.icon(
       style: TextButton.styleFrom(
         padding: EdgeInsets.symmetric(
-          horizontal: defaultPadding * 1.5,
-          vertical: defaultPadding * 0.4,
+          horizontal: kDefaultPadding * 1.5,
+          vertical: kDefaultPadding * 0.4,
         ),
         backgroundColor: color,
       ),
       onPressed: onPressed,
-      icon: Icon(icon),
-      label: Text(title),
+      icon: Icon(
+        icon,
+        color: Colors.white,
+      ),
+      label: Text(
+        title,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

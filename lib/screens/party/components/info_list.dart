@@ -37,7 +37,7 @@ class Info extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               InfoCard(
                 color: Colors.amber,
@@ -53,7 +53,7 @@ class Info extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: defaultPadding,
+                      width: kDefaultPadding,
                     ),
                     border(
                       Text(
@@ -65,7 +65,7 @@ class Info extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               InfoCard(
                 color: Colors.pink,

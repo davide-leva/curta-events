@@ -33,7 +33,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: defaultPadding),
+                  margin: EdgeInsets.symmetric(vertical: kDefaultPadding),
                   child: GestureDetector(
                     onLongPress: () => Get.back(),
                     child: Image.asset(
@@ -49,7 +49,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
 
   Container _desktopView() {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       child: Row(
         children: [
           Expanded(
@@ -58,7 +58,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
               children: [
                 ShiftsCard(),
                 SizedBox(
-                  height: defaultPadding,
+                  height: kDefaultPadding,
                 ),
                 Obx(
                   () => PeopleCard(
@@ -70,7 +70,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
             ),
           ),
           SizedBox(
-            width: defaultPadding,
+            width: kDefaultPadding,
           ),
           Expanded(
             flex: 3,
@@ -92,12 +92,12 @@ class _ViewerScreenState extends State<ViewerScreen> {
   SingleChildScrollView _mobileView() {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
             ShiftsCard(),
             SizedBox(
-              height: defaultPadding,
+              height: kDefaultPadding,
             ),
             Obx(
               () => PeopleCard(
@@ -106,7 +106,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
               ),
             ),
             SizedBox(
-              height: defaultPadding,
+              height: kDefaultPadding,
             ),
             SizedBox(
               height: 16,

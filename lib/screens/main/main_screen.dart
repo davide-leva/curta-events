@@ -113,12 +113,12 @@ class MainScreenState extends State<MainScreen> {
                         height: 24,
                       ),
                       Container(
-                        padding: EdgeInsets.all(defaultPadding),
+                        padding: EdgeInsets.all(kDefaultPadding),
                         width: 300,
                         height: 300,
                         decoration: BoxDecoration(
                           color: Theme.of(context).canvasColor,
-                          borderRadius: BorderRadius.circular(defaultPadding),
+                          borderRadius: BorderRadius.circular(kDefaultPadding),
                         ),
                         child: QrImageView(
                           data: event.data['regis'],
@@ -150,10 +150,11 @@ class MainScreenState extends State<MainScreen> {
                         },
                         child: Container(
                           width: 300,
-                          padding: EdgeInsets.all(defaultPadding),
+                          padding: EdgeInsets.all(kDefaultPadding),
                           decoration: BoxDecoration(
                             color: Theme.of(context).canvasColor,
-                            borderRadius: BorderRadius.circular(defaultPadding),
+                            borderRadius:
+                                BorderRadius.circular(kDefaultPadding),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

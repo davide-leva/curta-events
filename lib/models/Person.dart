@@ -1,5 +1,4 @@
 import 'package:admin/models/Model.dart';
-import 'package:mongo_dart/mongo_dart.dart';
 
 class Person implements Model {
   Person({
@@ -7,12 +6,14 @@ class Person implements Model {
     required this.hasEntered,
     required this.hasPaid,
     this.discount = 0.00,
+    this.code = 0,
   });
 
   String name;
   bool hasEntered;
   bool hasPaid;
   double discount;
+  int code;
 
   @override
   Map<String, dynamic> toJson({bool db = false}) {
@@ -21,16 +22,19 @@ class Person implements Model {
       "hasEntered": hasEntered,
       "hasPaid": hasPaid,
       "discount": discount,
+      "code": code,
     };
   }
 
   @override
   factory Person.fromJson(dynamic data, {bool db = false}) {
     return Person(
-        name: data['name'],
-        hasEntered: data['hasEntered'],
-        hasPaid: data['hasPaid'],
-        discount: data['discount'].toDouble() ?? 0.00);
+      name: data['name'],
+      hasEntered: data['hasEntered'],
+      hasPaid: data['hasPaid'],
+      discount: data['discount'].toDouble() ?? 0.00,
+      code: data['code'] ?? 0,
+    );
   }
 
   @override

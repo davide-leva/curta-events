@@ -1,6 +1,5 @@
-
 import 'package:admin/responsive.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/config/components/color_picker.dart';
 import 'package:admin/screens/config/components/party_selector.dart';
 import 'package:admin/screens/config/components/setting_panel.dart';
@@ -21,7 +20,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
+        padding: EdgeInsets.all(kDefaultPadding),
         child: Responsive(
           mobile: _mobileView(),
           desktop: _desktopView(),
@@ -44,7 +43,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
             )
           ],
         ),
-        SizedBox(height: defaultPadding),
+        SizedBox(height: kDefaultPadding),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -54,11 +53,11 @@ class _ConfigScreenState extends State<ConfigScreen> {
                 children: [
                   PartySelector(),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   PartyAdder(),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   SettingPanel(
                     settingList: [
@@ -73,7 +72,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
               ),
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             Expanded(
               flex: 2,
@@ -86,7 +85,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                     'socketEndpoint',
                   ], panelName: 'Connettività'),
                   SizedBox(
-                    height: defaultPadding,
+                    height: kDefaultPadding,
                   ),
                   SettingPanel(
                     settingList: [
@@ -122,15 +121,15 @@ class _ConfigScreenState extends State<ConfigScreen> {
           ],
         ),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         PartySelector(),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         PartyAdder(),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         SettingPanel(
           settingList: [
@@ -142,7 +141,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
           ],
         ),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         SettingPanel(settingList: [
           'deviceID',
@@ -151,7 +150,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
           'socketEndpoint',
         ], panelName: 'Connettività'),
         SizedBox(
-          height: defaultPadding,
+          height: kDefaultPadding,
         ),
         SettingPanel(
           settingList: [

@@ -4,7 +4,7 @@ import 'package:admin/controllers/InventoryController.dart';
 import 'package:admin/controllers/ProductsController.dart';
 import 'package:admin/models/Entry.dart';
 import 'package:admin/models/Product.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/services/cloud_service.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -48,7 +48,7 @@ class _InventarioTableState extends State<InventarioTable> {
 
   Container _desktopView(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -71,7 +71,7 @@ class _InventarioTableState extends State<InventarioTable> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: defaultPadding),
+                            padding: EdgeInsets.only(left: kDefaultPadding),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(8),
@@ -197,7 +197,7 @@ class _InventarioTableState extends State<InventarioTable> {
 
   Container _mobileView(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -219,7 +219,7 @@ class _InventarioTableState extends State<InventarioTable> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: defaultPadding),
+                            padding: EdgeInsets.only(left: kDefaultPadding),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(8),
@@ -270,7 +270,7 @@ class _InventarioTableState extends State<InventarioTable> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
-                  columnSpacing: defaultPadding,
+                  columnSpacing: kDefaultPadding,
                   columns: [
                     DataColumn(
                       label: Text("Prodotto"),
@@ -410,7 +410,7 @@ DataRow _dataRow(
             },
           ),
           SizedBox(
-            width: defaultPadding,
+            width: kDefaultPadding,
           ),
           TableButton(
             onPressed: onModify,
@@ -418,7 +418,7 @@ DataRow _dataRow(
             color: Colors.lightBlue,
           ),
           SizedBox(
-            width: defaultPadding,
+            width: kDefaultPadding,
           ),
           TableButton(
             color: Colors.lightBlue,

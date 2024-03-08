@@ -2,7 +2,7 @@ import 'package:admin/controllers/Config.dart';
 import 'package:admin/controllers/ProductsController.dart';
 import 'package:admin/controllers/TransactionController.dart';
 import 'package:admin/models/Product.dart';
-import 'package:admin/screens/components/button.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
@@ -38,7 +38,7 @@ class _MaterialTableState extends State<MaterialTable> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -62,7 +62,7 @@ class _MaterialTableState extends State<MaterialTable> {
                         Expanded(
                           child: Container(
                             width: 300,
-                            padding: EdgeInsets.only(left: defaultPadding),
+                            padding: EdgeInsets.only(left: kDefaultPadding),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(8),
@@ -99,7 +99,7 @@ class _MaterialTableState extends State<MaterialTable> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: defaultPadding),
+                            padding: EdgeInsets.only(left: kDefaultPadding),
                             decoration: BoxDecoration(
                               color: Theme.of(context).cardColor,
                               borderRadius: BorderRadius.circular(8),
@@ -147,7 +147,7 @@ class _MaterialTableState extends State<MaterialTable> {
                 color: Colors.lightBlue,
               ),
               SizedBox(
-                width: defaultPadding,
+                width: kDefaultPadding,
               ),
               ActionButton(
                 title: "Stampa",
@@ -273,7 +273,7 @@ DataRow _dataRow(
               ),
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -299,7 +299,7 @@ DataRow _dataRow(
               },
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               color: Colors.green,
@@ -309,7 +309,7 @@ DataRow _dataRow(
               },
             ),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             TableButton(
               color: Colors.red,

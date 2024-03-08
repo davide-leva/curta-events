@@ -7,7 +7,7 @@ import '../../../constants.dart';
 import '../../../controllers/PartiesController.dart';
 import '../../../models/Party.dart';
 import '../../../services/cloud_service.dart';
-import '../../components/button.dart';
+import '../../components/action_button.dart';
 import '../../components/text_input.dart';
 
 class PartyAdder extends StatefulWidget {
@@ -32,7 +32,7 @@ class _PartyAdderState extends State<PartyAdder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Theme.of(context).canvasColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -45,42 +45,42 @@ class _PartyAdderState extends State<PartyAdder> {
             style: Theme.of(context).textTheme.titleSmall,
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           TextInput(
             textController: _nameController,
             label: "Nome festa",
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           TextInput(
             textController: _placeController,
             label: "Luogo",
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           TextInput(
             textController: _prevenditaController,
             label: "Prezzo prevendita",
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           TextInput(
             textController: _prevenditaController,
             label: "Prezzo entrata",
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           TextInput(
             textController: _tagController,
             label: "Tag database",
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           GestureDetector(
             onTap: () {
@@ -90,10 +90,10 @@ class _PartyAdderState extends State<PartyAdder> {
                 firstDate: DateTime(DateTime.now().year - 5),
                 lastDate: DateTime(DateTime.now().year + 5),
               ).then(
-                (value) => setState(() => {
-                      _selectedDate = value!,
+                (value) => setState(() {
+                      _selectedDate = value!;
                       _dateController.text =
-                          DateFormat('yyyy/MM/dd', 'it').format(_selectedDate)
+                          DateFormat('yyyy/MM/dd', 'it').format(_selectedDate);
                     }),
               );
             },
@@ -104,7 +104,7 @@ class _PartyAdderState extends State<PartyAdder> {
             ),
           ),
           SizedBox(
-            height: defaultPadding,
+            height: kDefaultPadding,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

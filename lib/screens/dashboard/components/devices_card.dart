@@ -17,10 +17,10 @@ class _DevicesCardState extends State<DevicesCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            defaultPadding,
+            kDefaultPadding,
           ),
           color: Theme.of(context).canvasColor),
       child: Column(
@@ -62,9 +62,9 @@ Widget _deviceController(
       }
     },
     child: Container(
-      padding: EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       margin: EdgeInsets.only(
-        top: defaultPadding,
+        top: kDefaultPadding,
       ),
       decoration: BoxDecoration(
         color: device.isCaller
@@ -79,7 +79,7 @@ Widget _deviceController(
           children: [
             Icon(device.icon),
             SizedBox(
-              width: defaultPadding,
+              width: kDefaultPadding,
             ),
             Spacer(),
             Container(
