@@ -2,10 +2,11 @@ import 'package:admin/controllers/Config.dart';
 import 'package:admin/controllers/ProductsController.dart';
 import 'package:admin/controllers/TransactionController.dart';
 import 'package:admin/models/Product.dart';
+import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
-import 'package:admin/services/cloud_service.dart';
+import 'package:admin/screens/party/components/add_product_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,25 +15,23 @@ import '../../../constants.dart';
 import '../../../controllers/ShopController.dart';
 import '../../../models/Entry.dart';
 
-class MaterialTableMobile extends StatefulWidget {
-  MaterialTableMobile({
+class MaterialTable extends StatefulWidget {
+  MaterialTable({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<MaterialTableMobile> createState() => _MaterialTableMobileState();
+  State<MaterialTable> createState() => _MaterialTableState();
 }
 
-class _MaterialTableMobileState extends State<MaterialTableMobile> {
+class _MaterialTableState extends State<MaterialTable> {
   final ShopController shopController = Get.put(ShopController());
   final TransactionController transactionController =
       Get.put(TransactionController());
   final ProductController productController = Get.put(ProductController());
 
   TextEditingController _quantityController = TextEditingController();
-
   String _selectedProduct = "";
-  String _selectedShop = "Carlino";
 
   @override
   Widget build(BuildContext context) {
@@ -52,94 +51,13 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Spacer(),
-              TableButton(
+              ActionButton(
+                title: "Aggingi",
                 onPressed: () {
-                  showPopUp(context, "Aggiungi alla spesa", [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: 300,
-                            padding: EdgeInsets.only(left: kDefaultPadding),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: DropdownMenu<String>(
-                              initialSelection: _selectedShop,
-                              width: 280,
-                              hintText: "Negozio",
-                              menuHeight: 300,
-                              inputDecorationTheme: InputDecorationTheme(
-                                border: InputBorder.none,
-                                fillColor: Theme.of(context).cardColor,
-                              ),
-                              dropdownMenuEntries: productController
-                                  .getShops()
-                                  .map<DropdownMenuEntry<String>>(
-                                    (shop) => DropdownMenuEntry<String>(
-                                      value: shop,
-                                      label: shop,
-                                    ),
-                                  )
-                                  .toList(),
-                              onSelected: (value) {
-                                setState(() {
-                                  _selectedShop = value as String;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(left: kDefaultPadding),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Obx(() => DropdownMenu(
-                                hintText: "Prodotto",
-                                enableFilter: true,
-                                width: 280,
-                                menuHeight: 300,
-                                inputDecorationTheme: InputDecorationTheme(
-                                    border: InputBorder.none,
-                                    fillColor: Theme.of(context).cardColor),
-                                dropdownMenuEntries: List.generate(
-                                    productController
-                                        .getShop(_selectedShop)
-                                        .length, (index) {
-                                  return DropdownMenuEntry(
-                                    value: productController
-                                        .getShop(_selectedShop)[index]
-                                        .id,
-                                    label: productController
-                                        .getShop(_selectedShop)[index]
-                                        .name,
-                                  );
-                                }),
-                                onSelected: (productId) {
-                                  setState(() {
-                                    _selectedProduct = productId as String;
-                                  });
-                                })),
-                          ),
-                        ),
-                      ],
-                    ),
-                    TextInput(
-                      textController: _quantityController,
-                      label: "Quantità",
-                    )
-                  ], () {
-                    _addNewEntry(_selectedProduct, _quantityController.text,
-                        shopController);
-                  });
+                  showDialog(
+                    context: context,
+                    builder: (context) => AddProductPopUp(),
+                  );
                 },
                 icon: Icons.shopping_bag,
                 color: Colors.lightBlue,
@@ -147,7 +65,8 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
               SizedBox(
                 width: kDefaultPadding,
               ),
-              TableButton(
+              ActionButton(
+                title: "Stampa",
                 onPressed: () async {
                   Uri url = Uri.parse(
                       'https://docs.google.com/gview?embedded=true&url=${Config.get('dataEndpoint')}${Config.get('selectedParty')}/report/shop');
@@ -161,13 +80,13 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
               ),
             ],
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Obx(
-              () => shopController.entries.length == 0 ||
-                      productController.products.length == 0
-                  ? Container()
-                  : DataTable(
+          Obx(
+            () => shopController.entries.length == 0 ||
+                    productController.products.length == 0
+                ? Container()
+                : SizedBox(
+                    width: double.infinity,
+                    child: DataTable(
                       columns: [
                         DataColumn(
                           label: Text("Prodotto e quantità"),
@@ -233,8 +152,8 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
                         ),
                       ),
                     ),
-            ),
-          ),
+                  ),
+          )
         ],
       ),
     );
@@ -332,16 +251,6 @@ _modifyEntry(Entry oldEntry, String product, String amount,
   );
 
   shopController.modify(oldEntry, entry);
-}
-
-_addNewEntry(String productId, String quantity, ShopController controller) {
-  Entry entry = Entry(
-    id: CloudService.uuid(),
-    product: productId,
-    quantity: int.parse(quantity),
-    purchased: false,
-  );
-  controller.add(entry);
 }
 
 _purchaseEntry(Entry entry, ShopController shopController) {
