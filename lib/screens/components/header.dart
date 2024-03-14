@@ -19,9 +19,9 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> buttonSpace = <Widget>[];
 
-    buttons.forEach((button) {
-          buttonSpace.add(button);
-          buttonSpace.add(SizedBox(width: kDefaultPadding));
+    buttons.forEach((button) => {
+          buttonSpace.add(button),
+          buttonSpace.add(SizedBox(width: defaultPadding))
         });
 
     return Row(

@@ -4,8 +4,8 @@ import 'package:admin/screens/party/components/allert.dart';
 import 'package:admin/screens/party/components/balance.dart';
 import 'package:admin/screens/party/components/current_party_card.dart';
 import 'package:admin/screens/party/components/guests_table.dart';
-import 'package:admin/screens/party/components/material_table.dart';
-import 'package:admin/screens/party/components/material_table_mobile.dart';
+import 'package:admin/screens/party/components/shop_table.dart';
+import 'package:admin/screens/party/components/shop_table_mobile.dart';
 import 'package:admin/screens/party/components/preview.dart';
 import 'package:flutter/material.dart';
 
