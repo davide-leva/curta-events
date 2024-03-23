@@ -51,8 +51,6 @@ class _ListaScreenState extends State<ListaScreen> {
   final TextEditingController _namePersonController = TextEditingController();
   final TextEditingController _groupNameController = TextEditingController();
   final GroupsController _groupController = Get.put(GroupsController());
-  final TransactionController _transactionController =
-      Get.put(TransactionController());
   int _selectedGroup = 0;
 
   @override
@@ -331,8 +329,7 @@ class _ListaScreenState extends State<ListaScreen> {
                       color: Colors.lightBlue,
                       icon: Icons.print,
                       onPressed: () async {
-                        Uri url = Uri.parse(
-                            'https://docs.google.com/gview?embedded=true&url=${Config.get('dataEndpoint')}${Config.get('selectedParty')}/report/lista');
+                        Uri url = CloudService.reportUri('lista');
 
                         if (await canLaunchUrl(url)) {
                           await launchUrl(url,
@@ -396,50 +393,53 @@ class _ListaScreenState extends State<ListaScreen> {
                 });
                 return w;
               })
-            : _groupController.groups.isEmpty
-                ? Container(
-                    child: border(
-                      Text(
-                        "Lista vuota",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ),
-                  )
-                : Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            SearchGroup(controller: _groupController),
-                            SizedBox(
-                              height: kDefaultPadding,
-                            ),
-                            ...List.generate(
-                              max(0, 2 * _groupController.groups.length - 1),
-                              (index) {
-                                int groupIndex = index ~/ 2;
-
-                                if (index % 2 == 0) {
-                                  return Obx(() => GroupTable(
-                                        group:
-                                            _groupController.groups[groupIndex],
-                                        groupIndex: groupIndex,
-                                        controller: _groupController,
-                                      ));
-                                } else {
-                                  return SizedBox(
-                                    height: kDefaultPadding,
-                                  );
-                                }
-                              },
-                            )
-                          ],
+            : Obx(
+                () => _groupController.groups.isEmpty
+                    ? Container(
+                        child: border(
+                          Text(
+                            "Lista vuota",
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
                         ),
+                      )
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                SearchGroup(controller: _groupController),
+                                SizedBox(
+                                  height: kDefaultPadding,
+                                ),
+                                ...List.generate(
+                                  max(0,
+                                      2 * _groupController.groups.length - 1),
+                                  (index) {
+                                    int groupIndex = index ~/ 2;
+
+                                    if (index % 2 == 0) {
+                                      return Obx(() => GroupTable(
+                                            group: _groupController
+                                                .groups[groupIndex],
+                                            groupIndex: groupIndex,
+                                            controller: _groupController,
+                                          ));
+                                    } else {
+                                      return SizedBox(
+                                        height: kDefaultPadding,
+                                      );
+                                    }
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+              ),
       ],
     );
   }
@@ -706,8 +706,7 @@ class _ListaScreenState extends State<ListaScreen> {
                       color: Colors.lightBlue,
                       icon: Icons.print,
                       onPressed: () async {
-                        Uri url = Uri.parse(
-                            'https://docs.google.com/gview?embedded=true&url=${Config.get('dataEndpoint')}${Config.get('selectedParty')}/report/lista');
+                        Uri url = CloudService.reportUri('lista');
 
                         if (await canLaunchUrl(url)) {
                           await launchUrl(url,
@@ -772,50 +771,53 @@ class _ListaScreenState extends State<ListaScreen> {
                 });
                 return w;
               })
-            : _groupController.groups.isEmpty
-                ? Container(
-                    child: border(
-                      Text(
-                        "Lista vuota",
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ),
-                  )
-                : Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            SearchGroup(controller: _groupController),
-                            SizedBox(
-                              height: kDefaultPadding,
-                            ),
-                            ...List.generate(
-                              max(0, 2 * _groupController.groups.length - 1),
-                              (index) {
-                                int groupIndex = index ~/ 2;
-
-                                if (index % 2 == 0) {
-                                  return Obx(() => GroupTable(
-                                        group:
-                                            _groupController.groups[groupIndex],
-                                        groupIndex: groupIndex,
-                                        controller: _groupController,
-                                      ));
-                                } else {
-                                  return SizedBox(
-                                    height: kDefaultPadding,
-                                  );
-                                }
-                              },
-                            )
-                          ],
+            : Obx(
+                () => _groupController.groups.isEmpty
+                    ? Container(
+                        child: border(
+                          Text(
+                            "Lista vuota",
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
                         ),
+                      )
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                SearchGroup(controller: _groupController),
+                                SizedBox(
+                                  height: kDefaultPadding,
+                                ),
+                                ...List.generate(
+                                  max(0,
+                                      2 * _groupController.groups.length - 1),
+                                  (index) {
+                                    int groupIndex = index ~/ 2;
+
+                                    if (index % 2 == 0) {
+                                      return Obx(() => GroupTable(
+                                            group: _groupController
+                                                .groups[groupIndex],
+                                            groupIndex: groupIndex,
+                                            controller: _groupController,
+                                          ));
+                                    } else {
+                                      return SizedBox(
+                                        height: kDefaultPadding,
+                                      );
+                                    }
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+              ),
       ],
     );
   }

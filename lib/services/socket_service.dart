@@ -24,6 +24,8 @@ enum EventType {
   CALL,
   ANSWER,
   ERROR,
+  BACKUP,
+  PING,
 }
 
 class SocketService {
@@ -35,12 +37,18 @@ class SocketService {
     wss.sink.add(jsonEncode(event.toJson()));
   }
 
-  static void init() {
+  static void init({reconnect = false}) {
+    if (!reconnect) SyncService.status.value = Connection.pending;
+
+    5.seconds.delay(() {
+      if (SyncService.status.value == Connection.pending)
+        SyncService.status.value = Connection.failed;
+    });
+
     wss = WebSocketChannel.connect(Uri.parse(Config.get('socketEndpoint')));
     wss.ready.then((value) {
-      SyncService.cloudState.value = CloudState.online;
       if (kIsWeb) {
-        SyncService.socketState.value = SocketState.web_auth;
+        SyncService.status.value = Connection.web_auth;
       } else {
         send(SocketEvent(
             from: Config.get('deviceID'),
@@ -53,8 +61,7 @@ class SocketService {
     wss.stream.listen((event) {
       _inputChannel.add(event);
     }, onDone: () {
-      SyncService.cloudState.value = CloudState.offline;
-      5.seconds.delay(() => init());
+      init(reconnect: true);
     }, cancelOnError: true);
   }
 
@@ -116,15 +123,13 @@ class SocketService {
     );
   }
 
-  static void update(Collection collection) {
+  static void backup() {
     send(
       SocketEvent(
         from: Config.get('deviceID'),
-        to: 'all',
-        type: EventType.UPDATE,
-        data: {
-          'collection': collection.name,
-        },
+        to: 'server',
+        type: EventType.BACKUP,
+        data: {},
       ),
     );
   }

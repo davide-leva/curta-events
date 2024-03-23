@@ -1,11 +1,15 @@
+import 'package:admin/controllers/ProductsController.dart';
 import 'package:admin/screens/products/components/shop_table.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants.dart';
 import '../components/header.dart';
 
 class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+  ProductsScreen({Key? key}) : super(key: key);
+
+  final ProductController _productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +26,16 @@ class ProductsScreen extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: Column(
-                    children: [
-                      ShopTable(
-                        shopName: "Carlino",
-                      ),
-                      SizedBox(
-                        height: kDefaultPadding,
-                      ),
-                      ShopTable(
-                        shopName: "Esselunga",
-                      ),
-                      SizedBox(
-                        height: kDefaultPadding,
-                      ),
-                      ShopTable(
-                        shopName: "Haumai",
-                      ),
-                      SizedBox(
-                        height: kDefaultPadding,
-                      ),
-                      ShopTable(
-                        shopName: "Altro",
-                      )
-                    ],
+                    children: List.generate(
+                      _productController.getShops().length * 2 - 1,
+                      (index) => index % 2 == 0
+                          ? ShopTable(
+                              shopName: _productController
+                                  .getShops()[(index / 2).floor()])
+                          : SizedBox(
+                              height: kDefaultPadding,
+                            ),
+                    ),
                   ),
                 ),
               ],

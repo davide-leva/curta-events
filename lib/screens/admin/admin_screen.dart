@@ -1,5 +1,7 @@
 import 'package:admin/constants.dart';
+import 'package:admin/controllers/BackupController.dart';
 import 'package:admin/models/Device.dart';
+import 'package:admin/screens/admin/components/backup_panel.dart';
 import 'package:admin/screens/admin/components/icon_selector.dart';
 import 'package:admin/screens/admin/components/devices_card.dart';
 import 'package:admin/screens/components/pop_up.dart';
@@ -10,6 +12,7 @@ import 'package:admin/services/socket_service.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:admin/services/updater.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../controllers/Config.dart';
@@ -21,6 +24,8 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
+  final BackupController _backupController = Get.put(BackupController());
+
   @override
   Widget build(BuildContext context) {
     TextEditingController _operatorController = TextEditingController();
@@ -148,14 +153,17 @@ class _AdminScreenState extends State<AdminScreen> {
               height: kDefaultPadding,
             ),
             SettingPanel(
-              settingList: [
-                'cameras',
-              ],
-              panelName: "Telecamere",
+              settingList: ['cameras', 'call'],
+              panelName: "Impostazioni globali",
               onSave: (p) {
                 Config.share('cameras', p[0]);
+                Config.share('call', p[1]);
               },
             ),
+            SizedBox(
+              height: kDefaultPadding,
+            ),
+            BackupPanel(backupController: _backupController)
           ],
         ),
       ),

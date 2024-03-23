@@ -49,7 +49,7 @@ class Party implements Model {
       place: data['place'],
       pricePrevendita: data['pricePrevendita'],
       priceEntrance: data['priceEntrance'],
-      archived: data['archived'],
+      archived: data['archived'] ?? false,
     );
   }
 

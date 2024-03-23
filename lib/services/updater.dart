@@ -15,6 +15,8 @@ class Updater {
     Collection.bank: ValueNotifier<int>(0),
     Collection.devices: ValueNotifier<int>(0),
     Collection.register: ValueNotifier<int>(0),
+    Collection.config: ValueNotifier<int>(0),
+    Collection.backup: ValueNotifier<int>(0),
   };
 
   static final Map<Collection, List<Map<String, dynamic>>> _data = {
@@ -28,6 +30,8 @@ class Updater {
     Collection.bank: [],
     Collection.devices: [],
     Collection.register: [],
+    Collection.config: [],
+    Collection.backup: [],
   };
 
   static Future<void> update(Collection scope, {cloud = true}) async {

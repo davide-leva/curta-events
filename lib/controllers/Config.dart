@@ -29,6 +29,8 @@ class Config {
             .sorted((a, b) => a.date.compareTo(b.date))
             .last
             .tag);
+
+    _update();
   }
 
   static void _update() async {
@@ -132,11 +134,11 @@ List<ConfigEntry> defaultConfig = [
   ConfigEntry(
       key: 'dataEndpoint',
       name: 'Server dati',
-      value: 'https://api.curta-events.it/'),
+      value: 'https://api.curtaevents.it/'),
   ConfigEntry(
       key: 'socketEndpoint',
       name: 'Server socket',
-      value: 'wss://api.curta-events.it/'),
+      value: 'wss://api.curtaevents.it/'),
   ConfigEntry(
     key: 'operator',
     name: 'Operatore',

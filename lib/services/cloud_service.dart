@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:admin/controllers/Config.dart';
+import 'package:admin/models/Backup.dart';
 import 'package:admin/models/Model.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:flutter/foundation.dart';
@@ -128,5 +129,24 @@ class CloudService {
     } on FormatException {
       return int.parse(Config.get('followers'));
     }
+  }
+
+  static Uri reportUri(String type) {
+    String uri = Config.get('dataEndpoint');
+
+    uri += Config.get('selectedParty');
+    uri += '/report/${type}';
+    uri += '?device=${Config.get('deviceID')}&key=${Config.get('key')}';
+
+    return Uri.parse(uri);
+  }
+
+  static Uri backupUri(Backup backup) {
+    String uri = Config.get('dataEndpoint');
+
+    uri += '/backup/${backup.id}';
+    uri += '?device=${Config.get('deviceID')}&key=${Config.get('key')}';
+
+    return Uri.parse(uri);
   }
 }

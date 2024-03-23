@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/Config.dart';
-import '../../components/connection_status.dart';
 
 class SideMenu extends StatefulWidget {
   @override
@@ -39,13 +38,7 @@ class SideMenuStateAdmin extends State<SideMenu> {
       child: Column(
         children: [
           DrawerHeader(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.asset("assets/images/logo.png"),
-                ConnectionStatus(),
-              ],
-            ),
+            child: Image.asset("assets/images/logo.png"),
           ),
           DrawerListTile(
             title: "Festa",
@@ -131,13 +124,7 @@ class SideMenuStateMember extends State<SideMenu> {
       child: Column(
         children: [
           DrawerHeader(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.asset("assets/images/logo.png"),
-                ConnectionStatus(),
-              ],
-            ),
+            child: Image.asset("assets/images/logo.png"),
           ),
           DrawerListTile(
             title: "Festa",

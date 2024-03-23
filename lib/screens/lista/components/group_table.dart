@@ -300,6 +300,7 @@ DataRow _dataRow(
                 : person.code == 0
                     ? Colors.grey
                     : Colors.lightBlue,
+            size: Responsive.isDesktop(context) ? 200 : null,
           ),
         ),
       ),

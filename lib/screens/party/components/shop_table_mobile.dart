@@ -1,4 +1,3 @@
-import 'package:admin/controllers/Config.dart';
 import 'package:admin/controllers/ProductsController.dart';
 import 'package:admin/controllers/TransactionController.dart';
 import 'package:admin/models/Product.dart';
@@ -6,6 +5,7 @@ import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
 import 'package:admin/screens/party/components/add_product_popup.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -66,8 +66,7 @@ class _MaterialTableMobileState extends State<MaterialTableMobile> {
               ),
               TableButton(
                 onPressed: () async {
-                  Uri url = Uri.parse(
-                      'https://docs.google.com/gview?embedded=true&url=${Config.get('dataEndpoint')}${Config.get('selectedParty')}/report/shop');
+                  Uri url = CloudService.reportUri('shop');
 
                   if (await canLaunchUrl(url)) {
                     await launchUrl(url, mode: LaunchMode.platformDefault);

@@ -24,21 +24,18 @@ enum Collection {
   config,
   devices,
   register,
+  backup,
 }
 
-enum CloudState {
-  online,
-  offline,
-}
+enum Connection { pending, auth, web_auth, connected, failed }
 
-enum SocketState { pending, auth, web_auth, connect, connected }
+enum Ping { pending, received }
 
 class SyncService {
-  static final ValueNotifier<SocketState> socketState =
-      ValueNotifier<SocketState>(SocketState.pending);
+  static final ValueNotifier<Connection> status =
+      ValueNotifier<Connection>(Connection.pending);
+  static final ValueNotifier<Ping> ping = ValueNotifier<Ping>(Ping.received);
   static final ValueNotifier<String> socketChannel = ValueNotifier<String>("");
-  static final ValueNotifier<CloudState> cloudState =
-      ValueNotifier<CloudState>(CloudState.offline);
 
   static Future<void> init() async {
     await LocalStorage.init();
@@ -63,7 +60,7 @@ class SyncService {
 
     SocketService.setListener(EventType.UPDATE, (event) {
       Updater.update(Collection.values.singleWhere(
-          (collection) => collection.name == event.data['collection']));
+          (collection) => id(collection) == event.data['collection']));
     });
 
     SocketService.setListener(EventType.HANDSHAKE, (event) {
@@ -73,11 +70,12 @@ class SyncService {
       Config.set('place', device.place);
       Config.set('userLevel', device.type);
       Config.set('icon', device.icon.codePoint.toString());
-      SyncService.socketState.value = SocketState.connect;
+
+      SyncService.status.value = Connection.connected;
     });
 
     SocketService.setListener(EventType.REGISTRATION, (event) {
-      SyncService.socketState.value = SocketState.auth;
+      SyncService.status.value = Connection.auth;
       SyncService.socketChannel.value = event.data['regis'];
     });
 
@@ -93,8 +91,25 @@ class SyncService {
       Config.set('userLevel', device.type);
       Config.set('icon', device.icon.codePoint.toString());
       Config.set('key', event.data['key']);
+      Config.set('deviceID', device.id);
 
-      SyncService.socketState.value = SocketState.connect;
+      SyncService.status.value = Connection.connected;
+    });
+
+    SocketService.setListener(EventType.PING, (event) {
+      ping.value = Ping.received;
+
+      Timer.periodic(((event.data['interval'] as int) + 1).seconds, (timer) {
+        if (ping.value == Ping.pending) {
+          SocketService.init(reconnect: true);
+        }
+        timer.cancel();
+      });
+
+      Timer.periodic(((event.data['interval'] as int) - 1).seconds, (timer) {
+        ping.value = Ping.pending;
+        timer.cancel();
+      });
     });
   }
 
@@ -134,6 +149,9 @@ class SyncService {
 
       case Collection.config:
         return "main:config";
+
+      case Collection.backup:
+        return "main:backups";
     }
   }
 

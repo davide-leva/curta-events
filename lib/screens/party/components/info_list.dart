@@ -21,78 +21,80 @@ class Info extends StatelessWidget {
       children: [
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Wrap(
-            children: [
-              InfoCard(
-                color: Colors.green,
-                icon: Icons.euro_rounded,
-                title: "Cassa",
-                child: Center(
-                  child: border(
-                    Text(
-                      '${_bankController.balance.toStringAsFixed(2)} €',
-                      style: Theme.of(context).textTheme.headlineSmall,
+          child: Obx(
+            () => Wrap(
+              children: [
+                InfoCard(
+                  color: Colors.green,
+                  icon: Icons.euro_rounded,
+                  title: "Cassa",
+                  child: Center(
+                    child: border(
+                      Text(
+                        '${_bankController.balance.toStringAsFixed(2)} €',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: kDefaultPadding,
-              ),
-              InfoCard(
-                color: Colors.amber,
-                icon: Icons.pallet,
-                title: "Scorte",
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    border(
-                      Text(
-                        "${(Get.put(InventoryController())).totalValue.round()} €",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ),
-                    SizedBox(
-                      width: kDefaultPadding,
-                    ),
-                    border(
-                      Text(
-                        "${(Get.put(InventoryController())).totalLitres.toStringAsFixed(1)} L",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  width: kDefaultPadding,
                 ),
-              ),
-              SizedBox(
-                width: kDefaultPadding,
-              ),
-              InfoCard(
-                color: Colors.pink,
-                icon: Icons.camera_alt,
-                title: 'Instagram',
-                child: Center(
-                  child: border(
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
+                InfoCard(
+                  color: Colors.amber,
+                  icon: Icons.pallet,
+                  title: "Scorte",
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      border(
                         Text(
-                          Config.get('followers'),
+                          "${(Get.put(InventoryController())).totalValue.round()} €",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        SizedBox(
-                          width: 8,
+                      ),
+                      SizedBox(
+                        width: kDefaultPadding,
+                      ),
+                      border(
+                        Text(
+                          "${(Get.put(InventoryController())).totalLitres.toStringAsFixed(1)} L",
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Icon(
-                          Icons.person,
-                          size: 36,
-                        ),
-                      ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: kDefaultPadding,
+                ),
+                InfoCard(
+                  color: Colors.pink,
+                  icon: Icons.camera_alt,
+                  title: 'Instagram',
+                  child: Center(
+                    child: border(
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            Config.get('followers'),
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Icon(
+                            Icons.person,
+                            size: 36,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         )
       ],

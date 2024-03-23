@@ -1,5 +1,5 @@
+import 'package:admin/controllers/Config.dart';
 import 'package:admin/controllers/DevicesController.dart';
-import 'package:admin/screens/components/connection_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,15 +26,9 @@ class _DevicesCardState extends State<DevicesCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                "Dispostivi",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Spacer(),
-              ConnectionStatus(),
-            ],
+          Text(
+            "Dispostivi",
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           Obx(() => Column(
                 children: _devicesController.devices
@@ -53,7 +47,8 @@ class _DevicesCardState extends State<DevicesCard> {
 Widget _deviceController(
     BuildContext context, Device device, DevicesController controller) {
   return GestureDetector(
-    onTap: () {
+    onTap: () async {
+      if (Config.get('call') == "false") return;
       if (device.isCaller) {
         controller.removeCaller(device.id);
         device.answer();

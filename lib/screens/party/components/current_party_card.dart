@@ -5,12 +5,12 @@ import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
 import 'package:admin/screens/party/components/balance.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../controllers/Config.dart';
 import '../../../models/Party.dart';
 
 class CurrentPartyCard extends StatefulWidget {
@@ -178,8 +178,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                 color: Colors.lightBlue,
                 icon: Icons.print,
                 onPressed: () async {
-                  Uri url = Uri.parse(
-                      'https://docs.google.com/gview?embedded=true&url=${Config.get('dataEndpoint')}${Config.get('selectedParty')}/report/full');
+                  Uri url = CloudService.reportUri('full');
 
                   if (await canLaunchUrl(url)) {
                     await launchUrl(url, mode: LaunchMode.platformDefault);
@@ -299,8 +298,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                 color: Colors.lightBlue,
                 icon: Icons.print,
                 onPressed: () async {
-                  Uri url = Uri.parse(
-                      'https://docs.google.com/gview?embedded=true&url=${Config.get('dataEndpoint')}${Config.get('selectedParty')}/report/full');
+                  Uri url = CloudService.reportUri('full');
 
                   if (await canLaunchUrl(url)) {
                     await launchUrl(url, mode: LaunchMode.platformDefault);

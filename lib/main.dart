@@ -4,7 +4,9 @@ import 'package:admin/constants.dart';
 import 'package:admin/controllers/MenuController.dart' as controller;
 import 'package:admin/screens/lista/lista_screen.dart';
 import 'package:admin/screens/main/auth_screen.dart';
+import 'package:admin/screens/main/connection_failed_screen.dart';
 import 'package:admin/screens/main/main_screen.dart';
+import 'package:admin/screens/main/splash_screen.dart';
 import 'package:admin/screens/main/web_auth_screen.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +18,12 @@ import 'package:provider/provider.dart';
 
 import 'controllers/Config.dart';
 
-void main() {
+void main() async {
   initializeDateFormatting();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  await SyncService.init();
   runApp(MyApp());
-  SyncService.init();
 }
 
 class NoOverscroll extends ScrollBehavior {
@@ -59,25 +61,19 @@ class MyApp extends StatelessWidget {
             create: (context) => controller.MenuController(),
           ),
         ],
-        child: ValueListenableBuilder<SocketState>(
-          valueListenable: SyncService.socketState,
+        child: ValueListenableBuilder<Connection>(
+          valueListenable: SyncService.status,
           builder: (context, state, _) {
             switch (state) {
-              case SocketState.pending:
-                return Container(
-                  color: kBgColor,
-                );
-              case SocketState.auth:
+              case Connection.pending:
+                return SplashScreen();
+              case Connection.auth:
                 return AuthScreen();
-              case SocketState.web_auth:
+              case Connection.web_auth:
                 return WebAuthScreen();
-              case SocketState.connect:
-                10.milliseconds.delay(() =>
-                    SyncService.socketState.value = SocketState.connected);
-                return Container(
-                  color: kBgColor,
-                );
-              case SocketState.connected:
+              case Connection.failed:
+                return ConnectionFailedScreen();
+              case Connection.connected:
                 return Config.get('userLevel') == 'pr'
                     ? Scaffold(
                         body: ListaScreen(),
