@@ -266,7 +266,32 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
     Function() onEntrance, Function() onDiscount) {
   return DataRow(
     cells: [
-      DataCell(Text("${person.name}")),
+      DataCell(
+        GestureDetector(
+          onTap: () {
+            TextEditingController _codeController = TextEditingController();
+            if (person.code == 0) {
+              showPopUp(
+                context,
+                "Associa prevendita",
+                [
+                  TextInput(textController: _codeController, label: "Codice"),
+                ],
+                () => onCode(int.parse(_codeController.text)),
+              );
+            }
+          },
+          child: InfoBadge(
+            text: person.name,
+            color: person.hasPaid
+                ? Colors.green
+                : person.code == 0
+                    ? Colors.grey
+                    : Colors.lightBlue,
+            size: Responsive.isDesktop(context) ? 200 : null,
+          ),
+        ),
+      ),
       DataCell(
         Row(
           children: [
@@ -278,7 +303,7 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
                 : Container(),
             person.hasEntered
                 ? SizedBox(
-                    width: defaultPadding,
+                    width: kDefaultPadding,
                   )
                 : Container(),
             person.discount != 0.00
@@ -292,15 +317,20 @@ DataRow _dataRow(Person person, Function() onDelete, Function() onConfirm,
                     width: defaultPadding,
                   )
                 : Container(),
-            person.hasPaid
+            person.hasEntered
                 ? InfoBadge(
-                    color: Colors.green,
-                    text: "Pagato",
+                    color: Colors.purple,
+                    text: "Entato",
                   )
-                : InfoBadge(
-                    color: Colors.red,
-                    text: "Non pagato",
-                  )
+                : person.hasPaid
+                    ? InfoBadge(
+                        color: Colors.green,
+                        text: "Pagato",
+                      )
+                    : InfoBadge(
+                        color: Colors.red,
+                        text: "Non pagato",
+                      ),
           ],
         ),
       ),

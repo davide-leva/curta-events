@@ -111,10 +111,13 @@ Shift _selectShift(TimeOfDay time) {
   ShiftController _controller = Get.put(ShiftController());
   return _controller.shifts.firstWhereOrNull((shift) =>
           shift.timeStart.compareTo(time) < 1 &&
-          shift.timeFinish.compareTo(time) == 1) ??
+          shift.timeFinish.compareTo(time) == 1 &&
+          shift.type == "Festa") ??
       Shift(
-          id: 'notFound',
-          timeStart: TimeOfDay.now(),
-          timeFinish: TimeOfDay.now(),
-          jobs: []);
+        id: 'notFound',
+        type: 'Festa',
+        timeStart: TimeOfDay.now(),
+        timeFinish: TimeOfDay.now(),
+        jobs: [],
+      );
 }

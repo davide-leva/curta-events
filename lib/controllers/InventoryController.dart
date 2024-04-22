@@ -13,29 +13,32 @@ class InventoryController extends GetxController {
   List<Entry> _entries = <Entry>[].obs;
   List<Entry> get entries => _entries;
 
-  double get totalValue => _entries
-      .map((entry) =>
-          _productController.products
-              .singleWhere((product) => product.id == entry.product)
-              .price *
-          entry.quantity)
-      .fold<double>(0, (sum, amount) => sum + amount);
+  double get totalValue => _productController.products.length == 0
+      ? 0
+      : _entries
+          .map((entry) =>
+              _productController.products
+                  .singleWhere((product) => product.id == entry.product)
+                  .price *
+              entry.quantity)
+          .fold<double>(0, (sum, amount) => sum + amount);
 
-  double get totalLitres =>
-      _entries
-          .map<List<num>>((entry) {
-            Product product = _productController.products
-                .singleWhere((product) => product.id == entry.product);
+  double get totalLitres => _productController.products.length == 0
+      ? 0
+      : _entries
+              .map<List<num>>((entry) {
+                Product product = _productController.products
+                    .singleWhere((product) => product.id == entry.product);
 
-            if (product.measure == 'cl') {
-              return [product.price, product.volume * entry.quantity];
-            } else {
-              return [0, 0];
-            }
-          })
-          .where((element) => element[0] > 5)
-          .fold<double>(0, (sum, element) => sum + element[1]) /
-      100;
+                if (product.measure == 'cl') {
+                  return [product.price, product.volume * entry.quantity];
+                } else {
+                  return [0, 0];
+                }
+              })
+              .where((element) => element[0] > 5)
+              .fold<double>(0, (sum, element) => sum + element[1]) /
+          100;
 
   @override
   void onReady() {

@@ -28,6 +28,8 @@ class GroupsController extends GetxController {
             ),
       );
 
+  get first => null;
+
   @override
   void onReady() {
     _update();
@@ -63,7 +65,7 @@ class GroupsController extends GetxController {
     return;
   }
 
-  Future<void> addPerson(int index, String name) async {
+  Future<void> addPerson(int index, String name, {int code = 0}) async {
     ListaGroup group = _groups[index];
 
     group.numberOfPeople += 1;
@@ -71,6 +73,7 @@ class GroupsController extends GetxController {
       name: name,
       hasEntered: false,
       hasPaid: false,
+      code: code,
     ));
 
     await CloudService.update(Collection.groups, group.id, group);
@@ -92,7 +95,9 @@ class GroupsController extends GetxController {
   Future<void> togglePersonPaid(int groupIndex, int personIndex) async {
     ListaGroup group = _groups[groupIndex];
 
-    group.people[personIndex].hasPaid = !group.people[personIndex].hasPaid;
+    if (group.people[personIndex].code == 0) {
+      group.people[personIndex].hasPaid = !group.people[personIndex].hasPaid;
+    }
 
     await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
@@ -101,6 +106,10 @@ class GroupsController extends GetxController {
 
   Future<void> togglePersonEntrance(int groupIndex, int personIndex) async {
     ListaGroup group = _groups[groupIndex];
+
+    if (!group.people[personIndex].hasEntered) {
+      group.people[personIndex].hasPaid = true;
+    }
 
     group.people[personIndex].hasEntered =
         !group.people[personIndex].hasEntered;
@@ -115,6 +124,30 @@ class GroupsController extends GetxController {
     ListaGroup group = _groups[groupIndex];
 
     group.people[personIndex].discount = discount;
+
+    await CloudService.update(Collection.groups, group.id, group);
+    await Updater.update(Collection.groups);
+    return;
+  }
+
+  SearchEntry? searchBarcode(BarcodeCapture capture) {
+    for (int i = 0; i < groups.length; i++) {
+      for (int j = 0; j < groups[i].numberOfPeople; j++) {
+        if (groups[i].people[j].code ==
+            (int.parse(capture.barcodes[0].rawValue ?? "0"))) {
+          return SearchEntry(groupIndex: i, personIndex: j);
+        }
+      }
+    }
+
+    return null;
+  }
+
+  Future<void> modifyPersonCode(
+      int groupIndex, int personIndex, int code) async {
+    ListaGroup group = _groups[groupIndex];
+
+    group.people[personIndex].code = code;
 
     await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);

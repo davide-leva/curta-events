@@ -35,10 +35,12 @@ class SearchGroup extends StatefulWidget {
   SearchGroup({
     Key? key,
     required this.controller,
+    required this.searchController,
   }) : super(key: key);
 
   final GroupsController controller;
   final List<PersonEntry> result = List.empty(growable: true);
+  final TextEditingController searchController;
 
   @override
   State<SearchGroup> createState() => _SearchGroupState();
@@ -48,9 +50,9 @@ class _SearchGroupState extends State<SearchGroup> {
   final TransactionController transactionController =
       Get.put(TransactionController());
 
-  final TextEditingController _searchPersonController = TextEditingController();
+  void _updateResult(String text) {
+    widget.searchController.text = text;
 
-  void _updateResult() {
     final List<PersonEntry> people = flatten(
       widget.controller.groups.mapIndexed(
         (gid, group) => group.people.mapIndexed(
@@ -60,8 +62,7 @@ class _SearchGroupState extends State<SearchGroup> {
     );
 
     widget.result.assignAll(people.where((entry) {
-      List<String> words =
-          _searchPersonController.text.toLowerCase().split(' ');
+      List<String> words = text.toLowerCase().split(' ');
 
       bool flag = true;
       words.forEach((word) {
@@ -82,25 +83,24 @@ class _SearchGroupState extends State<SearchGroup> {
       onKeyEvent: (event) async {
         if (!(event is s.KeyDownEvent)) return;
         if (widget.result.length != 1) return;
-
         PersonEntry personFound = widget.result.first;
 
         if (event.logicalKey.same(PAY_KEY)) {
           await widget.controller.togglePersonPaid(
               personFound.groupIndex, personFound.personIndex);
-          setState(_updateResult);
+          setState(() => _updateResult(widget.searchController.text));
         }
 
         if (event.logicalKey.same(ENTRANCE_KEY)) {
           await widget.controller.togglePersonEntrance(
               personFound.groupIndex, personFound.personIndex);
-          setState(_updateResult);
+          setState(() => _updateResult(widget.searchController.text));
         }
 
         if (event.logicalKey.same(DELETE_KEY)) {
           await widget.controller
               .removePerson(personFound.groupIndex, personFound.personIndex);
-          setState(_updateResult);
+          setState(() => _updateResult(widget.searchController.text));
         }
       },
       child: Responsive(
@@ -139,11 +139,12 @@ class _SearchGroupState extends State<SearchGroup> {
                 height: 28,
                 child: Center(
                   child: TextInput(
-                    textController: _searchPersonController,
+                    textController: widget.searchController,
                     label: "",
                     textLength: 2,
                     onTextLength: () {
-                      setState(_updateResult);
+                      setState(
+                          () => _updateResult(widget.searchController.text));
                     },
                     orElse: () {
                       setState(() {
@@ -180,17 +181,20 @@ class _SearchGroupState extends State<SearchGroup> {
                         widget.controller.removePerson(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
-                        setState(_updateResult);
+                        setState(
+                            () => _updateResult(widget.searchController.text));
                       }, () {
                         widget.controller.togglePersonPaid(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
-                        setState(_updateResult);
+                        setState(
+                            () => _updateResult(widget.searchController.text));
                       }, () {
                         widget.controller.togglePersonEntrance(
                             widget.result[index].groupIndex,
                             widget.result[index].personIndex);
-                        setState(_updateResult);
+                        setState(
+                            () => _updateResult(widget.searchController.text));
                       }),
                     ),
                   )
@@ -248,11 +252,12 @@ class _SearchGroupState extends State<SearchGroup> {
                     height: 32,
                     child: Center(
                       child: TextInput(
-                        textController: _searchPersonController,
+                        textController: widget.searchController,
                         label: "",
                         textLength: 2,
                         onTextLength: () {
-                          setState(_updateResult);
+                          setState(() =>
+                              _updateResult(widget.searchController.text));
                         },
                         orElse: () {
                           setState(() {
@@ -293,17 +298,20 @@ class _SearchGroupState extends State<SearchGroup> {
                           widget.controller.removePerson(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
-                          setState(_updateResult);
+                          setState(() =>
+                              _updateResult(widget.searchController.text));
                         }, () {
                           widget.controller.togglePersonPaid(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
-                          setState(_updateResult);
+                          setState(() =>
+                              _updateResult(widget.searchController.text));
                         }, () {
                           widget.controller.togglePersonEntrance(
                               widget.result[index].groupIndex,
                               widget.result[index].personIndex);
-                          setState(_updateResult);
+                          setState(() =>
+                              _updateResult(widget.searchController.text));
                         }),
                       ),
                     ),

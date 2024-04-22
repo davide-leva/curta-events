@@ -261,7 +261,7 @@ DataRow _dataRow(
         Row(
           children: [
             Container(
-              width: 40,
+              width: 50,
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: entry.purchased ? Colors.green : Colors.orange,

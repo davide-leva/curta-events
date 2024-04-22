@@ -56,6 +56,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
   TextEditingController _timeStartController = TextEditingController();
   TextEditingController _timeFinishController = TextEditingController();
   TextEditingController _numberOfJobsController = TextEditingController();
+  String _jobType = "Prima";
 
   TimeOfDay _timeStart = TimeOfDay.now().replacing(minute: 0);
   TimeOfDay _timeFinish = TimeOfDay(hour: TimeOfDay.now().hour + 1, minute: 0);
@@ -88,6 +89,37 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
                 title: "Aggiungi turno",
                 onPressed: () {
                   showPopUp(context, "Inserimento guidato", [
+                    Container(
+                      width: 300,
+                      padding: EdgeInsets.only(left: kDefaultPadding),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: DropdownMenu<String>(
+                        initialSelection: _jobType,
+                        width: 280,
+                        hintText: "Tipo",
+                        menuHeight: 300,
+                        inputDecorationTheme: InputDecorationTheme(
+                          border: InputBorder.none,
+                          fillColor: Theme.of(context).cardColor,
+                        ),
+                        dropdownMenuEntries: ["Gestione", "Festa", "Post"]
+                            .map<DropdownMenuEntry<String>>(
+                              (type) => DropdownMenuEntry<String>(
+                                value: type,
+                                label: type,
+                              ),
+                            )
+                            .toList(),
+                        onSelected: (value) {
+                          setState(() {
+                            _jobType = value as String;
+                          });
+                        },
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () {
                         showTimePicker(
@@ -184,6 +216,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
                             _timeFinish,
                             titleControllers.map((e) => e.text).toList(),
                             workersControllers.map((e) => e.text).toList(),
+                            _jobType,
                           ),
                         );
                       },
@@ -438,6 +471,7 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
                             _timeFinish,
                             titleControllers.map((e) => e.text).toList(),
                             workersControllers.map((e) => e.text).toList(),
+                            _jobType,
                           ),
                         );
                       },
@@ -580,9 +614,10 @@ class _ShiftsScreenState extends State<ShiftsScreen> {
 }
 
 _addShift(ShiftController _controller, TimeOfDay start, TimeOfDay finish,
-    List<String> titles, List<String> workers) async {
+    List<String> titles, List<String> workers, String type) async {
   Shift shift = Shift(
     id: CloudService.uuid(),
+    type: type,
     timeStart: start,
     timeFinish: finish,
     jobs: titles
@@ -599,6 +634,7 @@ _modifyShift(ShiftController controller, Shift shift, TimeOfDay timeStart,
     TimeOfDay timeFinish, List<String> titles, List<String> workers) {
   Shift newShift = Shift(
     id: shift.id,
+    type: shift.type,
     timeStart: timeStart,
     timeFinish: timeFinish,
     jobs: titles

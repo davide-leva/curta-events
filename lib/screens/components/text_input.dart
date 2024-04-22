@@ -12,7 +12,7 @@ class TextInput extends StatefulWidget {
     this.editable = true,
     this.onTextLength = _voidFunction,
     this.orElse = _voidFunction,
-    this.textLength = 3,
+    this.textLength = 0,
     this.obscure = false,
   }) : super(key: key);
 
@@ -42,10 +42,10 @@ class _TextInputState extends State<TextInput> {
       child: TextField(
         obscureText: widget.obscure,
         onChanged: (value) {
-          if (value.length > widget.textLength) {
+          if (value.length >= widget.textLength) {
             widget.onTextLength();
           }
-          if (value.length <= widget.textLength) {
+          if (value.length < widget.textLength) {
             widget.orElse();
           }
         },

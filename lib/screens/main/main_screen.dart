@@ -4,6 +4,7 @@ import 'package:admin/controllers/MenuController.dart' as controller;
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/admin/admin_screen.dart';
 import 'package:admin/screens/bank/bank_screen.dart';
+import 'package:admin/screens/new_lista/new_lista_screen.dart';
 import 'package:admin/screens/party/party_screen.dart';
 import 'package:admin/screens/inventory/inventario_screen.dart';
 import 'package:admin/screens/products/products_screen.dart';
@@ -34,6 +35,7 @@ class MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     DashboardScreen(),
     ListaScreen(),
+    NewListaScreen(),
     InventarioScreen(),
     ProductsScreen(),
     ShiftsScreen(),

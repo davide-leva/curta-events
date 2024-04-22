@@ -7,12 +7,14 @@ import 'Model.dart';
 class Shift implements Model {
   Shift({
     required this.id,
-    required this.timeStart,
-    required this.timeFinish,
+    required this.type,
+    this.timeStart = const TimeOfDay(hour: 0, minute: 0),
+    this.timeFinish = const TimeOfDay(hour: 0, minute: 0),
     required this.jobs,
   });
 
   final String id;
+  final String type;
   final TimeOfDay timeStart;
   final TimeOfDay timeFinish;
   final List<Job> jobs;
@@ -21,6 +23,7 @@ class Shift implements Model {
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
+      'type': type,
       'timeStart': "${timeStart.hour}:${timeStart.minute}",
       'timeFinish': "${timeFinish.hour}:${timeFinish.minute}",
       'jobs': List.of(jobs.map((job) => jsonEncode(job.toJson()))),
@@ -30,6 +33,7 @@ class Shift implements Model {
   factory Shift.fromJson(Map<String, dynamic> data) {
     return Shift(
         id: data['_id'],
+        type: data['type'] ?? "Festa",
         timeStart: TimeOfDay(
           hour: int.parse(data['timeStart'].split(":")[0]),
           minute: int.parse(data['timeStart'].split(":")[1]),

@@ -33,10 +33,15 @@ class ShiftCard extends StatelessWidget {
       child: Column(children: [
         Row(
           children: [
-            Text(
-              "Turno ${shift.timeStart.format(context)} - ${shift.timeFinish.format(context)}",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            shift.type == "Festa"
+                ? Text(
+                    "Turno ${shift.timeStart.format(context)} - ${shift.timeFinish.format(context)}",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  )
+                : Text(
+                    shift.type,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
             Spacer(),
             TableButton(
               width: 1.25,
