@@ -62,38 +62,45 @@ class SideMenuStateAdmin extends State<SideMenu> {
             },
           ),
           DrawerListTile(
+            title: "[NEW] Lista",
+            icon: Icons.list,
+            press: () {
+              setState(() => widget.setScreen(2));
+            },
+          ),
+          DrawerListTile(
             title: "Inventario",
             icon: Icons.pallet,
             press: () {
-              setState(() => widget.setScreen(2));
+              setState(() => widget.setScreen(3));
             },
           ),
           DrawerListTile(
             title: "Prodotti",
             icon: Icons.shopping_bag,
             press: () {
-              setState(() => widget.setScreen(3));
+              setState(() => widget.setScreen(4));
             },
           ),
           DrawerListTile(
             title: "Turni",
             icon: Icons.work_history,
             press: () {
-              setState(() => widget.setScreen(4));
+              setState(() => widget.setScreen(5));
             },
           ),
           DrawerListTile(
             title: "Cassa",
             icon: Icons.euro,
             press: () {
-              setState(() => widget.setScreen(5));
+              setState(() => widget.setScreen(6));
             },
           ),
           DrawerListTile(
             title: "Telecamera",
             icon: Icons.security,
             press: () {
-              setState(() => widget.setScreen(6));
+              setState(() => widget.setScreen(7));
             },
           ),
           Spacer(),
@@ -101,14 +108,14 @@ class SideMenuStateAdmin extends State<SideMenu> {
             title: "Admin",
             icon: Icons.admin_panel_settings,
             press: () {
-              setState(() => widget.setScreen(7));
+              setState(() => widget.setScreen(8));
             },
           ),
           DrawerListTile(
             title: "Impostazioni",
             icon: Icons.settings,
             press: () {
-              setState(() => widget.setScreen(8));
+              setState(() => widget.setScreen(9));
             },
           ),
         ],
@@ -151,35 +158,35 @@ class SideMenuStateMember extends State<SideMenu> {
             title: "Inventario",
             icon: Icons.pallet,
             press: () {
-              setState(() => widget.setScreen(2));
+              setState(() => widget.setScreen(3));
             },
           ),
           DrawerListTile(
             title: "Prodotti",
             icon: Icons.shopping_bag,
             press: () {
-              setState(() => widget.setScreen(3));
+              setState(() => widget.setScreen(4));
             },
           ),
           DrawerListTile(
             title: "Turni",
             icon: Icons.work_history,
             press: () {
-              setState(() => widget.setScreen(4));
+              setState(() => widget.setScreen(5));
             },
           ),
           DrawerListTile(
             title: "Cassa",
             icon: Icons.euro,
             press: () {
-              setState(() => widget.setScreen(5));
+              setState(() => widget.setScreen(6));
             },
           ),
           DrawerListTile(
             title: "Telecamera",
             icon: Icons.security,
             press: () {
-              setState(() => widget.setScreen(6));
+              setState(() => widget.setScreen(7));
             },
           ),
           Spacer(),
@@ -187,7 +194,7 @@ class SideMenuStateMember extends State<SideMenu> {
             title: "Impostazioni",
             icon: Icons.settings,
             press: () {
-              setState(() => widget.setScreen(8));
+              setState(() => widget.setScreen(9));
             },
           ),
         ],

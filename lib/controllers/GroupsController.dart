@@ -133,6 +133,17 @@ class GroupsController extends GetxController {
     return;
   }
 
+  Future<void> modifyPersonName(
+      int groupIndex, int personIndex, String name) async {
+    ListaGroup group = _groups[groupIndex];
+
+    group.people[personIndex].name = name;
+
+    await CloudService.update(Collection.groups, group.id, group);
+    await Updater.update(Collection.groups);
+    return;
+  }
+
   SearchEntry? searchBarcode(BarcodeCapture capture) {
     for (int i = 0; i < groups.length; i++) {
       for (int j = 0; j < groups[i].numberOfPeople; j++) {

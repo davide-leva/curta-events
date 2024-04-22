@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 const kPrimaryColor = Color(0xFF2697FF);
 const kSecondaryColor = Color(0xFF2A2D3E);
+const kCardColor = Color(0xFF41424F);
 const kBgColor = Color(0xFF212332);
 
 const kDefaultPadding = 16.0;
