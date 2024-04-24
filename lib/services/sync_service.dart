@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:admin/controllers/Config.dart';
 import 'package:admin/controllers/DevicesController.dart';
+import 'package:admin/services/call_service.dart';
 import 'package:admin/services/cloud_service.dart';
 import 'package:admin/services/local_storage.dart';
 import 'package:admin/services/socket_service.dart';
@@ -39,6 +40,8 @@ class SyncService {
 
   static Future<void> init() async {
     await LocalStorage.init();
+    await CallService.init();
+
     Config.init();
     SocketService.init();
 

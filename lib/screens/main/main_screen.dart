@@ -4,7 +4,7 @@ import 'package:admin/controllers/MenuController.dart' as controller;
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/admin/admin_screen.dart';
 import 'package:admin/screens/bank/bank_screen.dart';
-import 'package:admin/screens/new_lista/new_lista_screen.dart';
+import 'package:admin/screens/lista/new_lista_screen.dart';
 import 'package:admin/screens/party/party_screen.dart';
 import 'package:admin/screens/inventory/inventario_screen.dart';
 import 'package:admin/screens/products/products_screen.dart';
@@ -19,7 +19,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../../models/Device.dart';
 import '../../services/socket_service.dart';
 import '../config/config_screen.dart';
-import '../lista/lista_screen.dart';
 import 'components/side_menu.dart';
 
 class MainScreen extends StatefulWidget {
@@ -35,7 +34,6 @@ class MainScreenState extends State<MainScreen> {
   List<Widget> screens = [
     DashboardScreen(),
     ListaScreen(),
-    NewListaScreen(),
     InventarioScreen(),
     ProductsScreen(),
     ShiftsScreen(),

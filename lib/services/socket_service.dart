@@ -80,17 +80,14 @@ class SocketService {
   }
 
   static void auth(String regis, Device device) {
-    send(
-      SocketEvent(
+    send(SocketEvent(
         from: Config.get('deviceID'),
         to: 'server',
         type: EventType.AUTH,
         data: {
-          'regis': regis,
-          'device': device.toJson(),
-        },
-      ),
-    );
+          "regis": regis,
+          "device": device.toJson(),
+        }));
   }
 
   static void login(String user, String pass) {

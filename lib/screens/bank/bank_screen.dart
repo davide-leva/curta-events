@@ -1,11 +1,10 @@
+import 'package:admin/constants.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/bank/components/actual_balance.dart';
 import 'package:admin/screens/bank/components/bank_summary.dart';
 import 'package:admin/screens/bank/components/transaction_table.dart';
+import 'package:admin/screens/components/header.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants.dart';
-import '../components/header.dart';
 
 class BankScreen extends StatelessWidget {
   @override

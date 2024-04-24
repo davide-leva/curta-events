@@ -2,14 +2,22 @@ import 'dart:math';
 
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/GroupsController.dart';
+import 'package:admin/models/Group.dart';
 import 'package:admin/screens/components/header.dart';
-import 'package:admin/screens/new_lista/components/group_card.dart';
-import 'package:admin/screens/new_lista/components/search_card.dart';
+import 'package:admin/screens/components/level_builder.dart';
+import 'package:admin/screens/lista/components/add_lista.dart';
+import 'package:admin/screens/lista/components/entrance_scanner.dart';
+import 'package:admin/screens/lista/components/member_preve_scanner.dart';
+import 'package:admin/screens/lista/components/group_card.dart';
+import 'package:admin/screens/lista/components/preve_scanner.dart';
+import 'package:admin/screens/lista/components/print_lista.dart';
+import 'package:admin/screens/lista/components/search_card.dart';
+import 'package:admin/services/cloud_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NewListaScreen extends StatelessWidget {
-  const NewListaScreen({Key? key}) : super(key: key);
+class ListaScreen extends StatelessWidget {
+  const ListaScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,32 @@ class NewListaScreen extends StatelessWidget {
         padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
-            Header(screenTitle: "Lista"),
+            Header(
+              screenTitle: "Lista",
+              buttons: [
+                LevelBuilder(
+                  pr: PreveScanner(),
+                  member: MemberPreveScanner(),
+                  admin: MemberPreveScanner(),
+                ),
+                LevelBuilder(
+                  member: EntranceScanner(),
+                  admin: EntranceScanner(),
+                ),
+                LevelBuilder(
+                  member: AddLista(
+                    onGroup: (name) => _addNewGroup(_groupsController, name),
+                  ),
+                  admin: AddLista(
+                    onGroup: (name) => _addNewGroup(_groupsController, name),
+                  ),
+                ),
+                LevelBuilder(
+                  member: PrintLista(),
+                  admin: PrintLista(),
+                )
+              ],
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,4 +97,16 @@ class NewListaScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+_addNewGroup(GroupsController controller, String groupName) async {
+  ListaGroup _newGroup = ListaGroup(
+    id: CloudService.uuid(),
+    title: groupName,
+    numberOfPeople: 0,
+    people: [],
+  );
+
+  await controller.add(_newGroup);
+  return;
 }

@@ -362,7 +362,7 @@ DataRow _dataRow(
       DataCell(Row(
         children: [
           Container(
-            width: 50,
+            width: 60,
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: Colors.lightBlue,

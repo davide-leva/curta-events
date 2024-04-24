@@ -1,7 +1,7 @@
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/GroupsController.dart';
 import 'package:admin/models/Person.dart';
-import 'package:admin/screens/new_lista/components/person_card.dart';
+import 'package:admin/screens/lista/components/person_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

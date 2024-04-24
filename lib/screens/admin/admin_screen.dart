@@ -1,6 +1,7 @@
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/BackupController.dart';
 import 'package:admin/models/Device.dart';
+import 'package:admin/screens/admin/components/agora.dart';
 import 'package:admin/screens/admin/components/backup_panel.dart';
 import 'package:admin/screens/admin/components/icon_selector.dart';
 import 'package:admin/screens/admin/components/devices_card.dart';
@@ -128,7 +129,7 @@ class _AdminScreenState extends State<AdminScreen> {
                                   SocketService.auth(
                                     code,
                                     new Device(
-                                      id: Config.get('deviceID'),
+                                      id: 'dev-000000',
                                       operator: _operatorController.text,
                                       place: _placeController.text,
                                       type: _type,
@@ -163,7 +164,11 @@ class _AdminScreenState extends State<AdminScreen> {
             SizedBox(
               height: kDefaultPadding,
             ),
-            BackupPanel(backupController: _backupController)
+            BackupPanel(backupController: _backupController),
+            SizedBox(
+              height: kDefaultPadding,
+            ),
+            Agora(),
           ],
         ),
       ),

@@ -10,13 +10,17 @@ import '../services/updater.dart';
 class InventoryController extends GetxController {
   ProductController _productController = Get.put(ProductController());
 
+  final Product _emptyProduct = Product(
+      id: "generated", name: "", price: 0, volume: 0, shop: "", measure: "");
+
   List<Entry> _entries = <Entry>[].obs;
   List<Entry> get entries => _entries;
 
   double get totalValue => _entries
       .map((entry) =>
           _productController.products
-              .singleWhere((product) => product.id == entry.product)
+              .singleWhere((product) => product.id == entry.product,
+                  orElse: () => _emptyProduct)
               .price *
           entry.quantity)
       .fold<double>(0, (sum, amount) => sum + amount);
@@ -24,8 +28,9 @@ class InventoryController extends GetxController {
   double get totalLitres =>
       _entries
           .map<List<num>>((entry) {
-            Product product = _productController.products
-                .singleWhere((product) => product.id == entry.product);
+            Product product = _productController.products.singleWhere(
+                (product) => product.id == entry.product,
+                orElse: () => _emptyProduct);
 
             if (product.measure == 'cl') {
               return [product.price, product.volume * entry.quantity];

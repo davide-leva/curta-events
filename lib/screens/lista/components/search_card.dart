@@ -1,7 +1,8 @@
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/GroupsController.dart';
+import 'package:admin/responsive.dart';
 import 'package:admin/screens/components/text_input.dart';
-import 'package:admin/screens/new_lista/components/result_list.dart';
+import 'package:admin/screens/lista/components/result_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as s;
 import 'package:get/get.dart';
@@ -59,7 +60,7 @@ class _SearchCardState extends State<SearchCard> {
                 Spacer(),
                 SizedBox(
                   width: 200,
-                  height: 28,
+                  height: Responsive.isDesktop(context) ? 28 : 36,
                   child: Center(
                     child: TextInput(
                       textController: widget.searchController,

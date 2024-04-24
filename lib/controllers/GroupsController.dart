@@ -104,7 +104,8 @@ class GroupsController extends GetxController {
   Future<void> togglePersonPaid(int groupIndex, int personIndex) async {
     ListaGroup group = _groups[groupIndex];
 
-    group.people[personIndex].hasPaid = !group.people[personIndex].hasPaid;
+    if (group.people[personIndex].code == 0)
+      group.people[personIndex].hasPaid = !group.people[personIndex].hasPaid;
 
     await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
@@ -113,6 +114,9 @@ class GroupsController extends GetxController {
 
   Future<void> togglePersonEntrance(int groupIndex, int personIndex) async {
     ListaGroup group = _groups[groupIndex];
+
+    if (!group.people[personIndex].hasPaid)
+      group.people[personIndex].hasPaid = true;
 
     group.people[personIndex].hasEntered =
         !group.people[personIndex].hasEntered;
@@ -162,6 +166,7 @@ class GroupsController extends GetxController {
     ListaGroup group = _groups[groupIndex];
 
     group.people[personIndex].code = code;
+    group.people[personIndex].hasPaid = true;
 
     await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);

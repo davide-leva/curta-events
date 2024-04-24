@@ -23,7 +23,7 @@ class InfoBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: kDefaultPadding,
+        horizontal: kDefaultPadding * 0.5,
         vertical: kDefaultPadding * 0.25,
       ),
       child: Center(

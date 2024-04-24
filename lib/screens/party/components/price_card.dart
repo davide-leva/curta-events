@@ -10,12 +10,14 @@ class PriceCard extends StatelessWidget {
     this.description = "",
     required this.amount,
     required this.onDelete,
+    this.disabled = false,
   }) : super(key: key);
 
   final String title;
   final String description;
   final double amount;
   final Function() onDelete;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,13 @@ class PriceCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  Text(
+                    "${amount.toStringAsFixed(2)} €",
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: color,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
                   description == ""
                       ? Container()
                       : Text(
@@ -68,20 +77,13 @@ class PriceCard extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            "${amount.toStringAsFixed(2)} €",
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
           SizedBox(
             width: kDefaultPadding,
           ),
           TableButton(
             color: Colors.red,
             icon: Icons.close,
-            isDisabled: title == "Spesa" ||
-                title == "Prevendite" ||
-                title == "Sconti" ||
-                title == "Ingressi",
+            isDisabled: disabled,
             onPressed: onDelete,
           )
         ],

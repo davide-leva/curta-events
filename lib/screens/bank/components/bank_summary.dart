@@ -1,9 +1,9 @@
 import 'package:admin/controllers/BankController.dart';
+import 'package:admin/screens/party/components/balance.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../constants.dart';
-import '../../party/components/balance.dart';
+import '/constants.dart';
 
 class BankSummary extends StatelessWidget {
   final BankController _bankController = Get.put(BankController());

@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../constants.dart';
-import '../../../controllers/Config.dart';
-import '../../../models/Party.dart';
-import '../../../services/updater.dart';
+import '/constants.dart';
+import '/controllers/Config.dart';
+import '/models/Party.dart';
+import '/services/updater.dart';
 
 class TransactionTable extends StatefulWidget {
   @override
@@ -106,11 +106,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                   lastDate: DateTime(DateTime.now().year + 5),
                                 ).then(
                                   (value) => setState(() {
-                                        _selectedDate = value!;
-                                        _dateController.text =
-                                            DateFormat('dd/MM/yy', 'it')
-                                                .format(_selectedDate);
-                                      }),
+                                    _selectedDate = value!;
+                                    _dateController.text =
+                                        DateFormat('dd/MM/yy', 'it')
+                                            .format(_selectedDate);
+                                  }),
                                 );
                               },
                               child: TextInput(
@@ -198,11 +198,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                   lastDate: DateTime(DateTime.now().year + 5),
                                 ).then(
                                   (value) => setState(() {
-                                        _selectedDate = value!;
-                                        _dateController.text =
-                                            DateFormat('dd/MM/yy', 'it')
-                                                .format(_selectedDate);
-                                      }),
+                                    _selectedDate = value!;
+                                    _dateController.text =
+                                        DateFormat('dd/MM/yy', 'it')
+                                            .format(_selectedDate);
+                                  }),
                                 );
                               },
                               child: TextInput(
@@ -284,11 +284,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                   lastDate: DateTime(DateTime.now().year + 5),
                                 ).then(
                                   (value) => setState(() {
-                                        _selectedDate = value!;
-                                        _dateController.text =
-                                            DateFormat('dd/MM/yy', 'it')
-                                                .format(_selectedDate);
-                                      }),
+                                    _selectedDate = value!;
+                                    _dateController.text =
+                                        DateFormat('dd/MM/yy', 'it')
+                                            .format(_selectedDate);
+                                  }),
                                 );
                               },
                               child: TextInput(
@@ -410,11 +410,11 @@ class _TransactionTableState extends State<TransactionTable> {
                                     lastDate: DateTime(DateTime.now().year + 5),
                                   ).then(
                                     (value) => setState(() {
-                                          _selectedDate = value!;
-                                          _dateController.text =
-                                              DateFormat('dd/MM/yy', 'it')
-                                                  .format(_selectedDate);
-                                        }),
+                                      _selectedDate = value!;
+                                      _dateController.text =
+                                          DateFormat('dd/MM/yy', 'it')
+                                              .format(_selectedDate);
+                                    }),
                                   );
                                 },
                                 child: TextInput(

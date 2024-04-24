@@ -114,19 +114,19 @@ class TransactionController extends GetxController {
 
   Future<void> add(Transaction transaction) async {
     await CloudService.insert(Collection.transactions, transaction);
-    await Updater.update(Collection.shifts);
+    await Updater.update(Collection.transactions);
     return;
   }
 
   Future<void> delete(Transaction transaction) async {
     await CloudService.delete(Collection.transactions, transaction.id);
-    await Updater.update(Collection.shifts);
+    await Updater.update(Collection.transactions);
     return;
   }
 
   Future<void> modify(Transaction old, Transaction newTransaction) async {
     await CloudService.update(Collection.transactions, old.id, newTransaction);
-    await Updater.update(Collection.shifts);
+    await Updater.update(Collection.transactions);
     return;
   }
 }

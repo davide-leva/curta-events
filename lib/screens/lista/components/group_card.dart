@@ -6,7 +6,7 @@ import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
-import 'package:admin/screens/new_lista/components/person_card.dart';
+import 'package:admin/screens/lista/components/person_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,13 +64,6 @@ class _GroupCardState extends State<GroupCard> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Spacer(),
-              TableButton(
-                color: Colors.lightBlue,
-                icon: _isOpen ? Icons.arrow_downward : Icons.arrow_upward,
-                onPressed: () => setState(() {
-                  _isOpen = !_isOpen;
-                }),
-              ),
               SizedBox(
                 width: kDefaultPadding,
               ),
@@ -143,6 +136,15 @@ class _GroupCardState extends State<GroupCard> {
                         () => _groupsController.delete(widget.group),
                       ),
                     ),
+              SizedBox(
+                width: 2 * kDefaultPadding,
+              ),
+              GestureDetector(
+                onTap: () => setState(() {
+                  _isOpen = !_isOpen;
+                }),
+                child: Icon(Icons.menu),
+              )
             ],
           ),
           _isOpen

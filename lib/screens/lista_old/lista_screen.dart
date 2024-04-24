@@ -9,8 +9,8 @@ import 'package:admin/responsive.dart';
 import 'package:admin/screens/components/action_button.dart';
 import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/text_input.dart';
-import 'package:admin/screens/lista/components/group_table.dart';
-import 'package:admin/screens/lista/components/search_group.dart';
+import 'package:admin/screens/lista_old/components/group_table.dart';
+import 'package:admin/screens/lista_old/components/search_group.dart';
 import 'package:admin/services/cloud_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -330,11 +330,7 @@ class _ListaScreenState extends State<ListaScreen> {
                       icon: Icons.print,
                       onPressed: () async {
                         Uri url = CloudService.reportUri('lista');
-
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url,
-                              mode: LaunchMode.platformDefault);
-                        }
+                        await launchUrl(url, mode: LaunchMode.platformDefault);
                       }),
                 ],
         ),
@@ -708,10 +704,7 @@ class _ListaScreenState extends State<ListaScreen> {
                       onPressed: () async {
                         Uri url = CloudService.reportUri('lista');
 
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url,
-                              mode: LaunchMode.platformDefault);
-                        }
+                        await launchUrl(url, mode: LaunchMode.platformDefault);
                       }),
                 ],
         ),

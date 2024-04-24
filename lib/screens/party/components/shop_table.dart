@@ -70,9 +70,7 @@ class _MaterialTableState extends State<MaterialTable> {
                 onPressed: () async {
                   Uri url = CloudService.reportUri('shop');
 
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url, mode: LaunchMode.platformDefault);
-                  }
+                  await launchUrl(url, mode: LaunchMode.platformDefault);
                 },
                 icon: Icons.print,
                 color: Colors.lightBlue,
@@ -176,7 +174,7 @@ DataRow _dataRow(
         Row(
           children: [
             Container(
-              width: 40,
+              width: 50,
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: entry.purchased ? Colors.green : Colors.orange,

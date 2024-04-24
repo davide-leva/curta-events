@@ -7,7 +7,6 @@ import 'package:admin/screens/components/pop_up.dart';
 import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/components/text_input.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class PersonID {
@@ -18,6 +17,15 @@ class PersonID {
 
   final int gid;
   final int pid;
+
+  @override
+  bool operator ==(Object other) {
+    if (other is PersonID) {
+      return gid == other.gid && pid == other.pid;
+    } else {
+      return false;
+    }
+  }
 }
 
 class PersonCard extends StatefulWidget {
@@ -78,18 +86,34 @@ class _PersonCardState extends State<PersonCard> {
                 Expanded(
                   flex: 3,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(widget.person.name),
-                      widget.person.discount != 0
+                      widget.person.discount + widget.person.code > 0
                           ? SizedBox(
                               height: 8,
                             )
                           : Container(),
-                      widget.person.discount != 0
-                          ? InfoBadge(
-                              color: Colors.amber,
-                              text: "${-widget.person.discount} €")
-                          : Container(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          widget.person.discount != 0
+                              ? InfoBadge(
+                                  color: Colors.orange,
+                                  text: "${-widget.person.discount} €")
+                              : Container(),
+                          widget.person.discount != 0 && widget.person.code != 0
+                              ? SizedBox(
+                                  width: kDefaultPadding,
+                                )
+                              : Container(),
+                          widget.person.code != 0
+                              ? InfoBadge(
+                                  color: Colors.lightBlue,
+                                  text: "${widget.person.code}")
+                              : Container(),
+                        ],
+                      ),
                     ],
                   ),
                 ),

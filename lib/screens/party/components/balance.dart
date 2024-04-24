@@ -7,6 +7,7 @@ import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/party/components/price_card.dart';
 import 'package:admin/services/cloud_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../constants.dart';
@@ -108,12 +109,50 @@ class Balance extends StatelessWidget {
                     .sort((a, b) => _floorAbs(b.amount) - _floorAbs(a.amount));
                 transactions.sort(
                     (a, b) => (a.amount > 0 ? 0 : 1) - (b.amount > 0 ? 0 : 1));
-                return PriceCard(
-                  title: transactions[index].title,
-                  amount: transactions[index].amount,
-                  description: transactions[index].description,
-                  onDelete: () =>
-                      transactionController.delete(transactions[index]),
+                return GestureDetector(
+                  onTap: () {
+                    if (transactions[index].id == 'do_not_delete') return;
+
+                    TextEditingController _nameController =
+                        TextEditingController(text: transactions[index].title);
+                    TextEditingController _priceController =
+                        TextEditingController(
+                            text: "${transactions[index].amount}");
+                    TextEditingController _descController =
+                        TextEditingController(
+                            text: transactions[index].description);
+
+                    showPopUp(
+                      context,
+                      "Modifica transazione",
+                      [
+                        TextInput(
+                            textController: _nameController,
+                            label: "Transazione"),
+                        TextInput(
+                            textController: _priceController, label: "Prezzo"),
+                        TextInput(
+                            textController: _descController,
+                            label: "Descrizione"),
+                      ],
+                      () => transactionController.modify(
+                        transactions[index],
+                        Transaction(
+                            id: transactions[index].id,
+                            title: _nameController.text,
+                            amount: double.parse(_priceController.text),
+                            description: _descController.text),
+                      ),
+                    );
+                  },
+                  child: PriceCard(
+                    title: transactions[index].title,
+                    amount: transactions[index].amount,
+                    description: transactions[index].description,
+                    onDelete: () =>
+                        transactionController.delete(transactions[index]),
+                    disabled: transactions[index].id == 'do_not_delete',
+                  ),
                 );
               }),
             ),

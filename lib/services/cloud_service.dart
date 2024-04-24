@@ -149,4 +149,18 @@ class CloudService {
 
     return Uri.parse(uri);
   }
+
+  static Future<String> token(String channel) async {
+    Map<String, String> headers = <String, String>{
+      'device': Config.get('deviceID'),
+      'key': Config.get('key'),
+      'Content-Type': 'application/json',
+    };
+
+    http.Response response = await http.get(
+        Uri.parse('${Config.get('dataEndpoint')}token/${channel}'),
+        headers: headers);
+
+    return (jsonDecode(response.body)['token'] as String);
+  }
 }

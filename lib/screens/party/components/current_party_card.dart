@@ -180,9 +180,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                 onPressed: () async {
                   Uri url = CloudService.reportUri('full');
 
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url, mode: LaunchMode.platformDefault);
-                  }
+                  await launchUrl(url, mode: LaunchMode.platformDefault);
                 })
           ],
         ),
@@ -300,9 +298,7 @@ class _CurrentPartyCardState extends State<CurrentPartyCard> {
                 onPressed: () async {
                   Uri url = CloudService.reportUri('full');
 
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url, mode: LaunchMode.platformDefault);
-                  }
+                  await launchUrl(url, mode: LaunchMode.platformDefault);
                 })
           ],
         ),
