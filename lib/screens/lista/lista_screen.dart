@@ -51,7 +51,7 @@ class ListaScreen extends StatelessWidget {
                 LevelBuilder(
                   member: PrintLista(),
                   admin: PrintLista(),
-                )
+                ),
               ],
             ),
             Row(

@@ -1,15 +1,15 @@
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/Config.dart';
 import 'package:admin/controllers/MenuController.dart' as controller;
+import 'package:admin/screens/entrance/entrance_screen.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/admin/admin_screen.dart';
 import 'package:admin/screens/bank/bank_screen.dart';
-import 'package:admin/screens/lista/new_lista_screen.dart';
+import 'package:admin/screens/lista/lista_screen.dart';
 import 'package:admin/screens/party/party_screen.dart';
 import 'package:admin/screens/inventory/inventario_screen.dart';
 import 'package:admin/screens/products/products_screen.dart';
 import 'package:admin/screens/shifts/shifts_screen.dart';
-import 'package:admin/screens/telecamera/telecamera_screen.dart';
 import 'package:admin/services/sync_service.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -38,7 +38,8 @@ class MainScreenState extends State<MainScreen> {
     ProductsScreen(),
     ShiftsScreen(),
     BankScreen(),
-    TelecameraScreen(),
+    //TelecameraScreen(),
+    EntranceScreen(),
     AdminScreen(),
     ConfigScreen(),
   ];
@@ -95,8 +96,8 @@ class MainScreenState extends State<MainScreen> {
           barrierDismissible: false,
           context: context,
           builder: (context) {
-            return WillPopScope(
-              onWillPop: () => Future(() => false),
+            return PopScope(
+              canPop: false,
               child: Scaffold(
                 body: Center(
                   child: Column(

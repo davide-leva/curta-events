@@ -89,9 +89,16 @@ class SideMenuStateAdmin extends State<SideMenu> {
               setState(() => widget.setScreen(5));
             },
           ),
-          DrawerListTile(
+          /*DrawerListTile(
             title: "Telecamera",
             icon: Icons.security,
+            press: () {
+              setState(() => widget.setScreen(6));
+            },
+          ),*/
+          DrawerListTile(
+            title: "Entrata",
+            icon: Icons.door_back_door,
             press: () {
               setState(() => widget.setScreen(6));
             },

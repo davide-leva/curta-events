@@ -1,11 +1,14 @@
 import 'package:admin/models/Group.dart';
 import 'package:admin/models/Person.dart';
+import 'package:admin/screens/lista/components/person_card.dart';
 import 'package:admin/services/cloud_service.dart';
+import 'package:collection/collection.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../services/sync_service.dart';
 import '../services/updater.dart';
+import 'package:admin/utils.dart';
 
 List<T> flatten<T>(Iterable<Iterable<T>> list) =>
     [for (var sublist in list) ...sublist];
@@ -18,6 +21,13 @@ class SearchEntry {
 
   int groupIndex;
   int personIndex;
+}
+
+class ControlPerson {
+  ControlPerson({required this.id, required this.entity});
+
+  PersonID id;
+  Person entity;
 }
 
 class GroupsController extends GetxController {
@@ -38,6 +48,16 @@ class GroupsController extends GetxController {
               (_sum, person) => _sum + (person.hasEntered ? 1 : 0),
             ),
       );
+
+  List<ControlPerson> get getAllPerson => flatten<ControlPerson>(groups.indexed
+          .map((g) => g.obj.people.indexed.map((p) =>
+              ControlPerson(id: PersonID(g.index, p.index), entity: p.obj))))
+      .where((e) => !e.entity.hasEntered)
+      .sortedByCompare((e) => e.entity.name, compareNatural)
+      .toList();
+
+  List<ControlPerson> get getSelectedPerson =>
+      getAllPerson.where((e) => e.entity.isSelected).toList();
 
   @override
   void onReady() {
@@ -121,6 +141,8 @@ class GroupsController extends GetxController {
     group.people[personIndex].hasEntered =
         !group.people[personIndex].hasEntered;
 
+    group.people[personIndex].isSelected = false;
+
     await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
     return;
@@ -171,5 +193,15 @@ class GroupsController extends GetxController {
     await CloudService.update(Collection.groups, group.id, group);
     await Updater.update(Collection.groups);
     return;
+  }
+
+  Future<void> togglePersonSelected(int groupIndex, int personIndex) async {
+    ListaGroup group = _groups[groupIndex];
+
+    group.people[personIndex].isSelected =
+        !group.people[personIndex].isSelected;
+
+    await CloudService.update(Collection.groups, group.id, group);
+    await Updater.update(Collection.groups);
   }
 }

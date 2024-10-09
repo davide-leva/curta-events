@@ -2,9 +2,7 @@ import 'dart:ui';
 
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/MenuController.dart' as controller;
-import 'package:admin/screens/admin/components/agora.dart';
-import 'package:admin/screens/config/config_screen.dart';
-import 'package:admin/screens/lista_old/lista_screen.dart';
+import 'package:admin/screens/lista/lista_screen.dart';
 import 'package:admin/screens/main/auth_screen.dart';
 import 'package:admin/screens/main/connection_failed_screen.dart';
 import 'package:admin/screens/main/main_screen.dart';
@@ -23,7 +21,7 @@ import 'controllers/Config.dart';
 void main() async {
   initializeDateFormatting();
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SyncService.init();
   runApp(MyApp());
 }
@@ -82,9 +80,9 @@ class MyApp extends StatelessWidget {
                       )
                     : Scaffold(
                         body: Center(
-                            child: SizedBox(
-                                width: 400,
-                                child: Agora()))); // TODO: MainScreen();
+                          child: MainScreen(),
+                        ),
+                      );
             }
           },
         ),

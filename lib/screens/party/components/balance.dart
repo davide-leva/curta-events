@@ -7,7 +7,6 @@ import 'package:admin/screens/components/table_button.dart';
 import 'package:admin/screens/party/components/price_card.dart';
 import 'package:admin/services/cloud_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../constants.dart';

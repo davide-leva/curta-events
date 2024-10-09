@@ -5,6 +5,7 @@ class Person implements Model {
     required this.name,
     required this.hasEntered,
     required this.hasPaid,
+    this.isSelected = false,
     this.discount = 0.00,
     this.code = 0,
   });
@@ -12,6 +13,7 @@ class Person implements Model {
   String name;
   bool hasEntered;
   bool hasPaid;
+  bool isSelected;
   double discount;
   int code;
 
@@ -23,6 +25,7 @@ class Person implements Model {
       "hasPaid": hasPaid,
       "discount": discount,
       "code": code,
+      "isSelected": isSelected,
     };
   }
 
@@ -34,6 +37,7 @@ class Person implements Model {
       hasPaid: data['hasPaid'],
       discount: data['discount'].toDouble() ?? 0.00,
       code: data['code'] ?? 0,
+      isSelected: data['isSelected'] ?? false,
     );
   }
 

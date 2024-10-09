@@ -1,6 +1,5 @@
 import 'package:admin/controllers/GroupsController.dart';
 import 'package:admin/models/Group.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,9 +30,8 @@ class GuestsList extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Obx(
-              () => DataTable2(
+              () => DataTable(
                 columnSpacing: kDefaultPadding,
-                minWidth: 600,
                 columns: [
                   DataColumn(
                     label: Text("Gruppo"),

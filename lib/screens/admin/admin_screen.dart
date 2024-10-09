@@ -50,7 +50,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       showDialog(
                         context: context,
                         builder: (context) => MobileScanner(
-                          overlay: Column(
+                          overlayBuilder: (context, size) => Column(
                             children: [
                               SizedBox(
                                 height: kDefaultPadding * 2,

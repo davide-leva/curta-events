@@ -22,7 +22,7 @@ class EntranceScanner extends StatelessWidget {
           builder: (context) => StatefulBuilder(builder: (context, setState) {
             return Scaffold(
               body: MobileScanner(
-                overlay: Column(
+                overlayBuilder: (context, size) => Column(
                   children: [
                     SizedBox(
                       height: kDefaultPadding,
